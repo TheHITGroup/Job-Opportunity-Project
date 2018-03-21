@@ -5,7 +5,7 @@ class DataStructures
     
     /*
      * A Two-dimensional associative array. Each language is
-     * associated with a set of frameworks. SQL and Assembly
+     * associated with a set of frameworks. SQL and Scratch
      * are not associated with any frameworks.
      */
     private $languagesAndFrameworks = array(
@@ -20,23 +20,21 @@ class DataStructures
         "Go"            => array("Beego", "Buffalo"),
         "Perl"          => array("Catalyst"),
         "SQL"           => array(),
-        
+        "Scala"         => array("Scalatra", "Finatra"),
         "Objective-C"   => array("CloudKit", "Mojolicious"),
-        
+        "Apex"          => array("Apex Up", "Trigger Framework"),
         "R"             => array("Coala", "Shiny"),
         "Swift"         => array("Cocoa Touch", "AVFoundation"),
-        
+        "SAS"           => array("Fraud Framework"),
         "MATLAB"        => array("Simulink"),
-        
-        
+        "Crystal"       => array("Kemal"),
+        "Scratch"       => array()
     );
     
     /*
      * Associative array that uses the percentages from
-     * the first infographic here: https://stackify.com/popular-programming-languages-2018
-     * to distribute languages based on popularity. Need to change
-     * it to use the data from the second infographic (based on job openings)
-     * at the link, which I didn't see until after writing this code
+     * the second infographic here: https://stackify.com/popular-programming-languages-2018
+     * to distribute languages based on demand according to Indeed.com.
      */
     private $percentages = array(
         "Java"          => 21.24,
@@ -58,7 +56,7 @@ class DataStructures
         "SAS"           => 98.16,
         "MATLAB"        => 98.80,
         "Crystal"       => 99.43,
-        "Scracth"       => 100
+        "Scratch"       => 100
     );
     
     public function getLanguagesAndFrameworks()

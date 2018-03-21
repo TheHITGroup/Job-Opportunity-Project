@@ -34,76 +34,80 @@ class TechnologyController
                 $language = "Java";
                 break;
                 
-            case($randomNum <= $percentages["C"]):
-                $language = "C";
-                break;
-                
-            case($randomNum <= $percentages["C++"]):
-                $language = "C++";
-                break;
-                
-            case($randomNum <= $percentages["Python"]):
-                $language = "Python";
+            case($randomNum <= $percentages["JavaScript"]):
+                $language = "JavaScript";
                 break;
                 
             case($randomNum <= $percentages["C#"]):
                 $language = "C#";
                 break;
                 
-            case($randomNum <= $percentages["JavaScript"]):
-                $language = "JavaScript";
+            case($randomNum <= $percentages["Python"]):
+                $language = "Python";
                 break;
                 
-            case($randomNum <= $percentages["VB.NET"]):
-                $language = "VB.NET";
+            case($randomNum <= $percentages["C++"]):
+                $language = "C++";
                 break;
                 
-            case($randomNum <= $percentages["R"]):
-                $language = "R";
+            case($randomNum <= $percentages["C"]):
+                $language = "C";
                 break;
                 
             case($randomNum <= $percentages["PHP"]):
                 $language = "PHP";
                 break;
                 
-            case($randomNum <= $percentages["MATLAB"]):
-                $language = "MATLAB";
-                break;
-                
-            case($randomNum <= $percentages["Swift"]):
-                $language = "Swift";
-                break;
-                
-            case($randomNum <= $percentages["Objective-C"]):
-                $language = "Objective-C";
-                break;
-                
-            case($randomNum <= $percentages["Assembly"]):
-                $language = "Assembly";
+            case($randomNum <= $percentages["Go"]):
+                $language = "Go";
                 break;
                 
             case($randomNum <= $percentages["Perl"]):
                 $language = "Perl";
                 break;
                 
-            case($randomNum <= $percentages["Ruby"]):
-                $language = "Ruby";
-                break;
-                
-            case($randomNum <= $percentages["Delphi"]):
-                $language = "Delphi";
-                break;
-                
-            case($randomNum <= $percentages["Go"]):
-                $language = "Go";
-                break;
-                
             case($randomNum <= $percentages["SQL"]):
                 $language = "SQL";
                 break;
                 
-            case($randomNum <= $percentages["Visual Basic"]):
-                $language = "Visual Basic";
+            case($randomNum <= $percentages["Swift"]):
+                $language = "Swift";
+                break;
+                
+            case($randomNum <= $percentages["Scala"]):
+                $language = "Scala";
+                break;
+                
+            case($randomNum <= $percentages["Objective-C"]):
+                $language = "Objective-C";
+                break;
+                
+            case($randomNum <= $percentages["Apex"]):
+                $language = "Apex";
+                break;
+                
+            case($randomNum <= $percentages["R"]):
+                $language = "R";
+                break;
+                
+            case($randomNum <= $percentages["Swift"]):
+                $language = "Swift";
+                break;
+                
+            case($randomNum <= $percentages["SAS"]):
+                $language = "SAS";
+                break;
+                
+            case($randomNum <= $percentages["MATLAB"]):
+                $language = "MATLAB";
+                break;
+                
+            case($randomNum <= $percentages["Crystal"]):
+                $language = "Crystal";
+                break;
+                
+            case($randomNum <= $percentages["Scratch"]):
+                $language = "Scratch";
                 break;
         }
         return $language;

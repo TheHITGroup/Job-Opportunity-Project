@@ -76,13 +76,13 @@ class DbController
         }         
     }
     
-    function populateLocationTableWithFile($pdo)
+    function populateLocationTableWithFile($file, $pdo)
     {
-        $sql = "LOAD DATA INFILE '/var/lib/mysql-files/zip_city_state.txt' INTO TABLE Location";
+        $sql = "LOAD DATA LOCAL INFILE '$file' INTO TABLE Location";
         try {
             $pdo->exec($sql);            
         } catch (Exception $e) {
-   
+            echo ("Error $e");
         }
     }
     

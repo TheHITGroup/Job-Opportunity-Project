@@ -51,15 +51,8 @@ class MainController
         //file containing the zipcodes
         $zips = fopen("zips.txt", "r") or die("Unable to open file");
         
-        while(($zip = fgets($zips)) !== FALSE) {
-            $pop = $this->getPopForZip($zip, $zipsAndPops);
-            
-            $numJobs = $pop / 10000;
-            $numJobs = floor($numJobs);
-            
-            $uc = new UsesController();
-            $uc->jobFrameworkAndLanguageHandler($numJobs, $zip, $pdo);
-        }
+        $uc = new UsesController();        
+        $uc->jobFrameworkAndLanguageHandler($zips, $zipsAndPops, $pdo);
         
         fclose($zips);
     }
@@ -74,23 +67,6 @@ class MainController
         }
         
         return $zipsAndPops;        
-    }
-    
-    private function getPopForZip($zip, $zipsAndPops) {
-        $zipString = (string) $zip;
-        $zipString = str_replace("\n", '', $zipString);
-        
-        //PHP gives a warning if there is no population for a zipcode
-        //This handles the warning
-        set_error_handler(array($this, 'warningHandler'));
-        $pop = $zipsAndPops[$zipString]; 
-        restore_error_handler();
-        
-        return $pop;
-    }
-    
-    private function warningHandler() {
-        return;
     }
 }
 

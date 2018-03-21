@@ -8,16 +8,46 @@ class UsesController
         $dbc->insertUsesTuple($uses, $pdo);
     }
     
-    function jobFrameworkAndLanguageHandler($numJobs, $zip, $pdo)
+    function jobFrameworkAndLanguageHandler($zips, $zipsAndPops, $pdo)
     {
         $jobId = 1;
-        for($i = 0; $i < $numJobs; $i++) {
-            $this->insertNewJob($jobId, $zip, $pdo);
+        while(($zip = fgets($zips)) !== FALSE) {
+            $pop = $this->getPopForZip($zip, $zipsAndPops);
             
-            $this->createLanguageAndFrameworkForJob($jobId, $pdo);
+            $numJobs = $this->getNumberOfJobsByPopulationSize($pop);
             
-            $jobId++;
-        }    
+            for($i = 0; $i < $numJobs; $i++) {
+                $this->insertNewJob($jobId, $zip, $pdo);
+                
+                $this->createLanguageAndFrameworkForJob($jobId, $pdo);
+                
+                $jobId++;
+            }  
+        }  
+    }
+    
+    private function getPopForZip($zip, $zipsAndPops) {
+        $zipString = (string) $zip;
+        $zipString = str_replace("\n", '', $zipString);
+        
+        //PHP gives a warning if there is no population for a zipcode
+        //This handles the warning
+        set_error_handler(array($this, 'warningHandler'));
+        $pop = $zipsAndPops[$zipString];
+        restore_error_handler();
+        
+        return $pop;
+    }
+    
+    private function warningHandler() {
+        return;
+    }
+    
+    private function getNumberOfJobsByPopulationSize($pop) {
+        $numJobs = $pop / 10000;
+        $numJobs = floor($numJobs);
+        
+        return $numJobs;
     }
     
     private function insertNewJob($jobId, $zip, $pdo) {
@@ -33,8 +63,8 @@ class UsesController
         $language = $tc->getRandomLanguage();
         
         $this->insertNewUsesRelationForJobAndLanguage($jobId, $language, $pdo);
-        //SQL does not have frameworks associated with it
-        if($language != "SQL") {
+        //SQL and Scratch do not have frameworks associated with them
+        if($language != "SQL" && $language != "Scratch") {
             $this->insertNewUsesRelationForJobAndFramework($jobId, $pdo, $language);
         }
     }

@@ -4,8 +4,10 @@ class LocationController
 {
     function populateLocationTable($pdo)
     {
+        $file = 'zip_city_state.txt';
+        
         $dbc = new \DbController();
-        $dbc->populateLocationTableWithFile($pdo);
+        $dbc->populateLocationTableWithFile($file, $pdo);
     }
 }
 
