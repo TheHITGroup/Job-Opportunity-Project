@@ -4,7 +4,11 @@ class DbConnect
 {
     private $host = "localhost";
     private $username = "root";
+<<<<<<< HEAD
     private $password = "";
+=======
+    private $password = "***REMOVED***";
+>>>>>>> 3bf8d47b4653eb1627eb809b35236c20059b9817
     private $database = "jobOps";
     
     public function getDbConnection()
