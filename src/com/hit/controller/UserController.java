@@ -3,43 +3,20 @@ import com.hit.json.UserJSON;
 
 import java.sql.PreparedStatement;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
 
 
 public class UserController {
-	
-	private static final String DB_DRIVER = "com.mysql.jdbc.Driver";
-	private static final String DB_CONNECTION = "jdbc:mysql://cs336.cvvd0wxa95qe.us-east-2.rds.amazonaws.com:3306/hitdb";
-	private static final String DB_USER = "user";
-	private static final String DB_PASSWORD = "user123";
-	
-	private static Connection getDBConnection() {
-		Connection dbConnection = null;
-		try {
-			Class.forName(DB_DRIVER);
-		} catch (ClassNotFoundException e) {
-			System.out.println(e.getMessage());
-		}
-
-		try {
-			dbConnection = DriverManager.getConnection(DB_CONNECTION, DB_USER, DB_PASSWORD);
-			return dbConnection;
-
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		}
-		return dbConnection;
-	}
 
 	public static int checkLogin(UserJSON userJSON) {
 	    int id=0;
 	    
 	    Connection conn = null;
 	    try {
-	        conn = getDBConnection();
+	    	DbController Dbc = new DbController();
+	        conn = Dbc.getDBConnection();
 
 	        Statement stmt = null;
 		    ResultSet rs = null;
@@ -99,7 +76,9 @@ public class UserController {
 	    
 	    Connection conn = null;
 	    try {
-	    	conn = getDBConnection();
+	    	DbController Dbc = new DbController();
+	        conn = Dbc.getDBConnection();
+	        
 	        Statement stmt = null;
 		    ResultSet rs = null;
 		    try {
@@ -161,7 +140,9 @@ public class UserController {
 
 		String insertTableSQL = "insert into user (username,password) values (?,?)";
 		try {
-				conn = getDBConnection();
+		    	DbController Dbc = new DbController();
+		        conn = Dbc.getDBConnection();
+		        
 				preparedStatement =  conn.prepareStatement(insertTableSQL); 
 
 				preparedStatement.setString(1, userJSON.getUserName());
