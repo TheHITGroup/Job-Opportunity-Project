@@ -1,9 +1,9 @@
 package com.hit.json;
 
 public class UserJSON {
-	int id;
-	String userName;
-	String password;
+	private int id;
+	private String userName;
+	private String password;
 
 	public int getId() {
 		return id;
