@@ -17,8 +17,10 @@ public class Test {
          
          TechnologyController tc = new TechnologyController();
          
-		 String result = tc.getMostPopularOfTwoTechnologies("Java", "C", "Somerville", "NJ");
+		 String result = tc.getMostPopularOfTwoTechnologiesByZip("Java", "C", "08876");
+		 String result2 = tc.getMostPopularOfTwoTechnologiesByCityState("C++", "Java", "Somerville", "NJ");
 		 System.out.println(result);
+		 System.out.println(result2);
 	}
 
 }
