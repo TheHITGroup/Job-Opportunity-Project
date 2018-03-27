@@ -60,8 +60,10 @@ class MainController
     private function getZipsAndPopsArrayFromFile($file) {
         $pop_zip = fopen("$file", "r") or die("Unable to open file");
         
+        //An array of arrays. Each array has the zipcode at index 0 and the population for that zipcode at index 1
         $rows = array_map('str_getcsv', file('zip_pop.csv'));
         
+        //Puts the arrays into a single associative array with the zipcode as the index and its pop as the value
         foreach ($rows as $zip_pop_array) {
             $zipsAndPops[$zip_pop_array[0]] = $zip_pop_array[1];
         }

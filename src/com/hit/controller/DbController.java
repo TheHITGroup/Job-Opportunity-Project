@@ -2,6 +2,7 @@ package com.hit.controller;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class DbController
@@ -28,6 +29,18 @@ public class DbController
 			System.out.println(e.getMessage());
 		}
 		return dbConnection;
+	}
+
+	public PreparedStatement getPreparedStatement(Connection conn, String sql)
+	{
+		PreparedStatement preparedStatement = null;
+		try {
+			preparedStatement =  conn.prepareStatement(sql);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		return preparedStatement;
 	}
 
 }

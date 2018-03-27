@@ -1,5 +1,7 @@
 package com.hit.controller;
 
+import java.sql.SQLException;
+
 import com.hit.json.UserJSON;
 
 public class Test {
@@ -9,10 +11,14 @@ public class Test {
          
          UserJSON userJSON = new UserJSON();
          userJSON.setUserName("Ivan");
-         userJSON.setPassword("trrrest");
+         userJSON.setPassword("test");
          
          System.out.println(UserController.checkLogin(userJSON));
          
+         TechnologyController tc = new TechnologyController();
+         
+		 String result = tc.getMostPopularOfTwoTechnologies("Java", "C", "Somerville", "NJ");
+		 System.out.println(result);
 	}
 
 }
