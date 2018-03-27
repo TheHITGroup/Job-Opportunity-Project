@@ -12,33 +12,69 @@ public class TechnologyController
 	{
 		SQLQueries SQL = new SQLQueries();
 		String sql = SQL.getSqlForMostPopularOfTwoTechnologies(techOne, techTwo, city, state);
-	    
-	    String resultString = getMostPopularOfTwoTechnologiesBySQL(sql);
-	    
-	    return resultString;	    
+		
+		String resultString = getMostPopularOfTwoTechnologiesBySQL(sql);
+		
+		return resultString;	    
 	}
 	
 	public String getMostPopularOfTwoTechnologiesByZip(String techOne, String techTwo, String zip)
 	{
 		SQLQueries SQL = new SQLQueries();
 		String sql = SQL.getSqlForMostPopularOfTwoTechnologiesByZip(techOne, techTwo, zip);
-	    
-	    String resultString = getMostPopularOfTwoTechnologiesBySQL(sql);
-	    
-	    return resultString;
+		
+		String resultString = getMostPopularOfTwoTechnologiesBySQL(sql);
+		
+		return resultString;
 	}
 	
+	public String getMostPopularOfTwoCityStatesForTechnology(String tech, 
+			String cityOne, String stateOne, String cityTwo, String stateTwo)
+	{
+		SQLQueries SQL = new SQLQueries();
+		String sql = SQL.getSQLForMostPopularOfTwoCityStatesForTechnology(tech, cityOne, stateOne, cityTwo, stateTwo);
+		
+		DbController Dbc = new DbController();
+		Connection conn = Dbc.getDBConnection();
+		PreparedStatement preparedStatement = Dbc.getPreparedStatement(conn, sql);
+		
+		ResultSet resultSet = getResultSet(preparedStatement);
+		
+		String resultString = getResultStringForMostPopularCityState(resultSet);
+		
+		return resultString;		
+	}
+
+	private String getResultStringForMostPopularCityState(ResultSet resultSet)
+	{	
+		String city = getResultByColumnName("city", resultSet);
+		String state = getResultByColumnName("state", resultSet);
+		String numJobs = getResultByColumnName("count", resultSet);
+		
+		String resultString =  "";
+		
+		if(resultHasMoreThanOneRow(resultSet)) {
+			resultString = "Both cities have the same number of jobs with " + numJobs + " jobs"		
+							+ (numJobs.equals("1") ? "" : "s") + ".";			
+		} else {
+			resultString = "The city with the most jobs is " + city + ", " + state + "" + " with " + numJobs + " job"
+							+ (numJobs.equals("1") ? "" : "s") + ".";
+		}
+		
+		return resultString;
+	}
+
 	private String getMostPopularOfTwoTechnologiesBySQL(String sql) 
 	{
 		DbController Dbc = new DbController();
-	    Connection conn = Dbc.getDBConnection();
-	    PreparedStatement preparedStatement = Dbc.getPreparedStatement(conn, sql);
-	    
-	    ResultSet resultSet = getResultSet(preparedStatement);
-	    
-	    String resultString = getResultString(resultSet);
-	    
-	    return resultString;
+		Connection conn = Dbc.getDBConnection();
+		PreparedStatement preparedStatement = Dbc.getPreparedStatement(conn, sql);
+		
+		ResultSet resultSet = getResultSet(preparedStatement);
+		
+		String resultString = getResultStringForMostPopularTechnology(resultSet);
+		
+		return resultString;
 	}
 	
 	
@@ -55,7 +91,7 @@ public class TechnologyController
 		return resultSet;
 	}
 
-	private String getResultString(ResultSet resultSet)
+	private String getResultStringForMostPopularTechnology(ResultSet resultSet)
 	{	
 		String name = getResultByColumnName("name", resultSet);
 		String numJobs = getResultByColumnName("count", resultSet);
@@ -63,9 +99,11 @@ public class TechnologyController
 		String resultString =  "";
 		
 		if(resultHasMoreThanOneRow(resultSet)) {
-			resultString = "Both languages have the same number of jobs with " + numJobs + " jobs.";			
+			resultString = "Both languages have the same number of jobs with " + numJobs + " job"
+							+ (numJobs.equals("1") ? "" : "s") + ".";
 		} else {
-			resultString = "The most popular of the two languages is " + name + ", having " + numJobs + " jobs.";
+			resultString = "The most popular of the two languages is " + name + " with " + numJobs + " job"
+							+ (numJobs.equals("1") ? "" : "s") + ".";
 		}
 		
 		return resultString;
@@ -93,7 +131,7 @@ public class TechnologyController
 		int i = 0;
 		try {
 			while(resultSet.next()) {
-				resultSet.getString("name");
+				resultSet.getInt(1);
 				i++;
 			}		
 		} catch (Exception e) {

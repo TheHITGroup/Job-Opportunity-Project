@@ -19,8 +19,10 @@ public class Test {
          
 		 String result = tc.getMostPopularOfTwoTechnologiesByZip("Java", "C", "08876");
 		 String result2 = tc.getMostPopularOfTwoTechnologiesByCityState("C++", "Java", "Somerville", "NJ");
+		 String result3 = tc.getMostPopularOfTwoCityStatesForTechnology("Java", "Somerville", "NJ", "Newark", "NJ");
 		 System.out.println(result);
 		 System.out.println(result2);
+		 System.out.println(result3);
 	}
 
 }

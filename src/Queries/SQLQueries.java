@@ -98,5 +98,53 @@ public class SQLQueries
 		
 		return sql;
 	}
+	
+	public String getSQLForMostPopularOfTwoCityStatesForTechnology(String tech, 
+			String cityOne, String stateOne, String cityTwo, String stateTwo)
+	{
+		String sql = "SELECT " + 
+				"    COUNT(L.city), max_city_count as count, L.city, L.state" + 
+				"    FROM" + 
+				"    Location AS L," + 
+				"    Technology AS T," + 
+				"    Job AS J," + 
+				"    Uses AS U," + 
+				"    (SELECT " + 
+				"        MAX(city_count1) AS max_city_count" + 
+				"    FROM" + 
+				"        (SELECT " + 
+				"        COUNT(city) AS city_count1, L.city" + 
+				"    FROM" + 
+				"        Location AS L, Technology AS T, Job AS J, Uses AS U" + 
+				"    WHERE" + 
+				"        (T.name = '" + tech + "' AND U.t_id = T.id" + 
+				"            AND U.j_id = J.id" + 
+				"            AND J.zipcode = L.zipcode" + 
+				"            AND L.city = '" + cityOne + "'" + 
+				"            AND L.state = '" + stateOne + "')" + 
+				"            OR (name = '" + tech + "' AND U.t_id = T.id" + 
+				"            AND U.j_id = J.id" + 
+				"            AND J.zipcode = L.zipcode" + 
+				"            AND city = '" + cityTwo + "'" + 
+				"            AND state = '" + stateTwo + "')" + 
+				"    GROUP BY city" + 
+				"    ORDER BY COUNT(name) DESC) A" + 
+				"    GROUP BY city" + 
+				"    LIMIT 1) B" + 
+				"    WHERE" + 
+				"    (T.name = '" + tech + "' AND U.t_id = T.id" + 
+				"        AND U.j_id = J.id" + 
+				"        AND J.zipcode = L.zipcode" + 
+				"        AND L.city = '" + cityOne + "'" + 
+				"        AND L.state = '" + stateOne + "')" + 
+				"        OR (name = '" + tech + "' AND U.t_id = T.id" + 
+				"        AND U.j_id = J.id" + 
+				"        AND J.zipcode = L.zipcode" + 
+				"        AND city = '" + cityTwo + "'" + 
+				"        AND state = '" + stateTwo + "')" + 
+				"    GROUP BY max_city_count , city" + 
+				"    HAVING max_city_count = COUNT(L.city)";
+		return sql;
+	}
 
 }
