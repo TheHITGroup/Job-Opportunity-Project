@@ -8,21 +8,39 @@ import Queries.SQLQueries;
 
 public class TechnologyController
 {
-	public String getMostPopularOfTwoTechnologies(String techOne, String techTwo, String city, String state)
+	public String getMostPopularOfTwoTechnologiesByCityState(String techOne, String techTwo, String city, String state)
 	{
 		SQLQueries SQL = new SQLQueries();
 		String sql = SQL.getSqlForMostPopularOfTwoTechnologies(techOne, techTwo, city, state);
-		
-    	DbController Dbc = new DbController();
-        Connection conn = Dbc.getDBConnection();
+	    
+	    String resultString = getMostPopularOfTwoTechnologiesBySQL(sql);
+	    
+	    return resultString;	    
+	}
+	
+	public String getMostPopularOfTwoTechnologiesByZip(String techOne, String techTwo, String zip)
+	{
+		SQLQueries SQL = new SQLQueries();
+		String sql = SQL.getSqlForMostPopularOfTwoTechnologiesByZip(techOne, techTwo, zip);
+	    
+	    String resultString = getMostPopularOfTwoTechnologiesBySQL(sql);
+	    
+	    return resultString;
+	}
+	
+	private String getMostPopularOfTwoTechnologiesBySQL(String sql) 
+	{
+		DbController Dbc = new DbController();
+	    Connection conn = Dbc.getDBConnection();
 	    PreparedStatement preparedStatement = Dbc.getPreparedStatement(conn, sql);
 	    
 	    ResultSet resultSet = getResultSet(preparedStatement);
 	    
 	    String resultString = getResultString(resultSet);
 	    
-	    return resultString;	    
+	    return resultString;
 	}
+	
 	
 	private ResultSet getResultSet(PreparedStatement preparedStatement)
 	{
