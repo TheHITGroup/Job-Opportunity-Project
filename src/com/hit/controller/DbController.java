@@ -5,6 +5,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+/**
+ * 
+ * Controller for the database. Uses mysql and jdbc
+ *
+ */
 public class DbController
 {
 	

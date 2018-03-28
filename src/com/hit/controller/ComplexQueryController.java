@@ -44,12 +44,58 @@ public class ComplexQueryController extends Controller
 		
 		return resultString;		
 	}
+	
+	public String getMostPopularFrameworkForLanguageInCityState(String language, String city, String state)
+	{
+		ComplexQueries SQL = new ComplexQueries();
+		String sql = SQL.getSQLForMostPopularFrameworkForLanguageInCityState(language, city, state);
+		
+		DbController Dbc = new DbController();
+		Connection conn = Dbc.getDBConnection();
+		PreparedStatement preparedStatement = Dbc.getPreparedStatement(conn, sql);
+		
+		ResultSet resultSet = getResultSet(preparedStatement);
+		
+		
+		String resultString = getResultStringForMostPopularFrameworkForLanguageInCityState(resultSet);
+		
+		return resultString;
+	}
+
+	private String getResultStringForMostPopularFrameworkForLanguageInCityState(ResultSet resultSet)
+	{
+		String city = getResultByColumnNameWithReset("city", resultSet);
+		String state = getResultByColumnNameWithReset("state", resultSet);
+		String numJobs = getResultByColumnNameWithReset("count", resultSet);
+		String frameworkString = getFrameworkString(resultSet);
+		
+		String resultString = "The framework" + (resultHasMoreThanOneRow(resultSet) ? "s" : "")
+							+ " most used in " + city + ", " + state + " " 
+							+ frameworkString + " with " + numJobs + " jobs";
+		
+		return resultString;
+	}
+
+	private String getFrameworkString(ResultSet resultSet)
+	{
+		if(!resultHasMoreThanOneRow(resultSet))
+			return "is " + getResultByColumnNameWithReset("name", resultSet);
+
+		int sizeOfResultSet = getSizeOfResultSet(resultSet);
+		String resultString = "are ";
+		for(int i = 0; i < sizeOfResultSet; i++) {
+			resultString += getResultByColumnNameNoReset("name", resultSet);
+			resultString += !(sizeOfResultSet != 2) ? ", " : "";
+		}
+		resultString += " and " + getResultByColumnNameWithReset("name", resultSet);
+		return resultString;
+	}
 
 	private String getResultStringForMostPopularCityState(ResultSet resultSet)
 	{	
-		String city = getResultByColumnName("city", resultSet);
-		String state = getResultByColumnName("state", resultSet);
-		String numJobs = getResultByColumnName("count", resultSet);
+		String city = getResultByColumnNameWithReset("city", resultSet);
+		String state = getResultByColumnNameWithReset("state", resultSet);
+		String numJobs = getResultByColumnNameWithReset("count", resultSet);
 		
 		String resultString =  "";
 		
@@ -79,8 +125,8 @@ public class ComplexQueryController extends Controller
 
 	private String getResultStringForMostPopularTechnology(ResultSet resultSet)
 	{	
-		String name = getResultByColumnName("name", resultSet);
-		String numJobs = getResultByColumnName("count", resultSet);
+		String name = getResultByColumnNameWithReset("name", resultSet);
+		String numJobs = getResultByColumnNameWithReset("count", resultSet);
 		
 		String resultString =  "";
 		

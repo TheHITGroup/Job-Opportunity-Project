@@ -1,5 +1,10 @@
 package Queries;
 
+/**
+ * 
+ * Class containing SQL for the complex queries (requirement number 4 in grading rubric)
+ *
+ */
 public class ComplexQueries
 {
 
@@ -144,6 +149,75 @@ public class ComplexQueries
 				"        AND state = '" + stateTwo + "')" + 
 				"    GROUP BY max_city_count , city" + 
 				"    HAVING max_city_count = COUNT(L.city)";
+		return sql;
+	}
+	
+	public String getSQLForMostPopularFrameworkForLanguageInCityState(String language, String city, String state)
+	{
+		String sql = "SELECT " + 
+				"    COUNT(T.name) as count, max_name_count, T.name, city, state" + 
+				"    FROM" + 
+				"    Location AS L," + 
+				"    Technology AS T," + 
+				"    Job AS J," + 
+				"    Uses AS U," + 
+				"    (SELECT " + 
+				"        J.id AS job_id, name, COUNT(name) AS name_count" + 
+				"    FROM" + 
+				"        Location AS L, Uses AS U, Technology AS T, Job AS J, (SELECT " + 
+				"        J.id AS id" + 
+				"    FROM" + 
+				"        Location AS L, Uses AS U, Technology AS T, Job AS J" + 
+				"    WHERE" + 
+				"        U.j_id = J.id AND U.t_id = T.id" + 
+				"            AND L.city = '" + city + "'" + 
+				"            AND L.state = '" + state + "'" + 
+				"            AND J.zipcode = L.zipcode" + 
+				"            AND T.name = '" + language + "') A" + 
+				"    WHERE" + 
+				"        T.type = 'fw' AND J.id = A.id" + 
+				"            AND U.j_id = J.id" + 
+				"            AND U.t_id = T.id" + 
+				"            AND L.city = '" + city + "'" + 
+				"            AND L.state = '" + state + "'" + 
+				"            AND J.zipcode = L.zipcode" + 
+				"    GROUP BY name , job_id) B," + 
+				"    (SELECT " + 
+				"        MAX(name_count) AS max_name_count" + 
+				"    FROM" + 
+				"        (SELECT " + 
+				"        name, COUNT(name) AS name_count" + 
+				"    FROM" + 
+				"        Location AS L, Uses AS U, Technology AS T, Job AS J, (SELECT " + 
+				"        J.id AS id" + 
+				"    FROM" + 
+				"        Location AS L, Uses AS U, Technology AS T, Job AS J" + 
+				"    WHERE" + 
+				"        U.j_id = J.id AND U.t_id = T.id" + 
+				"            AND L.city = '" + city + "'" + 
+				"            AND L.state = '" + state + "'" + 
+				"            AND J.zipcode = L.zipcode" + 
+				"            AND T.name = '" + language + "') A" + 
+				"    WHERE" + 
+				"        T.type = 'fw' AND J.id = A.id" + 
+				"            AND U.j_id = J.id" + 
+				"            AND U.t_id = T.id" + 
+				"            AND L.city = '" + city + "'" + 
+				"            AND L.state = '" + state + "'" + 
+				"            AND J.zipcode = L.zipcode" + 
+				"    GROUP BY name) B" + 
+				"    GROUP BY name" + 
+				"    ORDER BY name_count DESC" + 
+				"    LIMIT 1) C" + 
+				"    WHERE" + 
+				"    J.id = job_id AND U.j_id = J.id" + 
+				"        AND U.t_id = T.id" + 
+				"        AND L.city = '" + city + "'" + 
+				"        AND L.state = '" + state + "'" + 
+				"        AND J.zipcode = L.zipcode" + 
+				"        AND T.type = 'fw'" + 
+				"    GROUP BY max_name_count , name" + 
+				"    HAVING max_name_count = COUNT(T.name)";
 		return sql;
 	}
 
