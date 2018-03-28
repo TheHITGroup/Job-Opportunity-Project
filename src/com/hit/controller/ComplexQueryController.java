@@ -1,6 +1,5 @@
 package com.hit.controller;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -13,7 +12,12 @@ public class ComplexQueryController extends Controller
 		ComplexQueries SQL = new ComplexQueries();
 		String sql = SQL.getSqlForMostPopularOfTwoTechnologies(techOne, techTwo, city, state);
 		
-		String resultString = getMostPopularOfTwoTechnologiesBySQL(sql);
+		PreparedStatement preparedStatement = getPreparedStatement(sql);
+		
+		ResultSet resultSet = getResultSet(preparedStatement);
+		
+		StringMaker sm = new StringMaker();
+		String resultString = sm.getResultStringForMostPopularTechnology(resultSet);
 		
 		return resultString;	    
 	}
@@ -23,7 +27,12 @@ public class ComplexQueryController extends Controller
 		ComplexQueries SQL = new ComplexQueries();
 		String sql = SQL.getSqlForMostPopularOfTwoTechnologiesByZip(techOne, techTwo, zip);
 		
-		String resultString = getMostPopularOfTwoTechnologiesBySQL(sql);
+		PreparedStatement preparedStatement = getPreparedStatement(sql);
+		
+		ResultSet resultSet = getResultSet(preparedStatement);
+		
+		StringMaker sm = new StringMaker();
+		String resultString = sm.getResultStringForMostPopularTechnology(resultSet);
 		
 		return resultString;
 	}
@@ -34,13 +43,12 @@ public class ComplexQueryController extends Controller
 		ComplexQueries SQL = new ComplexQueries();
 		String sql = SQL.getSQLForMostPopularOfTwoCityStatesForTechnology(tech, cityOne, stateOne, cityTwo, stateTwo);
 		
-		DbController Dbc = new DbController();
-		Connection conn = Dbc.getDBConnection();
-		PreparedStatement preparedStatement = Dbc.getPreparedStatement(conn, sql);
+		PreparedStatement preparedStatement = getPreparedStatement(sql);
 		
 		ResultSet resultSet = getResultSet(preparedStatement);
 		
-		String resultString = getResultStringForMostPopularCityState(resultSet);
+		StringMaker sm = new StringMaker();
+		String resultString = sm.getResultStringForMostPopularCityState(resultSet);
 		
 		return resultString;		
 	}
@@ -50,93 +58,27 @@ public class ComplexQueryController extends Controller
 		ComplexQueries SQL = new ComplexQueries();
 		String sql = SQL.getSQLForMostPopularFrameworkForLanguageInCityState(language, city, state);
 		
-		DbController Dbc = new DbController();
-		Connection conn = Dbc.getDBConnection();
-		PreparedStatement preparedStatement = Dbc.getPreparedStatement(conn, sql);
+		PreparedStatement preparedStatement = getPreparedStatement(sql);
 		
 		ResultSet resultSet = getResultSet(preparedStatement);
 		
-		
-		String resultString = getResultStringForMostPopularFrameworkForLanguageInCityState(resultSet);
+		StringMaker sm = new StringMaker();
+		String resultString = sm.getResultStringForMostPopularFrameworkForLanguageInCityState(resultSet);
 		
 		return resultString;
 	}
-
-	private String getResultStringForMostPopularFrameworkForLanguageInCityState(ResultSet resultSet)
+	
+	public String getCityInStateWithAtLeastNJobsForTechnology(String state, String tech, String numJobsRequest)
 	{
-		String city = getResultByColumnNameWithReset("city", resultSet);
-		String state = getResultByColumnNameWithReset("state", resultSet);
-		String numJobs = getResultByColumnNameWithReset("count", resultSet);
-		String frameworkString = getFrameworkString(resultSet);
+		ComplexQueries SQL = new ComplexQueries();
+		String sql = SQL.getSQLForCityInStateWithAtLeastNJobsForTechnology(state, tech, numJobsRequest);
 		
-		String resultString = "The framework" + (resultHasMoreThanOneRow(resultSet) ? "s" : "")
-							+ " most used in " + city + ", " + state + " " 
-							+ frameworkString + " with " + numJobs + " jobs";
-		
-		return resultString;
-	}
-
-	private String getFrameworkString(ResultSet resultSet)
-	{
-		if(!resultHasMoreThanOneRow(resultSet))
-			return "is " + getResultByColumnNameWithReset("name", resultSet);
-
-		int sizeOfResultSet = getSizeOfResultSet(resultSet);
-		String resultString = "are ";
-		for(int i = 0; i < sizeOfResultSet; i++) {
-			resultString += getResultByColumnNameNoReset("name", resultSet);
-			resultString += !(sizeOfResultSet != 2) ? ", " : "";
-		}
-		resultString += " and " + getResultByColumnNameWithReset("name", resultSet);
-		return resultString;
-	}
-
-	private String getResultStringForMostPopularCityState(ResultSet resultSet)
-	{	
-		String city = getResultByColumnNameWithReset("city", resultSet);
-		String state = getResultByColumnNameWithReset("state", resultSet);
-		String numJobs = getResultByColumnNameWithReset("count", resultSet);
-		
-		String resultString =  "";
-		
-		if(resultHasMoreThanOneRow(resultSet)) {
-			resultString = "Both cities have the same number of jobs with " + numJobs + " jobs"		
-							+ (numJobs.equals("1") ? "" : "s") + ".";			
-		} else {
-			resultString = "The city with the most jobs is " + city + ", " + state + "" + " with " + numJobs + " job"
-							+ (numJobs.equals("1") ? "" : "s") + ".";
-		}
-		
-		return resultString;
-	}
-
-	private String getMostPopularOfTwoTechnologiesBySQL(String sql) 
-	{
-		DbController Dbc = new DbController();
-		Connection conn = Dbc.getDBConnection();
-		PreparedStatement preparedStatement = Dbc.getPreparedStatement(conn, sql);
+		PreparedStatement preparedStatement = getPreparedStatement(sql);
 		
 		ResultSet resultSet = getResultSet(preparedStatement);
 		
-		String resultString = getResultStringForMostPopularTechnology(resultSet);
-		
-		return resultString;
-	}
-
-	private String getResultStringForMostPopularTechnology(ResultSet resultSet)
-	{	
-		String name = getResultByColumnNameWithReset("name", resultSet);
-		String numJobs = getResultByColumnNameWithReset("count", resultSet);
-		
-		String resultString =  "";
-		
-		if(resultHasMoreThanOneRow(resultSet)) {
-			resultString = "Both languages have the same number of jobs with " + numJobs + " job"
-							+ (numJobs.equals("1") ? "" : "s") + ".";
-		} else {
-			resultString = "The most popular of the two languages is " + name + " with " + numJobs + " job"
-							+ (numJobs.equals("1") ? "" : "s") + ".";
-		}
+		StringMaker sm = new StringMaker();
+		String resultString = sm.getResultStringForCityInStateWithAtLeastNJobsForTechnology(resultSet, numJobsRequest);
 		
 		return resultString;
 	}

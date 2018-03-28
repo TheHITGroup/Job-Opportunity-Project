@@ -1,15 +1,32 @@
 package com.hit.controller;
 
+
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 /**
  * 
- * Constructor superclass. Inherited by ComplexQueryController and PatternController
+ * Constructor superclass. Inherited by ComplexQueryController, PatternController, and StringMaker
  *
  */
 public class Controller
 {
+	
+	/**
+	 * Gets a prepared statement from a SQL query
+	 * 
+	 * @param sql
+	 * @return
+	 */
+	public PreparedStatement getPreparedStatement(String sql)
+	{
+		DbController Dbc = new DbController();
+		Connection conn = Dbc.getDBConnection();
+		PreparedStatement preparedStatement = Dbc.getPreparedStatement(conn, sql);
+		
+		return preparedStatement;
+	}
 	/**
 	 * Gets a ResultObject from a PreparedStatement object
 	 * 
@@ -95,6 +112,7 @@ public class Controller
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		
 		return result;
 	}
 	
@@ -106,18 +124,39 @@ public class Controller
 	 */
 	public int getSizeOfResultSet(ResultSet resultSet)
 	{
-		int i = -1;
+		int size = 0;
+		
 		try {
-			while(resultSet.next()) {
-				resultSet.getInt(1);
-				i++;				
-			}
-			//set the row pointer back to the first row
-			resultSet.beforeFirst();
+			if(resultSet.last()) {
+				size = resultSet.getRow();
+				
+				//set the row pointer back to the first row
+				resultSet.beforeFirst();
+			}			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		return i;
+		return size;
+	}
+	
+	/**
+	 * Sets the row pointer to the specified rowNum
+	 * 
+	 * @param resultSet
+	 * @param rowNum row at which to point the pointer
+	 */
+	public void setRow(ResultSet resultSet, int rowNum)
+	{
+		try {
+			//ResultSet.absolute cannot absolute position to row 0, so we do it ourself
+			if(rowNum == 0) {
+				resultSet.beforeFirst();
+				return;
+			}
+			resultSet.absolute(rowNum);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 }

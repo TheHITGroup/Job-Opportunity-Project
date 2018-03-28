@@ -220,5 +220,26 @@ public class ComplexQueries
 				"    HAVING max_name_count = COUNT(T.name)";
 		return sql;
 	}
+	
+	public String getSQLForCityInStateWithAtLeastNJobsForTechnology(String state, String tech, String numJobsRequest)
+	{
+		String sql = "SELECT " + 
+				"    city, COUNT(city) as count" + 
+				"    FROM" + 
+				"    Uses AS U," + 
+				"    Job AS J," + 
+				"    Technology AS T," + 
+				"    Location AS L" + 
+				"    WHERE" + 
+				"    T.name = '" + tech + "' AND L.state = '" + state + "'" + 
+				"        AND T.id = U.t_id" + 
+				"        AND J.id = U.j_id" + 
+				"        AND J.zipcode = L.zipcode" + 
+				"    GROUP BY city" + 
+				"    HAVING count >=" + numJobsRequest +
+				"    ORDER BY count DESC";
+		
+		return sql;
+	}
 
 }
