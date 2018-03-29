@@ -22,7 +22,7 @@ public class TechnologyController extends Controller
 		return id;
 	}
 	
-	public List<TechnologyJSON> getListOfTechnologies()
+	public static List<TechnologyJSON> getListOfTechnologies()
 	{
 		String sql = "SELECT * FROM Technology";
 		
@@ -52,6 +52,9 @@ public class TechnologyController extends Controller
 		}	
 		return Techs;
 	}
+        
+      
+        
 	
 	public boolean techExists(String name)
 	{
