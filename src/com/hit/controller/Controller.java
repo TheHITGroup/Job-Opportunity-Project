@@ -129,6 +129,21 @@ public class Controller
 		return result;
 	}
 	
+	public int getIntResultByColumnNameNoReset(String columnName, ResultSet resultSet)
+	{	
+		int result = -1;
+		try {
+			//advance the row pointer to the first row
+			resultSet.next();
+			
+			result = resultSet.getInt(columnName);
+		} catch (Exception e) {
+			System.out.println(columnName);
+			System.out.println(e.getMessage());
+		}
+		return result;
+	}
+	
 	/**
 	 * Gets the result by name of column. Does not reset the row pointer in the ResultSet object to
 	 * its original position.

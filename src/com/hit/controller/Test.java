@@ -6,6 +6,7 @@ import com.hit.controller.UserController;
 import com.hit.json.LocationJSON;
 import com.hit.json.TechnologyJSON;
 import com.hit.json.UserJSON;
+import com.hit.json.UserJobJSON;
 
 public class Test {
 
@@ -47,9 +48,21 @@ public class Test {
 		 }
 		 
 		 OtherRequirementsController orc = new OtherRequirementsController();
-		 String[] techs = {"Lisp"};
+		 String[] techs = {"Python", "Flask"};
 		 int jobId = orc.addJob( 90210, techs, 1);
-		 System.out.println(jobId);
+		 //System.out.println(jobId);
+		 
+		 List<UserJobJSON> UJJs = orc.getJobsForUser(1);
+		 int i = 1;
+		 for(UserJobJSON UJJ : UJJs) {
+			 System.out.println("------Job " + i++ + "------");
+			 System.out.println(UJJ.getCity());
+			 System.out.println(UJJ.getState());
+			 System.out.println(UJJ.getZipcode());
+			 for(String tech : UJJ.getTechs()) {
+				 System.out.println(tech);
+			 }
+		 }
 	}
 
 }

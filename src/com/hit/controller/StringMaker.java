@@ -104,6 +104,7 @@ public class StringMaker extends Controller
 		int i = 0;
 		for(; i < sizeOfResultSet - 1; i++) {
 			String[] cityAndNumJobsInCityArray = getCityAndNumJobsArray(resultSet, i);
+			
 			resultString += cityAndNumJobsInCityArray[0] + " with " + cityAndNumJobsInCityArray[1] + " jobs";
 			resultString += (sizeOfResultSet != 2) ? ", " : " ";
 		}
@@ -116,8 +117,10 @@ public class StringMaker extends Controller
 	private String[] getCityAndNumJobsArray(ResultSet resultSet, int rowNum)
 	{
 		String[] cityAndNumJobsInCityArray = new String[2];
-		setRow(resultSet, rowNum);
+		
+		setRow(resultSet, rowNum); 
 		cityAndNumJobsInCityArray[0] = getResultByColumnNameNoReset("city", resultSet);
+		
 		setRow(resultSet, rowNum);
 		cityAndNumJobsInCityArray[1] = getResultByColumnNameNoReset("count", resultSet);
 		
