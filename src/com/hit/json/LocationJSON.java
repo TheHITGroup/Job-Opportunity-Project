@@ -2,18 +2,18 @@ package com.hit.json;
 
 public class LocationJSON
 {
-	private int zipcode;
+	private String zipcode;
 	
 	private String city;
 	
 	private String state;
 
-	public int getZipcode()
+	public String getZipcode()
 	{
 		return zipcode;
 	}
 
-	public void setZipcode(int zipcode)
+	public void setZipcode(String zipcode)
 	{
 		this.zipcode = zipcode;
 	}

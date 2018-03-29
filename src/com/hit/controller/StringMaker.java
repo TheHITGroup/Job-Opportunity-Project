@@ -8,6 +8,9 @@ public class StringMaker extends Controller
 
 	public String getResultStringForMostPopularTechnology(ResultSet resultSet)
 	{	
+		if(getSizeOfResultSet(resultSet) == 0)
+			return getNoResultString();
+		
 		String name = getResultByColumnNameWithReset("name", resultSet);
 		String numJobs = getResultByColumnNameWithReset("count", resultSet);
 		
@@ -26,6 +29,9 @@ public class StringMaker extends Controller
 
 	public String getResultStringForMostPopularCityState(ResultSet resultSet)
 	{	
+		if(getSizeOfResultSet(resultSet) == 0)
+			return getNoResultString();
+		
 		String city = getResultByColumnNameWithReset("city", resultSet);
 		String state = getResultByColumnNameWithReset("state", resultSet);
 		String numJobs = getResultByColumnNameWithReset("count", resultSet);
@@ -45,6 +51,9 @@ public class StringMaker extends Controller
 
 	public String getResultStringForMostPopularFrameworkForLanguageInCityState(ResultSet resultSet)
 	{
+		if(getSizeOfResultSet(resultSet) == 0)
+			return getNoResultString();
+		
 		String city = getResultByColumnNameWithReset("city", resultSet);
 		String state = getResultByColumnNameWithReset("state", resultSet);
 		String numJobs = getResultByColumnNameWithReset("count", resultSet);
@@ -69,11 +78,15 @@ public class StringMaker extends Controller
 			resultString += (sizeOfResultSet != 2) ? ", " : "";
 		}
 		resultString += " and " + getResultByColumnNameWithReset("name", resultSet);
+		
 		return resultString;
 	}
 
 	public String getResultStringForCityInStateWithAtLeastNJobsForTechnology(ResultSet resultSet, String numJobsRequest)
 	{
+		if(getSizeOfResultSet(resultSet) == 0)
+			return getNoResultString();
+		
 		if(!resultHasMoreThanOneRow(resultSet))
 			return "The only city with more than N jobs is " + getResultByColumnNameWithReset("city", resultSet)
 					+ " with " + getResultByColumnNameWithReset("count", resultSet) + " jobs.";
@@ -109,6 +122,11 @@ public class StringMaker extends Controller
 		cityAndNumJobsInCityArray[1] = getResultByColumnNameNoReset("count", resultSet);
 		
 		return cityAndNumJobsInCityArray;
+	}
+	
+	private String getNoResultString() 
+	{
+		return "Sorry, your search did not produce any results.";
 	}
 
 }
