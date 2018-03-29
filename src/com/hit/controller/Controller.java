@@ -1,9 +1,8 @@
 package com.hit.controller;
 
-
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * 
@@ -19,11 +18,19 @@ public class Controller
 	 * @param sql
 	 * @return
 	 */
-	public PreparedStatement getPreparedStatement(String sql)
+	public static PreparedStatement getPreparedStatement(String sql)
 	{
 		DbController Dbc = new DbController();
-		Connection conn = Dbc.getDBConnection();
-		PreparedStatement preparedStatement = Dbc.getPreparedStatement(conn, sql);
+		PreparedStatement preparedStatement = Dbc.getPreparedStatement(sql);
+		
+		return preparedStatement;
+	}
+	
+
+	public static PreparedStatement getPreparedStatementWithLastInsertId(String sql)
+	{
+		DbController Dbc = new DbController();
+		PreparedStatement preparedStatement = Dbc.getPreparedStatementWithLastInsertId(sql);
 		
 		return preparedStatement;
 	}
@@ -33,7 +40,7 @@ public class Controller
 	 * @param preparedStatement
 	 * @return ResultSet
 	 */
-	public ResultSet getResultSet(PreparedStatement preparedStatement)
+	public static ResultSet getResultSet(PreparedStatement preparedStatement)
 	{
 		ResultSet resultSet = null;
 		
@@ -44,6 +51,18 @@ public class Controller
 		}
 		
 		return resultSet;
+	}
+	
+	public static boolean executeInsertQuery(PreparedStatement preparedStatement)
+	{ 
+		try {
+			preparedStatement.executeUpdate();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+		return true;
+		
 	}
 
 	/**
@@ -92,6 +111,24 @@ public class Controller
 		return result;
 	}
 	
+	public int getIntResultByColumnNameWithReset(String columnName, ResultSet resultSet)
+	{	
+		int result = -1;
+		try {
+			//advance the row pointer to the first row
+			resultSet.next();
+			
+			result = resultSet.getInt(columnName);
+			
+			//set the row pointer back to the first row
+			resultSet.beforeFirst();
+		} catch (Exception e) {
+			System.out.println(columnName);
+			System.out.println(e.getMessage());
+		}
+		return result;
+	}
+	
 	/**
 	 * Gets the result by name of column. Does not reset the row pointer in the ResultSet object to
 	 * its original position.
@@ -101,7 +138,7 @@ public class Controller
 	 * @return result
 	 */
 	
-	public String getResultByColumnNameNoReset(String columnName, ResultSet resultSet)
+	public static String getResultByColumnNameNoReset(String columnName, ResultSet resultSet)
 	{	
 		String result = "";
 		try {
@@ -122,7 +159,7 @@ public class Controller
 	 * @param resultSet
 	 * @return size of ResultSet
 	 */
-	public int getSizeOfResultSet(ResultSet resultSet)
+	public static int getSizeOfResultSet(ResultSet resultSet)
 	{
 		int size = 0;
 		
@@ -145,7 +182,7 @@ public class Controller
 	 * @param resultSet
 	 * @param rowNum row at which to point the pointer
 	 */
-	public void setRow(ResultSet resultSet, int rowNum)
+	public static void setRow(ResultSet resultSet, int rowNum)
 	{
 		try {
 			//ResultSet.absolute cannot absolute position to row 0, so we do it ourself
@@ -157,6 +194,23 @@ public class Controller
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+	}
+
+	public int getIdForLastInsert(PreparedStatement preparedStatement)
+	{
+		ResultSet resultSet = null;
+		int id = -1;
+		try {
+			resultSet = preparedStatement.getGeneratedKeys();
+			
+			resultSet.next();
+			
+			id = resultSet.getInt(1);
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		return id;
 	}
 
 }

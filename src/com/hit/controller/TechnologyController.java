@@ -9,6 +9,19 @@ import com.hit.json.TechnologyJSON;
 
 public class TechnologyController extends Controller
 {
+	public int getIdByName(String name)
+	{
+		String sql = "SELECT id FROM Technology WHERE name='" + name + "'";
+		
+		PreparedStatement preparedStatement = getPreparedStatement(sql);
+		
+		ResultSet resultSet = getResultSet(preparedStatement);
+		
+		int id = getIntResultByColumnNameWithReset("id", resultSet);
+		
+		return id;
+	}
+	
 	public List<TechnologyJSON> getListOfTechnologies()
 	{
 		String sql = "SELECT * FROM Technology";
@@ -38,5 +51,30 @@ public class TechnologyController extends Controller
 			Techs.add(Tech);
 		}	
 		return Techs;
+	}
+	
+	public boolean techExists(String name)
+	{
+		String sql = "SELECT id FROM Technology where name='" + name + "'";
+		
+		PreparedStatement preparedStatement = getPreparedStatement(sql);
+		
+		ResultSet resultSet = getResultSet(preparedStatement);
+		
+		return (getSizeOfResultSet(resultSet) != 0);
+	}
+
+	public int insertTech(String tech)
+	{
+		String sql = "INSERT INTO Technology (name) VALUES('" + tech + "')";
+		
+		PreparedStatement preparedStatement = getPreparedStatementWithLastInsertId(sql);
+		
+		executeInsertQuery(preparedStatement);
+		
+		int techId = getIdForLastInsert(preparedStatement);
+		
+		return techId;
+		
 	}
 }

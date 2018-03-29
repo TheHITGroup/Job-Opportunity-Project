@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import com.mysql.jdbc.Statement;
+
 /**
  * 
  * Controller for the database. Uses mysql and jdbc
@@ -36,12 +38,26 @@ public class DbController
 		return dbConnection;
 	}
 
-	public PreparedStatement getPreparedStatement(Connection conn, String sql)
+	public PreparedStatement getPreparedStatement(String sql)
 	{
+		Connection conn = getDBConnection();
 		PreparedStatement preparedStatement = null;
 		try {
 			preparedStatement =  conn.prepareStatement(sql);
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		return preparedStatement;
+	}
+	
+	public PreparedStatement getPreparedStatementWithLastInsertId(String sql)
+	{
+		Connection conn = getDBConnection();
+		PreparedStatement preparedStatement = null;
+		try {
+			preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
 		

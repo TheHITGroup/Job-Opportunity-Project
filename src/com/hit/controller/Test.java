@@ -45,6 +45,11 @@ public class Test {
 			 System.out.println(Loc.getState());
 			 System.out.println(Loc.getZipcode());
 		 }
+		 
+		 OtherRequirementsController orc = new OtherRequirementsController();
+		 String[] techs = {"Lisp"};
+		 int jobId = orc.addJob( 90210, techs, 1);
+		 System.out.println(jobId);
 	}
 
 }

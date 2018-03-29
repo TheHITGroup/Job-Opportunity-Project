@@ -15,7 +15,7 @@ public class ComplexQueryController extends Controller
 		PreparedStatement preparedStatement = getPreparedStatement(sql);
 		
 		ResultSet resultSet = getResultSet(preparedStatement);
-		
+	
 		StringMaker sm = new StringMaker();
 		String resultString = sm.getResultStringForMostPopularTechnology(resultSet);
 		
