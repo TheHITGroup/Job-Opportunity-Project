@@ -79,7 +79,7 @@ public class TechnologyController extends Controller
 	 */
 	public static List<TechnologyJSON> getListOfTechnologies()
 	{
-		String sql = "SELECT * FROM Technology";
+		String sql = "SELECT * FROM Technology ORDER BY name";
 		
 		PreparedStatement preparedStatement = getPreparedStatement(sql);
 		
