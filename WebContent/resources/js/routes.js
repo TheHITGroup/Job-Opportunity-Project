@@ -20,7 +20,7 @@
                 })
                 .when('/createUser', {
                     templateUrl: './pages/createuser.html',
-                    controller: 'createUserController'
+                    controller: 'userController'
 
                 })
                 .when('/search', {
