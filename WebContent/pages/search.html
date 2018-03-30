@@ -1,10 +1,41 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-    SEARCH SECTION is under construction. Please click on HOME to go back to main menu.
-</body>
-</html>
+<div>
+    <h4>Most Popular Of Two Technologies by Location</h4>
+
+    <form>
+        <div class="form-group">
+            <label for="tech1"> Technology 1 </label><br>
+            <select name="tech1" ng-model="tech1">
+                <option ng-repeat="tech in techs" value="{{tech.name}}">{{tech.name}}</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+
+            <label for="tech2"> Technology 2 </label><br>
+            <select name="tech2" ng-model="tech2">
+                <option ng-repeat="tech in techs" value="{{tech.name}}">{{tech.name}}</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+
+            <label for="state">State</label><br>
+            <select name="state" ng-model="state">
+                <option ng-repeat="item in states" value="{{item.state}}">{{item.state}}</option>
+            </select>
+        </div>
+        
+         <div class="form-group">
+
+            <label for="state">State</label><br>
+            <select name="state" ng-model="state">
+                <option ng-repeat="item in states" value="{{item.state}}">{{item.state}}</option>
+            </select>
+        </div>
+        
+    </form>
+
+
+    <hr class="my-4">
+
+</div>
