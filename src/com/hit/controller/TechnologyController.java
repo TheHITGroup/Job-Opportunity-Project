@@ -50,7 +50,7 @@ public class TechnologyController extends Controller
 		
 		return (getSizeOfResultSet(resultSet) != 0);
 	}
-	
+
 	/**
 	 * Given a technology name, this method inserts a Technology tuple into the database
 	 * 
@@ -77,7 +77,7 @@ public class TechnologyController extends Controller
 	 * 
 	 * @return List of Technology Json objects
 	 */
-	public List<TechnologyJSON> getListOfTechnologies()
+	public static List<TechnologyJSON> getListOfTechnologies()
 	{
 		String sql = "SELECT * FROM Technology";
 		
@@ -97,8 +97,7 @@ public class TechnologyController extends Controller
 	 * 
 	 * @return List of Technology Json objects
 	 */
-	
-	private List<TechnologyJSON> technologyListBuilder(ResultSet resultSet)
+	private static List<TechnologyJSON> technologyListBuilder(ResultSet resultSet)
 	{
 		List<TechnologyJSON> techs = new ArrayList<TechnologyJSON>();
 		
