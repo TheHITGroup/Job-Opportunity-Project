@@ -27,33 +27,33 @@ public class Test {
 			 System.out.println(Tech.getId());
 			 System.out.println(Tech.getType());
 		 }
-		 
-		 LocationController lc = new LocationController();
-		 List<LocationJSON> Locs = lc.getListOfLocations();
-		 for(LocationJSON Loc : Locs) {
-			 System.out.println(Loc.getCity());
-			 System.out.println(Loc.getState());
-			 System.out.println(Loc.getZipcode());
-		 }
+//		 
+//		 LocationController lc = new LocationController();
+//		 List<LocationJSON> Locs = lc.getListOfLocations();
+//		 for(LocationJSON Loc : Locs) {
+//			 System.out.println(Loc.getCity());
+//			 System.out.println(Loc.getState());
+//			 System.out.println(Loc.getZipcode());
+//		 }
 		 
 		 OtherRequirementsController orc = new OtherRequirementsController();
 		 String[] techs = {"Python", "Flask"};
 		 int jobId = orc.addJobOpening( 90210, techs, 1);
 		 //System.out.println(jobId);
 		 
-		 List<JobOpeningJSON> UJJs = orc.getJobsForUser(1);
-		 int i = 1;
-		 for(JobOpeningJSON UJJ : UJJs) {
-			 System.out.println("------Job " + i++ + "------");
-			 System.out.println(UJJ.getCity());
-			 System.out.println(UJJ.getState());
-			 System.out.println(UJJ.getZipcode());
-			 for(String tech : UJJ.getTechs()) {
-				 System.out.println(tech);
-			 }
-		 }
+//		 List<JobOpeningJSON> UJJs = orc.getJobOpeningsForUser(1);
+//		 int i = 1;
+//		 for(JobOpeningJSON UJJ : UJJs) {
+//			 System.out.println("------Job " + i++ + "------");
+//			 System.out.println(UJJ.getCity());
+//			 System.out.println(UJJ.getState());
+//			 System.out.println(UJJ.getZipcode());
+//			 for(String tech : UJJ.getTechs()) {
+//				 System.out.println(tech);
+//			 }
+//		 }
          
-		 String result = tc.getPopOfTwoTechsByZip("JavaScript", "C", "08876");
+		 String result = tc.getPopOfTwoTechsByZip("Java", "C++", "08876");
 		 String result2 = tc.getPopOfTwoTechsByCityState("C++", "Java", "Somerville", "NJ");
 		 String result3 = tc.getPopOfTwoCityStatesForTech("Spring", "New York", "NY", "Newark", "NJ");
 		 String result4 = tc.getPopFWForLangInCityState("Java", "Newark", "NJ");

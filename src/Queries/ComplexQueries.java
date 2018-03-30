@@ -37,9 +37,9 @@ public class ComplexQueries
 				"            AND U.j_id = J.id" + 
 				"            AND J.zipcode = L.zipcode)" + 
 				"    GROUP BY name" + 
-				"    ORDER BY COUNT(name) DESC) A" + 
+				"    ORDER BY COUNT(name) DESC LIMIT 1) A" + 
 				"    GROUP BY name" + 
-				"    LIMIT 1) B" + 
+				"    ) B" + 
 				"    WHERE" + 
 				"    (city = '" + city + "' AND state = '" + state + "'" + 
 				"        AND U.t_id = T.id" + 
@@ -85,9 +85,9 @@ public class ComplexQueries
 				"            AND U.j_id = J.id" + 
 				"            AND J.zipcode = L.zipcode)" + 
 				"    GROUP BY name" + 
-				"    ORDER BY COUNT(name) DESC) A" + 
+				"    ORDER BY COUNT(name) DESC LIMIT 1) A" + 
 				"    GROUP BY name" + 
-				"    LIMIT 1) B" + 
+				"    ) B" + 
 				"    WHERE" + 
 				"    (L.zipcode = '" + zip + "'" + 
 				"        AND U.t_id = T.id" + 
