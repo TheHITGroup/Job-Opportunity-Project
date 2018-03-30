@@ -3,7 +3,7 @@ package com.hit.json;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserJobJSON
+public class JobOpeningJSON
 {
 	private String city;
 	

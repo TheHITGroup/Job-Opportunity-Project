@@ -2,6 +2,9 @@ package com.hit.json;
 
 import java.sql.Timestamp;
 
+/*
+ * This is the JSON representation of the Job relations
+ */
 public class JobJSON
 {
 	private int id;

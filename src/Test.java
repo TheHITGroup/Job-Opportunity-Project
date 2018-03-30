@@ -14,10 +14,10 @@ public class Test {
          
          ComplexQueryController tc = new ComplexQueryController();
          
-		 String result = tc.getMostPopularOfTwoTechnologiesByZip("Python", "C", "08876");
-		 String result2 = tc.getMostPopularOfTwoTechnologiesByCityState("C++", "Java", "Somerville", "NJ");
-		 String result3 = tc.getMostPopularOfTwoCityStatesForTechnology("Spring", "New York", "NY", "Newark", "NJ");
-		 String result4 = tc.getMostPopularFrameworkForLanguageInCityState("Java", "Newark", "NJ");
+		 String result = tc.getPopOfTwoTechsByZip("Python", "C", "08876");
+		 String result2 = tc.getPopOfTwoTechsByCityState("C++", "Java", "Somerville", "NJ");
+		 String result3 = tc.getPopOfTwoCityStatesForTech("Spring", "New York", "NY", "Newark", "NJ");
+		 String result4 = tc.getPopFWForLangInCityState("Java", "Newark", "NJ");
 		 System.out.println(result);
 		 System.out.println(result2);
 		 System.out.println(result3);

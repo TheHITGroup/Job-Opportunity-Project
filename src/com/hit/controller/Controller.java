@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 /**
  * 
- * Constructor superclass. Inherited by ComplexQueryController, PatternController, and StringMaker
+ * Constructor superclass.
  *
  */
 public class Controller
@@ -26,7 +26,14 @@ public class Controller
 		return preparedStatement;
 	}
 	
-
+	/**
+	 * Gets a prepared statement which maintains the auto incremented id of the tuple to be inserted,
+	 * which can be requested later by calling getGeneratedKeys on the PreparedStatement object
+	 * 
+	 * @param sql
+	 * 
+	 * @return PreparedStatement object
+	 */
 	public static PreparedStatement getPreparedStatementWithLastInsertId(String sql)
 	{
 		DbController Dbc = new DbController();
@@ -53,6 +60,13 @@ public class Controller
 		return resultSet;
 	}
 	
+	/**
+	 * Exececutes an insert query from a Prepared Statement object
+	 * 
+	 * @param preparedStatement
+	 * 
+	 * @return true if successful; false if failed
+	 */
 	public static boolean executeInsertQuery(PreparedStatement preparedStatement)
 	{ 
 		try {
@@ -87,14 +101,14 @@ public class Controller
 	}
 	
 	/**
-	 * Gets the result by name of column. Resets the row pointer in the ResultSet object to
-	 * its original position.
+	 * Gets the string representation of a query result in a given column for the current row.
+	 * It then resets the ResultSet row pointer back to its original position (before first).
 	 * 
 	 * @param columnName
 	 * @param resultSet
 	 * @return result
 	 */
-	public String getResultByColumnNameWithReset(String columnName, ResultSet resultSet)
+	public String getStringResultByColNameAndReset(String columnName, ResultSet resultSet)
 	{	
 		String result = "";
 		try {
@@ -111,7 +125,15 @@ public class Controller
 		return result;
 	}
 	
-	public int getIntResultByColumnNameWithReset(String columnName, ResultSet resultSet)
+	/**
+	 * Gets the integer representation of a query result in a given column for the current row.
+	 * It then resets the ResultSet row pointer back to its original position (before first).
+	 * 
+	 * @param columnName
+	 * @param resultSet
+	 * @return result
+	 */
+	public int getIntResultByColNameAndReset(String columnName, ResultSet resultSet)
 	{	
 		int result = -1;
 		try {
@@ -128,8 +150,17 @@ public class Controller
 		}
 		return result;
 	}
+
 	
-	public int getIntResultByColumnNameNoReset(String columnName, ResultSet resultSet)
+	/**
+	 * Gets the integer representation of a query result in a given column for the current row.
+	 * It does not reset the ResultSet row pointer back to its original position.
+	 * 
+	 * @param columnName
+	 * @param resultSet
+	 * @return result
+	 */
+	public int getIntResultByColNameNoReset(String columnName, ResultSet resultSet)
 	{	
 		int result = -1;
 		try {
@@ -145,15 +176,14 @@ public class Controller
 	}
 	
 	/**
-	 * Gets the result by name of column. Does not reset the row pointer in the ResultSet object to
-	 * its original position.
+	 * Gets the string representation of a query result in a given column for the current row.
+	 * It does not reset the ResultSet row pointer back to its original position (before first).
 	 * 
 	 * @param columnName
 	 * @param resultSet
 	 * @return result
 	 */
-	
-	public static String getResultByColumnNameNoReset(String columnName, ResultSet resultSet)
+	public static String getStringResultByColNameNoReset(String columnName, ResultSet resultSet)
 	{	
 		String result = "";
 		try {
@@ -211,6 +241,14 @@ public class Controller
 		}
 	}
 
+	/**
+	 * Gets the auto incremented id result of the last value inserted tuple, given
+	 * that the insert was prepared with the getPreparedStatementWithLastInsertId
+	 * method at the top of this class
+	 * 
+	 * @param preparedStatement
+	 * @return
+	 */
 	public int getIdForLastInsert(PreparedStatement preparedStatement)
 	{
 		ResultSet resultSet = null;

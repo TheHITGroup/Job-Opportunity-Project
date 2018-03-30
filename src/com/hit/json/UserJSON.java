@@ -1,5 +1,8 @@
 package com.hit.json;
 
+/*
+ * This is the JSON representation of the User entity
+ */
 public class UserJSON {
 	private int id;
 	private String userName;

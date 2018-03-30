@@ -104,7 +104,7 @@ public class ComplexQueries
 		return sql;
 	}
 	
-	public String getSQLForMostPopularOfTwoCityStatesForTechnology(String tech, 
+	public String getSQLForPopOfTwoCityStatesForTech(String tech, 
 			String cityOne, String stateOne, String cityTwo, String stateTwo)
 	{
 		String sql = "SELECT " + 

@@ -5,12 +5,26 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.hit.json.UserJobJSON;
+import com.hit.json.JobOpeningJSON;
 
+/**
+ *  Class containing the queries used to fulfill requirements 1 and 2 in the grading rubric
+ *
+ */
 public class OtherRequirementsController extends Controller
 {
 
-	public int addJob(int zipcode, String[] techs, int userId) 
+	/**
+	 * Adds a new job opening entered by the user to the database and creates all necessary relations.
+	 * If the new job opening is for a programming language or framework not already in the technology
+	 * table, it adds the new technology to the table.
+	 * 
+	 * @param zipcode
+	 * @param techs
+	 * @param userId
+	 * @return
+	 */
+	public int addJobOpening(int zipcode, String[] techs, int userId) 
 	{		
 		JobController jc = new JobController();
 		int jobId = jc.insertJob(userId, zipcode);
@@ -39,10 +53,8 @@ public class OtherRequirementsController extends Controller
 		for(String tech: techs) {
 			int techId;
 			if(tc.techExists(tech)) {
-				System.out.println("exists\n");
 				techId = tc.getIdByName(tech);
 			} else {
-				System.out.println("does not exist\n");
 				techId = tc.insertTech(tech);
 			}
 			techIds.add(techId);
@@ -50,7 +62,15 @@ public class OtherRequirementsController extends Controller
 		return techIds;
 	}
 	
-	public List<UserJobJSON> getJobsForUser(int userId)
+	/**
+	 * Gets a list of all job openings created by a user identified by userId. A job opening
+	 * contains the city, state, and zipcode of the job as well as any technologies being used.
+	 * 
+	 * @param userId
+	 * 
+	 * @return List of JobOpenings
+	 */
+	public List<JobOpeningJSON> getJobOpeningsForUser(int userId)
 	{
 		String sql = "SELECT city, state, L.zipcode, name, J.id as jobId FROM Location AS L, Uses AS Us, Job AS J, User AS Ur, Technology AS T" + 
 				"	WHERE Ur.id=" + userId + " AND J.u_id=Ur.id AND Us.j_id=J.id AND Us.t_id=T.id AND L.zipcode=J.zipcode ORDER BY J.id";
@@ -59,35 +79,42 @@ public class OtherRequirementsController extends Controller
 		
 		ResultSet resultSet = getResultSet(preparedStatement);
 		
-		List<UserJobJSON> UJJs = jobsForUserListBuilder(resultSet);
+		List<JobOpeningJSON> UJJs = jobOpeningsForUserListBuilder(resultSet);
 		
 		return UJJs;
 		
 	}
 	
-	private List<UserJobJSON> jobsForUserListBuilder(ResultSet resultSet)
+	/**
+	 * Builds the JobOpenings list for the getJobOpeningsForUser method
+	 * 
+	 * @param resultSet
+	 * 
+	 * @return List of JobOpenings
+	 */
+	private List<JobOpeningJSON> jobOpeningsForUserListBuilder(ResultSet resultSet)
 	{
-		List<UserJobJSON> UJJs = new ArrayList<>();
+		List<JobOpeningJSON> UJJs = new ArrayList<>();
 		
 		int sizeOfResultSet = getSizeOfResultSet(resultSet);
 		for(int i = 0; i < sizeOfResultSet; i++) {
-			UserJobJSON UJJ = new UserJobJSON();
+			JobOpeningJSON UJJ = new JobOpeningJSON();
 			
 			setRow(resultSet, i);
 			
-			String city = getResultByColumnNameNoReset("city", resultSet);
+			String city = getStringResultByColNameNoReset("city", resultSet);
 			UJJ.setCity(city);
 			setRow(resultSet, i);
 			
-			String state = getResultByColumnNameNoReset("state", resultSet);
+			String state = getStringResultByColNameNoReset("state", resultSet);
 			UJJ.setState(state);
 			setRow(resultSet, i);
 			
-			int zipcode = getIntResultByColumnNameNoReset("zipcode", resultSet);
+			int zipcode = getIntResultByColNameNoReset("zipcode", resultSet);
 			UJJ.setZipcode(zipcode);
 			setRow(resultSet, i);
 			
-			String tech = getResultByColumnNameNoReset("name", resultSet);
+			String tech = getStringResultByColNameNoReset("name", resultSet);
 			List<String> techs = new ArrayList<>();
 			techs.add(tech);
 			setRow(resultSet, i);
@@ -99,23 +126,34 @@ public class OtherRequirementsController extends Controller
 		return UJJs;
 	}
 
-	private int multipleTechsForOneJobHandler(UserJobJSON UJJ, List<String> techs, ResultSet resultSet, int i)
+	/**
+	 * Handles JobOpenings with more than one technology. Increases the row pointer which doubles as
+	 * the loop counter for the jobOpeningsForUserListBuilder method
+	 * 
+	 * @param UJJ
+	 * @param techs
+	 * @param resultSet
+	 * @param rowPointer
+	 * 
+	 * @return row pointer
+	 */
+	private int multipleTechsForOneJobHandler(JobOpeningJSON UJJ, List<String> techs, ResultSet resultSet, int rowPointer)
 	{
 		
-		int jobIdForPreviousTech = getIntResultByColumnNameNoReset("jobId", resultSet);
-		int jobIdForCurrentTech = getIntResultByColumnNameNoReset("jobId", resultSet);
+		int jobIdForPreviousTech = getIntResultByColNameNoReset("jobId", resultSet);
+		int jobIdForCurrentTech = getIntResultByColNameNoReset("jobId", resultSet);
 		while(jobIdForCurrentTech == jobIdForPreviousTech) {
-			i++;
+			rowPointer++;
 			
-			setRow(resultSet, i);
-			String currentTech = getResultByColumnNameNoReset("name", resultSet);
+			setRow(resultSet, rowPointer);
+			String currentTech = getStringResultByColNameNoReset("name", resultSet);
 			techs.add(currentTech);
 			
 			//advance to next job
-			jobIdForCurrentTech = getIntResultByColumnNameNoReset("jobId", resultSet);
+			jobIdForCurrentTech = getIntResultByColNameNoReset("jobId", resultSet);
 		}
 		UJJ.setTechs(techs);
 		
-		return i;		
+		return rowPointer;		
 	}
 }

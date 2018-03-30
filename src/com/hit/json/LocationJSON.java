@@ -1,5 +1,8 @@
 package com.hit.json;
 
+/*
+ * This is the JSON representation of the Location entitie
+ */
 public class LocationJSON
 {
 	private String zipcode;

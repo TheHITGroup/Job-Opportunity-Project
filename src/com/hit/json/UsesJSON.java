@@ -1,5 +1,8 @@
 package com.hit.json;
 
+/*
+ * This is the JSON representation of the Uses relations
+ */
 public class UsesJSON
 {
 	private int j_id;

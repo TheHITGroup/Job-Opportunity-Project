@@ -20,6 +20,11 @@ public class DbController
 	private static final String DB_USER = "user";
 	private static final String DB_PASSWORD = "user123";
 	
+	/**
+	 * Gets a connection to the database
+	 * 
+	 * @return DB connection
+	 */
 	public Connection getDBConnection() {
 		Connection dbConnection = null;
 		try {
@@ -38,6 +43,12 @@ public class DbController
 		return dbConnection;
 	}
 
+	/**
+	 * Gets a prepared statement from a SQL query
+	 * 
+	 * @param sql
+	 * @return
+	 */
 	public PreparedStatement getPreparedStatement(String sql)
 	{
 		Connection conn = getDBConnection();
@@ -51,6 +62,14 @@ public class DbController
 		return preparedStatement;
 	}
 	
+	/**
+	 * Gets a prepared statement which maintains the auto incremented id of the tuple to be inserted,
+	 * which can be requested later by calling getGeneratedKeys on the PreparedStatement object
+	 * 
+	 * @param sql
+	 * 
+	 * @return PreparedStatement object
+	 */	
 	public PreparedStatement getPreparedStatementWithLastInsertId(String sql)
 	{
 		Connection conn = getDBConnection();

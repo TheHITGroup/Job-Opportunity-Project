@@ -6,7 +6,7 @@ import com.hit.controller.UserController;
 import com.hit.json.LocationJSON;
 import com.hit.json.TechnologyJSON;
 import com.hit.json.UserJSON;
-import com.hit.json.UserJobJSON;
+import com.hit.json.JobOpeningJSON;
 
 public class Test {
 
@@ -19,20 +19,9 @@ public class Test {
          System.out.println(UserController.checkLogin(userJSON));
          
          ComplexQueryController tc = new ComplexQueryController();
-         
-		 String result = tc.getMostPopularOfTwoTechnologiesByZip("JavaScript", "C", "08876");
-		 String result2 = tc.getMostPopularOfTwoTechnologiesByCityState("C++", "Java", "Somerville", "NJ");
-		 String result3 = tc.getMostPopularOfTwoCityStatesForTechnology("Spring", "New York", "NY", "Newark", "NJ");
-		 String result4 = tc.getMostPopularFrameworkForLanguageInCityState("Java", "Newark", "NJ");
-		 String result5 = tc.getCityInStateWithAtLeastNJobsForTechnology("NJ", "JavaScript", "10");
 		 
 		 TechnologyController tctrlr = new TechnologyController();
 		 List<TechnologyJSON> Techs = tctrlr.getListOfTechnologies();
-		 System.out.println(result);
-		 System.out.println(result2);
-		 System.out.println(result3);
-		 System.out.println(result4);
-		 System.out.println(result5);
 		 for(TechnologyJSON Tech : Techs) {
 			 System.out.println(Tech.getName());
 			 System.out.println(Tech.getId());
@@ -49,12 +38,12 @@ public class Test {
 		 
 		 OtherRequirementsController orc = new OtherRequirementsController();
 		 String[] techs = {"Python", "Flask"};
-		 int jobId = orc.addJob( 90210, techs, 1);
+		 int jobId = orc.addJobOpening( 90210, techs, 1);
 		 //System.out.println(jobId);
 		 
-		 List<UserJobJSON> UJJs = orc.getJobsForUser(1);
+		 List<JobOpeningJSON> UJJs = orc.getJobsForUser(1);
 		 int i = 1;
-		 for(UserJobJSON UJJ : UJJs) {
+		 for(JobOpeningJSON UJJ : UJJs) {
 			 System.out.println("------Job " + i++ + "------");
 			 System.out.println(UJJ.getCity());
 			 System.out.println(UJJ.getState());
@@ -63,6 +52,17 @@ public class Test {
 				 System.out.println(tech);
 			 }
 		 }
+         
+		 String result = tc.getPopOfTwoTechsByZip("JavaScript", "C", "08876");
+		 String result2 = tc.getPopOfTwoTechsByCityState("C++", "Java", "Somerville", "NJ");
+		 String result3 = tc.getPopOfTwoCityStatesForTech("Spring", "New York", "NY", "Newark", "NJ");
+		 String result4 = tc.getPopFWForLangInCityState("Java", "Newark", "NJ");
+		 String result5 = tc.getCityInStateAtLeastNJobsForTech("NJ", "JavaScript", "10");
+		 System.out.println(result);
+		 System.out.println(result2);
+		 System.out.println(result3);
+		 System.out.println(result4);
+		 System.out.println(result5);
 	}
 
 }

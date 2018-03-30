@@ -3,16 +3,28 @@ import java.sql.ResultSet;
 
 import com.hit.controller.Controller;
 
+/**
+ * This class creates result strings for the ComplexQueries class. Inherits from Controller.
+ * @author tom
+ *
+ */
 public class StringMaker extends Controller
 {
 
-	public String getResultStringForMostPopularTechnology(ResultSet resultSet)
+	/**
+	 * Creates result string for getPopOfTwoTechsByCityState and getPopOfTwoTechsByZip method in ComplexQueries class.
+	 * 
+	 * @param resultSet
+	 * 
+	 * @return Result String
+	 */
+	public String getStringPopOfTwoTechsByZip(ResultSet resultSet)
 	{	
 		if(getSizeOfResultSet(resultSet) == 0)
 			return getNoResultString();
 		
-		String name = getResultByColumnNameWithReset("name", resultSet);
-		String numJobs = getResultByColumnNameWithReset("count", resultSet);
+		String name = getStringResultByColNameAndReset("name", resultSet);
+		String numJobs = getStringResultByColNameAndReset("count", resultSet);
 		
 		String resultString =  "";
 		
@@ -27,14 +39,21 @@ public class StringMaker extends Controller
 		return resultString;
 	}
 
-	public String getResultStringForMostPopularCityState(ResultSet resultSet)
+	/**
+	 * Creates result string for getPopOfTwoCityStatesForTech in ComplexQuerie class.
+	 * 
+	 * @param resultSet
+	 * 
+	 * @return Result String
+	 */
+	public String getStringPopOfTwoCityStatesForTech(ResultSet resultSet)
 	{	
 		if(getSizeOfResultSet(resultSet) == 0)
 			return getNoResultString();
 		
-		String city = getResultByColumnNameWithReset("city", resultSet);
-		String state = getResultByColumnNameWithReset("state", resultSet);
-		String numJobs = getResultByColumnNameWithReset("count", resultSet);
+		String city = getStringResultByColNameAndReset("city", resultSet);
+		String state = getStringResultByColNameAndReset("state", resultSet);
+		String numJobs = getStringResultByColNameAndReset("count", resultSet);
 		
 		String resultString =  "";
 		
@@ -49,15 +68,23 @@ public class StringMaker extends Controller
 		return resultString;
 	}
 
-	public String getResultStringForMostPopularFrameworkForLanguageInCityState(ResultSet resultSet)
+
+	/**
+	 * Creates result string for getPopFWForLangInCityState in ComplexQuerie class.
+	 * 
+	 * @param resultSet
+	 * 
+	 * @return Result String
+	 */
+	public String getStringPopFWForLangInCityState(ResultSet resultSet)
 	{
 		if(getSizeOfResultSet(resultSet) == 0)
 			return getNoResultString();
 		
-		String city = getResultByColumnNameWithReset("city", resultSet);
-		String state = getResultByColumnNameWithReset("state", resultSet);
-		String numJobs = getResultByColumnNameWithReset("count", resultSet);
-		String frameworkString = buildFrameworkList(resultSet);
+		String city = getStringResultByColNameAndReset("city", resultSet);
+		String state = getStringResultByColNameAndReset("state", resultSet);
+		String numJobs = getStringResultByColNameAndReset("count", resultSet);
+		String frameworkString = frameworkStringBuilder(resultSet);
 		
 		String resultString = "The framework" + (resultHasMoreThanOneRow(resultSet) ? "s" : "")
 							+ " most used in " + city + ", " + state + " " 
@@ -66,38 +93,60 @@ public class StringMaker extends Controller
 		return resultString;
 	}
 
-	private String buildFrameworkList(ResultSet resultSet)
+	/**
+	 * Builds a string representation of frameworks for the getStringPopFWForLangInCityState method
+	 * 
+	 * @param resultSet
+	 * 
+	 * @return String
+	 */
+	private String frameworkStringBuilder(ResultSet resultSet)
 	{
 		if(!resultHasMoreThanOneRow(resultSet))
-			return "is " + getResultByColumnNameWithReset("name", resultSet);
+			return "is " + getStringResultByColNameAndReset("name", resultSet);
 
 		int sizeOfResultSet = getSizeOfResultSet(resultSet);
 		String resultString = "are ";
 		for(int i = 1; i < sizeOfResultSet; i++) {
-			resultString += getResultByColumnNameNoReset("name", resultSet);
+			resultString += getStringResultByColNameNoReset("name", resultSet);
 			resultString += (sizeOfResultSet != 2) ? ", " : "";
 		}
-		resultString += " and " + getResultByColumnNameWithReset("name", resultSet);
+		resultString += " and " + getStringResultByColNameAndReset("name", resultSet);
 		
 		return resultString;
 	}
 
-	public String getResultStringForCityInStateWithAtLeastNJobsForTechnology(ResultSet resultSet, String numJobsRequest)
+
+	/**
+	 * Creates result string for getCityInStateAtLeastNJobsForTech in ComplexQuerie class.
+	 * 
+	 * @param resultSet
+	 * 
+	 * @return Result String
+	 */
+	public String getStringCityInStateAtLeastNJobsForTech(ResultSet resultSet, String numJobsRequest)
 	{
 		if(getSizeOfResultSet(resultSet) == 0)
 			return getNoResultString();
 		
 		if(!resultHasMoreThanOneRow(resultSet))
-			return "The only city with more than N jobs is " + getResultByColumnNameWithReset("city", resultSet)
-					+ " with " + getResultByColumnNameWithReset("count", resultSet) + " jobs.";
+			return "The only city with more than N jobs is " + getStringResultByColNameAndReset("city", resultSet)
+					+ " with " + getStringResultByColNameAndReset("count", resultSet) + " jobs.";
 		
 		String resultString = "The cities with more than " + numJobsRequest + " jobs are ";
-		resultString += buildCityList(resultSet);
+		resultString += cityStringBuilder(resultSet);
 		
 		return resultString;
 	}
 
-	private String buildCityList(ResultSet resultSet)
+	/**
+	 * Builds a string representation of cities for getStringCityInStateAtLeastNJobsForTech method
+	 * 
+	 * @param resultSet
+	 * 
+	 * @return String
+	 */
+	private String cityStringBuilder(ResultSet resultSet)
 	{
 		int sizeOfResultSet = getSizeOfResultSet(resultSet);
 		String resultString = "";
@@ -119,14 +168,20 @@ public class StringMaker extends Controller
 		String[] cityAndNumJobsInCityArray = new String[2];
 		
 		setRow(resultSet, rowNum); 
-		cityAndNumJobsInCityArray[0] = getResultByColumnNameNoReset("city", resultSet);
+		cityAndNumJobsInCityArray[0] = getStringResultByColNameNoReset("city", resultSet);
 		
 		setRow(resultSet, rowNum);
-		cityAndNumJobsInCityArray[1] = getResultByColumnNameNoReset("count", resultSet);
+		cityAndNumJobsInCityArray[1] = getStringResultByColNameNoReset("count", resultSet);
 		
 		return cityAndNumJobsInCityArray;
 	}
 	
+	/**
+	 * Returns a string to tell the user their query did not produce any results. Called
+	 * by all public methods in the class.
+	 * 
+	 * @return String
+	 */
 	private String getNoResultString() 
 	{
 		return "Sorry, your search did not produce any results.";

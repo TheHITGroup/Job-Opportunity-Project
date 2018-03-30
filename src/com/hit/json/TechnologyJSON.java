@@ -1,5 +1,8 @@
 package com.hit.json;
 
+/*
+ * This is the JSON representation of the technology entites
+ */
 public class TechnologyJSON
 {
 	private String id;
