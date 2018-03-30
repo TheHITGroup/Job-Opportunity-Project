@@ -1,6 +1,6 @@
-(function() {
-	
-	angular.module('hitModule').controller('searchController', function($scope,$location,$http) {
-		
-			});
+(function () {
+
+    angular.module('hitModule').controller('searchController', function ($scope, $location, $http) {
+
+    });
 })();

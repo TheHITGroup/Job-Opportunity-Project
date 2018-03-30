@@ -1,3 +1,3 @@
-(function() {
-	angular.module('hitModule', [ 'ngResource','ngRoute']);
+(function () {
+    angular.module('hitModule', ['ngResource', 'ngRoute']);
 })();

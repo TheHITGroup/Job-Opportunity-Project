@@ -1,5 +1,5 @@
-(function() {
-	angular.module('hitModule').controller('mainController',function($scope) {
-		
-	});
+(function () {
+    angular.module('hitModule').controller('mainController', function ($scope) {
+
+    });
 })();
