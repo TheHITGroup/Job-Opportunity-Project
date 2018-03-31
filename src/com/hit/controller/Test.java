@@ -55,14 +55,17 @@ public class Test {
          
 		 String result = tc.getPopOfTwoTechsByZip("Java", "C++", "08876");
 		 String result2 = tc.getPopOfTwoTechsByCityState("C++", "Java", "Somerville", "NJ");
-		 String result3 = tc.getPopOfTwoCityStatesForTech("Spring", "New York", "NY", "Newark", "NJ");
+		 String result3 = tc.getPopOfTwoCityStatesForTech("Java", "New York", "NY", "Newark", "NJ");
 		 String result4 = tc.getPopFWForLangInCityState("Java", "Newark", "NJ");
-		 String result5 = tc.getCityInStateAtLeastNJobsForTech("NJ", "JavaScript", "10");
+		 String result5 = tc.getCityInStateAtLeastNJobsForTech("NY", "Java", "10");
 		 System.out.println(result);
 		 System.out.println(result2);
 		 System.out.println(result3);
 		 System.out.println(result4);
 		 System.out.println(result5);
+		 LocationController lc = new LocationController();
+		 int result6 = lc.getMaxJobsForLangInCityByStateTech("NJ", "Java");
+		 System.out.println(result6);
 	}
 
 }

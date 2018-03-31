@@ -13,6 +13,40 @@ import com.hit.json.StateJSON;
  *
  */
 public class LocationController extends Controller {
+	
+	/**
+	 * Given a state and tech, this method returns the number of jobs for
+	 * the city in the given state with the most jobs for the given tech
+	 * 
+	 * @param state
+	 * @param tech
+	 * 
+	 * @return number of jobs
+	 */
+	public int getMaxJobsForLangInCityByStateTech(String state, String tech)
+	{
+		String sql = "SELECT " + 
+				"    MAX(count1) as max" + 
+				"    FROM" + 
+				"    (SELECT " + 
+				"        COUNT(*) AS count1, name, city" + 
+				"    FROM" + 
+				"        Location, Uses, Job, Technology" + 
+				"    WHERE" + 
+				"        state = '" + state + "' AND name = '"+ tech + "'" + 
+				"            AND Uses.j_id = Job.id" + 
+				"            AND Uses.t_id = Technology.id" + 
+				"            AND Job.zipcode = Location.zipcode" + 
+				"    GROUP BY city) A;";
+		
+		PreparedStatement preparedStatement = getPreparedStatement(sql);
+		
+		ResultSet resultSet = getResultSet(preparedStatement);
+		
+		int max = getIntResultByColNameNoReset("max", resultSet);
+		
+		return max;
+	}
 
     /**
      * Returns of list of all Location tuples
