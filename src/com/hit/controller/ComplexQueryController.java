@@ -21,7 +21,7 @@ public class ComplexQueryController extends Controller
 	 * 
 	 * @return Result String
 	 */
-	public String getPopOfTwoTechsByCityState(String techOne, String techTwo, String city, String state)
+	public static String getPopOfTwoTechsByCityState(String techOne, String techTwo, String city, String state)
 	{
 		ComplexQueries SQL = new ComplexQueries();
 		String sql = SQL.getSqlForMostPopularOfTwoTechnologies(techOne, techTwo, city, state);
@@ -46,7 +46,7 @@ public class ComplexQueryController extends Controller
 	 * 
 	 * @return Result String
 	 */
-	public String getPopOfTwoTechsByZip(String techOne, String techTwo, String zip)
+	public static String getPopOfTwoTechsByZip(String techOne, String techTwo, String zip)
 	{
 		ComplexQueries SQL = new ComplexQueries();
 		String sql = SQL.getSqlForMostPopularOfTwoTechnologiesByZip(techOne, techTwo, zip);
@@ -73,7 +73,7 @@ public class ComplexQueryController extends Controller
 	 * 
 	 * @return Result String
 	 */
-	public String getPopOfTwoCityStatesForTech(String tech, 
+	public static String getPopOfTwoCityStatesForTech(String tech, 
 			String cityOne, String stateOne, String cityTwo, String stateTwo)
 	{
 		ComplexQueries SQL = new ComplexQueries();
@@ -99,7 +99,7 @@ public class ComplexQueryController extends Controller
 	 * 
 	 * @return Result String
 	 */
-	public String getPopFWForLangInCityState(String language, String city, String state)
+	public static String getPopFWForLangInCityState(String language, String city, String state)
 	{
 		ComplexQueries SQL = new ComplexQueries();
 		String sql = SQL.getSQLForMostPopularFrameworkForLanguageInCityState(language, city, state);
@@ -124,7 +124,7 @@ public class ComplexQueryController extends Controller
 	 * 
 	 * @return Result String
 	 */
-	public String getCityInStateAtLeastNJobsForTech(String state, String tech, String numJobsRequest)
+	public static String getCityInStateAtLeastNJobsForTech(String state, String tech, String numJobsRequest)
 	{
 		ComplexQueries SQL = new ComplexQueries();
 		String sql = SQL.getSQLForCityInStateWithAtLeastNJobsForTechnology(state, tech, numJobsRequest);
