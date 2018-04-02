@@ -42,10 +42,27 @@
                 }
                 }]);
             
+      angular.module('hitModule').factory('searchOneFactory',
+        ['$resource', function ($resource) {
+        return function (techOne, techTwo, city, state) {
+        var restUrl = "ws/complexQueries/twoTechsByCityState";
+                return $resource(restUrl, {}, {
+                get: {
+                method: 'GET',
+                        params: {'techOne': techOne,
+                                'techTwo' : techTwo,
+                                'city' : city,
+                                'state': state},
+                         isArray: false
+                }
+
+                });
+                }
+        }]);        
             
 
 
-    angular.module('hitModule').controller('searchController', function ($scope, $location, $http, techListFactory, stateListFactory,cityListFactory) {
+    angular.module('hitModule').controller('searchController', function ($scope, $location, $http, techListFactory, stateListFactory,cityListFactory,searchOneFactory) {
 
 
       //  $scope.tech1="";
@@ -80,33 +97,12 @@
        }
        
        
-      //$scope.cities = cityListFactory('NJ').get().$promise;
-      
-      //console.log("my promise");
-    console.log($scope.cities);
-        //get list of cities
-      //  $scope.state = 'NJ';
+       $scope.resultOne = "";
         
-     //   $scope.getCities = function (state)
-     //   {
-     //       $http({
-     //           method: 'GET',
-     //           data: state, // object
-     //           url: 'ws/location/citylist'
-     //       }).then(function (response) {
-     //           console.log("GET success");
-     //           console.log(response);
-                
-     //       }, function (response) {
-     //           $location.path("/errorcanceling");
-     //           return;
-     //       });
-      //  }
-      
-      
-       
-
-    //    console.log($scope.getCities('NJ'));
-
+        $scope.searchOne = function() {
+             $scope.resultOne = searchOneFactory($scope.techOne, $scope.techTwo, $scope.city, $scope.state).get();
+        }
+        
+ 
     });
 })();

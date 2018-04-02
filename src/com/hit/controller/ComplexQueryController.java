@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import Queries.ComplexQueries;
+import com.hit.json.TextJSON;
 /*
  * Class containing the queries used to fulfill requirement number 4 in the grading rubric. Inherits from Controller
  * All the SQL for this class is stored in Queries/ComplexQueries.java
@@ -21,7 +22,7 @@ public class ComplexQueryController extends Controller
 	 * 
 	 * @return Result String
 	 */
-	public static String getPopOfTwoTechsByCityState(String techOne, String techTwo, String city, String state)
+	/*public static String getPopOfTwoTechsByCityState(String techOne, String techTwo, String city, String state)
 	{
 		ComplexQueries SQL = new ComplexQueries();
 		String sql = SQL.getSqlForMostPopularOfTwoTechnologies(techOne, techTwo, city, state);
@@ -33,8 +34,27 @@ public class ComplexQueryController extends Controller
 		StringMaker sm = new StringMaker();
 		String resultString = sm.getStringPopOfTwoTechsByZip(resultSet);
 		
-		return resultString;	    
+		return resultString;
+                
+	}*/
+        public static TextJSON getPopOfTwoTechsByCityState(String techOne, String techTwo, String city, String state)
+	{
+		ComplexQueries SQL = new ComplexQueries();
+		String sql = SQL.getSqlForMostPopularOfTwoTechnologies(techOne, techTwo, city, state);
+		
+		PreparedStatement preparedStatement = getPreparedStatement(sql);
+		
+		ResultSet resultSet = getResultSet(preparedStatement);
+	
+		StringMaker sm = new StringMaker();
+		String resultString = sm.getStringPopOfTwoTechsByZip(resultSet);
+		
+                TextJSON textJSON = new TextJSON();
+                textJSON.setResult(resultString);
+		return textJSON;
+                
 	}
+        
 	
 	/**
 	 * Given two technologies and a zipcode this method returns which of the two technologies has

@@ -6,17 +6,35 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
 import com.hit.controller.ComplexQueryController;
+import com.hit.controller.LocationController;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 @Path("/complexQueries")
 public class ComplexQueriesService
 {
-    @GET
+    /*@GET
     @Path("/twoTechsByCityState")
     @Produces("text/plain")
     public String getTwoTechsByCityState(@QueryParam("techOne") String techOne, @QueryParam("techTwo") String techTwo, 
     		@QueryParam("city") String city, @QueryParam("state") String state) throws Exception {
         return ComplexQueryController.getPopOfTwoTechsByCityState(techOne, techTwo, city, state);
+    }*/
+    
+    
+    @GET
+    @Path("/twoTechsByCityState")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getTwoTechsByCityState(@QueryParam("techOne") String techOne, @QueryParam("techTwo") String techTwo, 
+    		@QueryParam("city") String city, @QueryParam("state") String state) throws Exception {
+        return Response.ok(ComplexQueryController.getPopOfTwoTechsByCityState(techOne, techTwo, city, state))
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "GET")
+                .build();
+
     }
+    
+    
     
     @GET
     @Path("/twoTechsByZip")
