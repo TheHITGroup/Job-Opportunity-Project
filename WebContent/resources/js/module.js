@@ -1,3 +1,3 @@
 (function () {
-    angular.module('hitModule', ['ngResource', 'ngRoute']);
+    angular.module('hitModule', ['ngResource', 'ngRoute' ,'ui.bootstrap']);
 })();
