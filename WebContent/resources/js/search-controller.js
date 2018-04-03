@@ -58,11 +58,29 @@
 
                 });
                 }
-        }]);        
+        }]);   
+    
+     angular.module('hitModule').factory('searchTwoFactory',
+        ['$resource', function ($resource) {
+        return function (techOne, techTwo, zip) {
+        var restUrl = "ws/complexQueries/twoTechsByZip";
+                return $resource(restUrl, {}, {
+                get: {
+                method: 'GET',
+                        params: {'techOne': techOne,
+                                'techTwo' : techTwo,
+                                'zip' : zip},
+                             
+                         isArray: false
+                }
+
+                });
+                }
+        }]);    
             
 
 
-    angular.module('hitModule').controller('searchController', function ($scope, $location, $http, techListFactory, stateListFactory,cityListFactory,searchOneFactory) {
+    angular.module('hitModule').controller('searchController', function ($scope, $location, $http, techListFactory, stateListFactory,cityListFactory,searchOneFactory,searchTwoFactory) {
 
 
       //  $scope.tech1="";
@@ -103,6 +121,10 @@
              $scope.resultOne = searchOneFactory($scope.techOne, $scope.techTwo, $scope.city, $scope.state).get();
         }
         
+        $scope.resultTwo = "";
+        $scope.searchTwo = function() {
+             $scope.resultTwo = searchTwoFactory($scope.techOneZip, $scope.techTwoZip, $scope.zipCode).get();
+        }
  
     });
 })();

@@ -3,59 +3,92 @@
 <div class="panel panel-default">
     <div class="panel-heading">Most Popular Of Two Technologies by City</div>
     <div class="panel-body">
-      <form>
+        <form>
 
-    <div class="row">
+            <div class="row">
 
-            <div class="form-group col-md-3 col-xs-6">
+                <div class="form-group col-md-3 col-xs-6">
 
-                <label for="state">State</label><br>
-                <select ng-change="getCities()" name="state" ng-model="state">
-                    <option ng-repeat="item in states" value="{{item.state}}">{{item.state}}</option>
-                </select>
+                    <label for="state">State</label><br>
+                    <select ng-change="getCities()" name="state" ng-model="state">
+                        <option ng-repeat="item in states" value="{{item.state}}">{{item.state}}</option>
+                    </select>
+                </div>
+
+
+                <div class="form-group col-md-3 col-xs-6">
+
+                    <label for="city">City</label><br>
+                    <select name="city" ng-model="city">
+                        <option ng-repeat="item in cities" value="{{item.city}}">{{item.city}}</option>
+                    </select>
+                </div>
+            </div> 
+
+            <div class="row">
+                <div class="form-group col-xs-6 col-md-3">
+                    <label for="techOne"> Technology 1 </label><br>
+                    <select name="techOne" ng-model="techOne">
+                        <option ng-repeat="tech in techs" value="{{tech.name}}">{{tech.name}}</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-xs-6 col-md-3">
+
+                    <label for="techTwo"> Technology 2 </label><br>
+                    <select name="techTwo" ng-model="techTwo">
+                        <option ng-repeat="tech in techs" value="{{tech.name}}">{{tech.name}}</option>
+                    </select>
+                </div>
             </div>
-
-
-            <div class="form-group col-md-3 col-xs-6">
-
-                <label for="city">City</label><br>
-                <select name="city" ng-model="city">
-                    <option ng-repeat="item in cities" value="{{item.city}}">{{item.city}}</option>
-                </select>
-            </div>
-
-
-
-
-
-    </div> 
-
-    <div class="row">
-        <div class="form-group col-xs-6 col-md-3">
-            <label for="techOne"> Technology 1 </label><br>
-            <select name="techOne" ng-model="techOne">
-                <option ng-repeat="tech in techs" value="{{tech.name}}">{{tech.name}}</option>
-            </select>
-        </div>
-
-        <div class="form-group col-xs-6 col-md-3">
-
-            <label for="techTwo"> Technology 2 </label><br>
-            <select name="techTwo" ng-model="techTwo">
-                <option ng-repeat="tech in techs" value="{{tech.name}}">{{tech.name}}</option>
-            </select>
-        </div>
-    </div>
-    <button ng-click="searchOne()" type="button" class="btn btn-primary">Search</button>
-    </form>
-   <br/>
-    <div class="alert alert-info">
+            <button ng-click="searchOne()" type="button" class="btn btn-primary">Search</button>
+        </form>
+        <br/>
+        <div class="alert alert-info">
             Result: {{resultOne.result}}
+        </div>
+
     </div>
- 
-    </div>
-  </div>
+</div>
 
 
+<div class="panel panel-default">
+    <div class="panel-heading">Most Popular Of Two Technologies by Zip Code</div>
+    <div class="panel-body">
+        <form>
+
+            <div class="row">
+                <div class="form-group col-xs-6 col-md-3">
+                    <label for="zipCode">Zip Code</label>
+                    <input type="text" ng-model="zipCode"class="form-control" placeholder="Enter Zip Code">
+                </div>
+                
+            </div> 
+
+            <div class="row">
+                <div class="form-group col-xs-6 col-md-3">
+                    <label for="techOneZip"> Technology 1 </label><br>
+                    <select name="techOneZip" ng-model="techOneZip">
+                        <option ng-repeat="tech in techs" value="{{tech.name}}">{{tech.name}}</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-xs-6 col-md-3">
+
+                    <label for="techTwoZip"> Technology 2 </label><br>
+                    <select name="techTwoZip" ng-model="techTwoZip">
+                        <option ng-repeat="tech in techs" value="{{tech.name}}">{{tech.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <button ng-click="searchTwo()" type="button" class="btn btn-primary">Search</button>
+        </form>
+        <br/>
+        <div class="alert alert-info">
+            Result: {{resultTwo.result}}
+        </div>
+
+    </div>
+</div>
 
 
