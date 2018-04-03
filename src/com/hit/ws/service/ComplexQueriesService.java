@@ -6,67 +6,67 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
 import com.hit.controller.ComplexQueryController;
-import com.hit.controller.LocationController;
+
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Path("/complexQueries")
 public class ComplexQueriesService
-{
-    /*@GET
-    @Path("/twoTechsByCityState")
-    @Produces("text/plain")
-    public String getTwoTechsByCityState(@QueryParam("techOne") String techOne, @QueryParam("techTwo") String techTwo, 
-    		@QueryParam("city") String city, @QueryParam("state") String state) throws Exception {
-        return ComplexQueryController.getPopOfTwoTechsByCityState(techOne, techTwo, city, state);
-    }*/
-    
-    
+{      
     @GET
     @Path("/twoTechsByCityState")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getTwoTechsByCityState(@QueryParam("techOne") String techOne, @QueryParam("techTwo") String techTwo, 
     		@QueryParam("city") String city, @QueryParam("state") String state) throws Exception {
         return Response.ok(ComplexQueryController.getPopOfTwoTechsByCityState(techOne, techTwo, city, state))
-                .header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Methods", "GET")
-                .build();
-
+            .header("Access-Control-Allow-Origin", "*")
+            .header("Access-Control-Allow-Methods", "GET")
+            .build();
     }
-    
-    
     
     @GET
     @Path("/twoTechsByZip")
-    @Produces("text/plain")
-    public String getTwoTechsByZip(@QueryParam("techOne") String techOne, @QueryParam("techTwo") String techTwo, 
-    		@QueryParam("city") String zip) throws Exception {
-        return ComplexQueryController.getPopOfTwoTechsByZip(techOne, techTwo, zip);
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getTwoTechsByZip(@QueryParam("techOne") String techOne, @QueryParam("techTwo") String techTwo, 
+    		@QueryParam("zip") String zip) throws Exception {
+    	 return Response.ok(ComplexQueryController.getPopOfTwoTechsByZip(techOne, techTwo, zip))
+	        .header("Access-Control-Allow-Origin", "*")
+	        .header("Access-Control-Allow-Methods", "GET")
+	        .build();
     }
     
     @GET
     @Path("/twoCityStatesForTech")
-    @Produces("text/plain")
-    public String gettwoCityStatesForTech(@QueryParam("tech") String tech, 
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response gettwoCityStatesForTech(@QueryParam("tech") String tech, 
     		@QueryParam("cityOne") String cityOne, @QueryParam("stateOne") String stateOne, 
     		@QueryParam("cityTwo") String cityTwo, @QueryParam("stateTwo") String stateTwo) throws Exception {
-        return ComplexQueryController.getPopOfTwoCityStatesForTech(tech, cityOne,  stateOne,  cityTwo, stateTwo);
+        return Response.ok(ComplexQueryController.getPopOfTwoCityStatesForTech(tech, cityOne,  stateOne,  cityTwo, stateTwo))
+	        .header("Access-Control-Allow-Origin", "*")
+	        .header("Access-Control-Allow-Methods", "GET")
+	        .build();
     }
     
     @GET
     @Path("/fwForLangInCityState")
-    @Produces("text/plain")
-    public String getPopFWForLangInCityState(@QueryParam("language") String language, 
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getPopFWForLangInCityState(@QueryParam("language") String language, 
     		@QueryParam("city") String city, @QueryParam("state") String state) throws Exception {
-        return ComplexQueryController.getPopFWForLangInCityState(language,  city,  state);
+    	return Response.ok(ComplexQueryController.getPopFWForLangInCityState(language,  city,  state))
+	        .header("Access-Control-Allow-Origin", "*")
+	        .header("Access-Control-Allow-Methods", "GET")
+	        .build();
     }
     
     @GET
     @Path("/cityStateNJobsForTech")
-    @Produces("text/plain")
-    public String getcityStateNJobsForTech(@QueryParam("state") String state, 
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getcityStateNJobsForTech(@QueryParam("state") String state, 
     		@QueryParam("tech") String tech, 
     		@QueryParam("numJobs") String numJobsRequest) throws Exception {
-        return ComplexQueryController.getCityInStateAtLeastNJobsForTech(state,  tech,  numJobsRequest);
+    	return Response.ok(ComplexQueryController.getCityInStateAtLeastNJobsForTech(state,  tech,  numJobsRequest))
+	        .header("Access-Control-Allow-Origin", "*")
+	        .header("Access-Control-Allow-Methods", "GET")
+	        .build();
     }
 }

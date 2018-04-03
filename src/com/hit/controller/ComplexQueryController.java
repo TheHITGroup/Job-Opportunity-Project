@@ -20,7 +20,7 @@ public class ComplexQueryController extends Controller
 	 * @param city
 	 * @param state
 	 * 
-	 * @return Result String
+	 * @return JSON object with result String
 	 */
 	/*public static String getPopOfTwoTechsByCityState(String techOne, String techTwo, String city, String state)
 	{
@@ -49,10 +49,10 @@ public class ComplexQueryController extends Controller
 		StringMaker sm = new StringMaker();
 		String resultString = sm.getStringPopOfTwoTechsByZip(resultSet);
 		
-                TextJSON textJSON = new TextJSON();
-                textJSON.setResult(resultString);
-		return textJSON;
-                
+        TextJSON textJSON = new TextJSON();
+        textJSON.setResult(resultString);
+
+        return textJSON;                
 	}
         
 	
@@ -64,9 +64,9 @@ public class ComplexQueryController extends Controller
 	 * @param techTwo
 	 * @param zip
 	 * 
-	 * @return Result String
+	 * @return JSON object with result String
 	 */
-	public static String getPopOfTwoTechsByZip(String techOne, String techTwo, String zip)
+	public static TextJSON getPopOfTwoTechsByZip(String techOne, String techTwo, String zip)
 	{
 		ComplexQueries SQL = new ComplexQueries();
 		String sql = SQL.getSqlForMostPopularOfTwoTechnologiesByZip(techOne, techTwo, zip);
@@ -78,7 +78,10 @@ public class ComplexQueryController extends Controller
 		StringMaker sm = new StringMaker();
 		String resultString = sm.getStringPopOfTwoTechsByZip(resultSet);
 		
-		return resultString;
+        TextJSON textJSON = new TextJSON();
+        textJSON.setResult(resultString);
+        
+        return textJSON;
 	}
 	
 	/**
@@ -91,9 +94,9 @@ public class ComplexQueryController extends Controller
 	 * @param cityTwo
 	 * @param stateTwo
 	 * 
-	 * @return Result String
+	 * @return JSON object with result String
 	 */
-	public static String getPopOfTwoCityStatesForTech(String tech, 
+	public static TextJSON getPopOfTwoCityStatesForTech(String tech, 
 			String cityOne, String stateOne, String cityTwo, String stateTwo)
 	{
 		ComplexQueries SQL = new ComplexQueries();
@@ -106,7 +109,10 @@ public class ComplexQueryController extends Controller
 		StringMaker sm = new StringMaker();
 		String resultString = sm.getStringPopOfTwoCityStatesForTech(resultSet);
 		
-		return resultString;		
+        TextJSON textJSON = new TextJSON();
+        textJSON.setResult(resultString);
+        
+        return textJSON;		
 	}
 	
 	/**
@@ -119,7 +125,7 @@ public class ComplexQueryController extends Controller
 	 * 
 	 * @return Result String
 	 */
-	public static String getPopFWForLangInCityState(String language, String city, String state)
+	public static TextJSON getPopFWForLangInCityState(String language, String city, String state)
 	{
 		ComplexQueries SQL = new ComplexQueries();
 		String sql = SQL.getSQLForMostPopularFrameworkForLanguageInCityState(language, city, state);
@@ -131,7 +137,10 @@ public class ComplexQueryController extends Controller
 		StringMaker sm = new StringMaker();
 		String resultString = sm.getStringPopFWForLangInCityState(resultSet);
 		
-		return resultString;
+        TextJSON textJSON = new TextJSON();
+        textJSON.setResult(resultString);
+        
+        return textJSON;
 	}
 	
 	/**
@@ -142,9 +151,9 @@ public class ComplexQueryController extends Controller
 	 * @param tech
 	 * @param numJobsRequest
 	 * 
-	 * @return Result String
+	 * @return JSON object with result String
 	 */
-	public static String getCityInStateAtLeastNJobsForTech(String state, String tech, String numJobsRequest)
+	public static TextJSON getCityInStateAtLeastNJobsForTech(String state, String tech, String numJobsRequest)
 	{
 		ComplexQueries SQL = new ComplexQueries();
 		String sql = SQL.getSQLForCityInStateWithAtLeastNJobsForTechnology(state, tech, numJobsRequest);
@@ -156,7 +165,10 @@ public class ComplexQueryController extends Controller
 		StringMaker sm = new StringMaker();
 		String resultString = sm.getStringCityInStateAtLeastNJobsForTech(resultSet, numJobsRequest);
 		
-		return resultString;
+        TextJSON textJSON = new TextJSON();
+        textJSON.setResult(resultString);
+        
+        return textJSON;
 	}
 
 }

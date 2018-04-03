@@ -133,9 +133,8 @@ public class ComplexQueries
 				"            AND city = '" + cityTwo + "'" + 
 				"            AND state = '" + stateTwo + "')" + 
 				"    GROUP BY city" + 
-				"    ORDER BY COUNT(name) DESC) A" + 
-				"    GROUP BY city" + 
-				"    LIMIT 1) B" + 
+				"    ORDER BY COUNT(name) DESC LIMIT 1) A" + 
+				"    GROUP BY city) B" + 
 				"    WHERE" + 
 				"    (T.name = '" + tech + "' AND U.t_id = T.id" + 
 				"        AND U.j_id = J.id" + 
