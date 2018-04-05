@@ -1,5 +1,6 @@
 <h2>Searches</h2>
 
+<!-- Most Popular Of Two Technologies by City -->
 <div class="panel panel-default">
     <div class="panel-heading">Most Popular Of Two Technologies by City</div>
     <div class="panel-body">
@@ -51,7 +52,7 @@
     </div>
 </div>
 
-
+<!-- Most Popular Of Two Technologies by Zip Code -->
 <div class="panel panel-default">
     <div class="panel-heading">Most Popular Of Two Technologies by Zip Code</div>
     <div class="panel-body">
@@ -92,3 +93,67 @@
 </div>
 
 
+<!-- City with the most job openings for the given technology -->
+<div class="panel panel-default">
+    <div class="panel-heading">Which of Two Cities has the most job openings for a Technology</div>
+    <div class="panel-body">
+        <form>
+
+             <div class="row">
+
+                <div class="form-group col-md-3 col-xs-6">
+
+                    <label for="stateOne">State</label><br>
+                    <select ng-change="getCitiesOne()" name="stateOne" ng-model="stateOne">
+                        <option ng-repeat="item in states" value="{{item.state}}">{{item.state}}</option>
+                    </select>
+                </div>
+
+
+                <div class="form-group col-md-3 col-xs-6">
+
+                    <label for="cityOne">City 1</label><br>
+                    <select name="cityOne" ng-model="cityOne">
+                        <option ng-repeat="item in citiesOne" value="{{item.city}}">{{item.city}}</option>
+                    </select>
+                </div>
+            </div> 
+            
+             <div class="row">
+
+                <div class="form-group col-md-3 col-xs-6">
+
+                    <label for="stateTwo">State</label><br>
+                    <select ng-change="getCitiesTwo()" name="stateTwo" ng-model="stateTwo">
+                        <option ng-repeat="item in states" value="{{item.state}}">{{item.state}}</option>
+                    </select>
+                </div>
+
+
+                <div class="form-group col-md-3 col-xs-6">
+
+                    <label for="cityTwo">City 2</label><br>
+                    <select name="cityTwo" ng-model="cityTwo">
+                        <option ng-repeat="item in citiesTwo" value="{{item.city}}">{{item.city}}</option>
+                    </select>
+                </div>
+            </div> 
+            
+            <div class="row">
+             <div class="form-group col-xs-6 col-md-3">
+                    <label for="techThird"> Technology</label><br>
+                    <select name="techThird" ng-model="techThird">
+                        <option ng-repeat="tech in techs" value="{{tech.name}}">{{tech.name}}</option>
+                    </select>
+                </div>
+            </div>
+            
+            <button ng-click="searchThree()" type="button" class="btn btn-primary">Search</button>
+        </form>
+        <br/>
+        <div class="alert alert-info">
+            Result: {{resultThree.result}}
+        </div>
+
+    </div>
+</div>

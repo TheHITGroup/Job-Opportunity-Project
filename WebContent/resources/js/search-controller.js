@@ -79,8 +79,29 @@
         }]);    
             
 
+        angular.module('hitModule').factory('searchThreeFactory',
+        ['$resource', function ($resource) {
+        return function (tech,cityOne,stateOne,cityTwo,stateTwo) {
+        var restUrl = "ws/complexQueries/twoCityStatesForTech";
+                return $resource(restUrl, {}, {
+                get: {
+                method: 'GET',
+                        params: {'tech': tech,
+                                'cityOne' : cityOne,
+                                'stateOne' : stateOne,
+                                'cityTwo': cityTwo,
+                                'stateTwo': stateTwo},
+                             
+                         isArray: false
+                }
 
-    angular.module('hitModule').controller('searchController', function ($scope, $location, $http, techListFactory, stateListFactory,cityListFactory,searchOneFactory,searchTwoFactory) {
+                });
+                }
+        }]);  
+    
+    
+
+    angular.module('hitModule').controller('searchController', function ($scope, $location, $http, techListFactory, stateListFactory,cityListFactory,searchOneFactory,searchTwoFactory, searchThreeFactory) {
 
 
       //  $scope.tech1="";
@@ -124,6 +145,20 @@
         $scope.resultTwo = "";
         $scope.searchTwo = function() {
              $scope.resultTwo = searchTwoFactory($scope.techOneZip, $scope.techTwoZip, $scope.zipCode).get();
+        }
+        
+        
+        $scope.getCitiesOne = function() {
+           $scope.citiesOne = cityListFactory($scope.stateOne).get();
+        }
+        $scope.getCitiesTwo = function() {
+           $scope.citiesTwo = cityListFactory($scope.stateTwo).get();
+        }
+       
+       
+        $scope.resultThree = "";
+        $scope.searchThree= function() {
+             $scope.resultThree = searchThreeFactory($scope.techThird, $scope.cityOne, $scope.stateOne, $scope.cityTwo, $scope.stateTwo).get();
         }
  
     });
