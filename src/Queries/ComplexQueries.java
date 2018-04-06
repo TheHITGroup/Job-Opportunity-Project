@@ -7,7 +7,6 @@ package Queries;
  */
 public class ComplexQueries
 {
-
 	public String getSqlForMostPopularOfTwoTechnologies(String techOne, String techTwo, String city, String state)
 	{
 		
@@ -26,13 +25,13 @@ public class ComplexQueries
 				"    FROM" + 
 				"        Location AS L, Technology AS T, Job AS J, Uses AS U" + 
 				"    WHERE" + 
-				"        (city ='"  + city + "' AND state ='" + state + "'" +
+				"        (city = ?  AND state = ? " +
 				"            AND U.t_id = T.id" + 
 				"            AND U.j_id = J.id" + 
 				"            AND J.zipcode = L.zipcode" + 
-				"            AND name = '" + techOne + "')" + 
-				"            OR (name = '" + techTwo + "' AND city = '" + city + "'" + 
-				"            AND state = '" + state + "'" + 
+				"            AND name =  ? )" + 
+				"            OR (name = ? AND city = ? " + 
+				"            AND state = ? " + 
 				"            AND U.t_id = T.id" + 
 				"            AND U.j_id = J.id" + 
 				"            AND J.zipcode = L.zipcode)" + 
@@ -41,13 +40,13 @@ public class ComplexQueries
 				"    GROUP BY name" + 
 				"    ) B" + 
 				"    WHERE" + 
-				"    (city = '" + city + "' AND state = '" + state + "'" + 
+				"    (city = ? AND state = ? " + 
 				"        AND U.t_id = T.id" + 
 				"        AND U.j_id = J.id" + 
 				"        AND J.zipcode = L.zipcode" + 
-				"        AND name = '" + techOne + "')" + 
-				"        OR (name = '" + techTwo + "' AND city = '" + city + "'" + 
-				"        AND state = '" + state + "'" + 
+				"        AND name = ? )" + 
+				"        OR (name = ? AND city = ? " + 
+				"        AND state = ? " + 
 				"        AND U.t_id = T.id" + 
 				"        AND U.j_id = J.id" + 
 				"        AND J.zipcode = L.zipcode)" + 
@@ -75,12 +74,12 @@ public class ComplexQueries
 				"    FROM" + 
 				"        Location AS L, Technology AS T, Job AS J, Uses AS U" + 
 				"    WHERE" + 
-				"        (L.zipcode ='"  + zip + "'" +
+				"        (L.zipcode = ? " +
 				"            AND U.t_id = T.id" + 
 				"            AND U.j_id = J.id" + 
 				"            AND J.zipcode = L.zipcode" + 
-				"            AND name = '" + techOne + "')" + 
-				"            OR (name = '" + techTwo + "' AND L.zipcode = '" + zip + "'" + 
+				"            AND name = ?)" + 
+				"            OR (name = ? AND L.zipcode = ?" + 
 				"            AND U.t_id = T.id" + 
 				"            AND U.j_id = J.id" + 
 				"            AND J.zipcode = L.zipcode)" + 
@@ -89,18 +88,17 @@ public class ComplexQueries
 				"    GROUP BY name" + 
 				"    ) B" + 
 				"    WHERE" + 
-				"    (L.zipcode = '" + zip + "'" + 
+				"    (L.zipcode = ?" + 
 				"        AND U.t_id = T.id" + 
 				"        AND U.j_id = J.id" + 
 				"        AND J.zipcode = L.zipcode" + 
-				"        AND name = '" + techOne + "')" + 
-				"        OR (name = '" + techTwo + "' AND L.zipcode = '" + zip + "'" +
+				"        AND name = ?)" + 
+				"        OR (name = ? AND L.zipcode = ?" +
 				"        AND U.t_id = T.id" + 
 				"        AND U.j_id = J.id" + 
 				"        AND J.zipcode = L.zipcode)" + 
 				"    GROUP BY max_name_count , name" + 
 				"    HAVING max_name_count = COUNT(T.name)";
-		
 		return sql;
 	}
 	
@@ -122,32 +120,33 @@ public class ComplexQueries
 				"    FROM" + 
 				"        Location AS L, Technology AS T, Job AS J, Uses AS U" + 
 				"    WHERE" + 
-				"        (T.name = '" + tech + "' AND U.t_id = T.id" + 
+				"        (T.name = ? AND U.t_id = T.id" + 
 				"            AND U.j_id = J.id" + 
 				"            AND J.zipcode = L.zipcode" + 
-				"            AND L.city = '" + cityOne + "'" + 
-				"            AND L.state = '" + stateOne + "')" + 
-				"            OR (name = '" + tech + "' AND U.t_id = T.id" + 
+				"            AND L.city = ?" + 
+				"            AND L.state = ?)" + 
+				"            OR (name = ? AND U.t_id = T.id" + 
 				"            AND U.j_id = J.id" + 
 				"            AND J.zipcode = L.zipcode" + 
-				"            AND city = '" + cityTwo + "'" + 
-				"            AND state = '" + stateTwo + "')" + 
+				"            AND city = ?" + 
+				"            AND state = ?)" + 
 				"    GROUP BY city" + 
 				"    ORDER BY COUNT(name) DESC LIMIT 1) A" + 
 				"    GROUP BY city) B" + 
 				"    WHERE" + 
-				"    (T.name = '" + tech + "' AND U.t_id = T.id" + 
+				"    (T.name = ? AND U.t_id = T.id" + 
 				"        AND U.j_id = J.id" + 
 				"        AND J.zipcode = L.zipcode" + 
-				"        AND L.city = '" + cityOne + "'" + 
-				"        AND L.state = '" + stateOne + "')" + 
-				"        OR (name = '" + tech + "' AND U.t_id = T.id" + 
+				"        AND L.city = ?" + 
+				"        AND L.state = ?)" + 
+				"        OR (name = ? AND U.t_id = T.id" + 
 				"        AND U.j_id = J.id" + 
 				"        AND J.zipcode = L.zipcode" + 
-				"        AND city = '" + cityTwo + "'" + 
-				"        AND state = '" + stateTwo + "')" + 
+				"        AND city = ?" + 
+				"        AND state = ?)" + 
 				"    GROUP BY max_city_count , city" + 
 				"    HAVING max_city_count = COUNT(L.city)";
+		
 		return sql;
 	}
 	
@@ -169,16 +168,16 @@ public class ComplexQueries
 				"        Location AS L, Uses AS U, Technology AS T, Job AS J" + 
 				"    WHERE" + 
 				"        U.j_id = J.id AND U.t_id = T.id" + 
-				"            AND L.city = '" + city + "'" + 
-				"            AND L.state = '" + state + "'" + 
+				"            AND L.city = ?" + 
+				"            AND L.state = ?" + 
 				"            AND J.zipcode = L.zipcode" + 
-				"            AND T.name = '" + language + "') A" + 
+				"            AND T.name = ?) A" + 
 				"    WHERE" + 
 				"        T.type = 'fw' AND J.id = A.id" + 
 				"            AND U.j_id = J.id" + 
 				"            AND U.t_id = T.id" + 
-				"            AND L.city = '" + city + "'" + 
-				"            AND L.state = '" + state + "'" + 
+				"            AND L.city = ?" + 
+				"            AND L.state = ?" + 
 				"            AND J.zipcode = L.zipcode" + 
 				"    GROUP BY name , job_id) B," + 
 				"    (SELECT " + 
@@ -193,16 +192,16 @@ public class ComplexQueries
 				"        Location AS L, Uses AS U, Technology AS T, Job AS J" + 
 				"    WHERE" + 
 				"        U.j_id = J.id AND U.t_id = T.id" + 
-				"            AND L.city = '" + city + "'" + 
-				"            AND L.state = '" + state + "'" + 
+				"            AND L.city = ?" + 
+				"            AND L.state = ?" + 
 				"            AND J.zipcode = L.zipcode" + 
-				"            AND T.name = '" + language + "') A" + 
+				"            AND T.name = ?) A" + 
 				"    WHERE" + 
 				"        T.type = 'fw' AND J.id = A.id" + 
 				"            AND U.j_id = J.id" + 
 				"            AND U.t_id = T.id" + 
-				"            AND L.city = '" + city + "'" + 
-				"            AND L.state = '" + state + "'" + 
+				"            AND L.city = ?" + 
+				"            AND L.state = ?" + 
 				"            AND J.zipcode = L.zipcode" + 
 				"    GROUP BY name) B" + 
 				"    GROUP BY name" + 
@@ -211,12 +210,13 @@ public class ComplexQueries
 				"    WHERE" + 
 				"    J.id = job_id AND U.j_id = J.id" + 
 				"        AND U.t_id = T.id" + 
-				"        AND L.city = '" + city + "'" + 
-				"        AND L.state = '" + state + "'" + 
+				"        AND L.city = ?" + 
+				"        AND L.state = ?" + 
 				"        AND J.zipcode = L.zipcode" + 
 				"        AND T.type = 'fw'" + 
 				"    GROUP BY max_name_count , name" + 
 				"    HAVING max_name_count = COUNT(T.name)";
+
 		return sql;
 	}
 	
@@ -230,12 +230,12 @@ public class ComplexQueries
 				"    Technology AS T," + 
 				"    Location AS L" + 
 				"    WHERE" + 
-				"    T.name = '" + tech + "' AND L.state = '" + state + "'" + 
+				"    T.name = ? AND L.state = ?" + 
 				"        AND T.id = U.t_id" + 
 				"        AND J.id = U.j_id" + 
 				"        AND J.zipcode = L.zipcode" + 
 				"    GROUP BY city" + 
-				"    HAVING count >=" + numJobsRequest +
+				"    HAVING count >= ?" +
 				"    ORDER BY count DESC";
 		
 		return sql;

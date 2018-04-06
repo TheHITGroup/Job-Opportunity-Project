@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.hit.json.TechnologyJSON;
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.InterningXmlVisitor;
 
 /**
  * This is the controller for Technology entity
@@ -20,17 +21,22 @@ public class TechnologyController extends Controller
 	 * 
 	 * @return tech id
 	 */
-	public int getIdByName(String name)
+	public String getIdByName(String name)
 	{
-		String sql = "SELECT id FROM Technology WHERE name='" + name + "'";
+		String sql = "SELECT id FROM Technology WHERE name=?";
 		
 		PreparedStatement preparedStatement = getPreparedStatement(sql);
 		
+		String[] values = {name};
+		setPlaceholderValues(values, preparedStatement);
+		
 		ResultSet resultSet = getResultSet(preparedStatement);
 		
-		int id = getIntResultByColNameAndReset("id", resultSet);
+		int techIdInt = getIntResultByColNameAndReset("id", resultSet);
 		
-		return id;
+		String techId = Integer.toString(techIdInt);
+		
+		return techId;
 	}
 
 	/**
@@ -42,9 +48,12 @@ public class TechnologyController extends Controller
 	 */
 	public boolean techExists(String name)
 	{
-		String sql = "SELECT id FROM Technology where name='" + name + "'";
+		String sql = "SELECT id FROM Technology where name= ?";
 		
 		PreparedStatement preparedStatement = getPreparedStatement(sql);
+		
+		String[] values = {name};
+		setPlaceholderValues(values, preparedStatement);
 		
 		ResultSet resultSet = getResultSet(preparedStatement);
 		
@@ -59,15 +68,20 @@ public class TechnologyController extends Controller
 	 * 
 	 * @return id of inserted Technology
 	 */
-	public int insertTech(String tech)
+	public String insertTech(String tech)
 	{
-		String sql = "INSERT INTO Technology (name) VALUES('" + tech + "')";
+		String sql = "INSERT INTO Technology (name) VALUES(?)";
 		
 		PreparedStatement preparedStatement = getPreparedStatementWithLastInsertId(sql);
 		
+		String[] values = {tech};
+		setPlaceholderValues(values, preparedStatement);
+		
 		executeInsertQuery(preparedStatement);
 		
-		int techId = getIdForLastInsert(preparedStatement);
+		int techIdInt = getIdForLastInsert(preparedStatement);
+		
+		String techId = Integer.toString(techIdInt);
 		
 		return techId;	
 	}

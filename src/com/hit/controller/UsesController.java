@@ -16,11 +16,14 @@ public class UsesController extends Controller
 	 * 
 	 * @return true if successful; false otherwise
 	 */
-	public boolean insertUses(int techId, int jobId)
+	public boolean insertUses(String techId, String jobId)
 	{
-		String sql = "INSERT INTO Uses (t_id, j_id) VALUES(" + techId + ", " + jobId+ ")";
+		String sql = "INSERT INTO Uses (t_id, j_id) VALUES(?, ?)";
 		
 		PreparedStatement preparedStatement = getPreparedStatement(sql);
+		
+		String[] values = {techId, jobId};
+		setPlaceholderValues(values, preparedStatement);
 		
 		return executeInsertQuery(preparedStatement);
 	}

@@ -41,6 +41,21 @@ public class Controller
 		
 		return preparedStatement;
 	}
+	
+	public static void setPlaceholderValues(String[] values, PreparedStatement preparedStatement)
+	{
+		int valuesLength = values.length;
+		
+		for(int i = 0; i < valuesLength; i++) {
+			try {
+				preparedStatement.setString(i + 1, values[i]);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return;
+	}
+	
 	/**
 	 * Gets a ResultObject from a PreparedStatement object
 	 * 

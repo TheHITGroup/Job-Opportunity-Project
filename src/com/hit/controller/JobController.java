@@ -16,15 +16,20 @@ public class JobController extends Controller
 	 * 
 	 * @return id of inserted Job
 	 */
-	public int insertJob(int userId, int zipcode)
+	public String insertJob(String userId, String zipcode)
 	{
-		String sql = "INSERT INTO Job (u_id, zipcode) VALUES(" + userId + ", " + zipcode + ")";
+		String sql = "INSERT INTO Job (u_id, zipcode) VALUES(?, ?)";
 		
 		PreparedStatement preparedStatement = getPreparedStatementWithLastInsertId(sql);
 		
+		String[] values = {userId, zipcode};
+		setPlaceholderValues(values, preparedStatement);
+		
 		executeInsertQuery(preparedStatement);
 		
-		int jobId = getIdForLastInsert(preparedStatement);
+		int jobIdInt = getIdForLastInsert(preparedStatement);
+		
+		String jobId = Integer.toString(jobIdInt);
 		
 		return jobId;
 	}

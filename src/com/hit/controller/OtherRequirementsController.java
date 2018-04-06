@@ -24,15 +24,15 @@ public class OtherRequirementsController extends Controller
 	 * @param userId
 	 * @return
 	 */
-	public int addJobOpening(int zipcode, String[] techs, int userId) 
+	public String addJobOpening(String zipcode, String[] techs, String userId) 
 	{		
 		JobController jc = new JobController();
-		int jobId = jc.insertJob(userId, zipcode);
+		String jobId = jc.insertJob(userId, zipcode);
 		
-		List<Integer> techIds = techHandler(techs);
+		List<String> techIds = techHandler(techs);
 		
 		UsesController uc = new UsesController();
-		for(int techId: techIds) {
+		for(String techId: techIds) {
 			uc.insertUses(techId, jobId);
 		}
 		
@@ -45,13 +45,13 @@ public class OtherRequirementsController extends Controller
 	 * @param techs
 	 * @return list of techIds
 	 */
-	private List<Integer> techHandler(String[] techs)
+	private List<String> techHandler(String[] techs)
 	{
 		TechnologyController tc = new TechnologyController();
-		List<Integer> techIds = new ArrayList<>();
+		List<String> techIds = new ArrayList<>();
 		
 		for(String tech: techs) {
-			int techId;
+			String techId;
 			if(tc.techExists(tech)) {
 				techId = tc.getIdByName(tech);
 			} else {
@@ -70,12 +70,15 @@ public class OtherRequirementsController extends Controller
 	 * 
 	 * @return List of JobOpenings
 	 */
-	public List<JobOpeningJSON> getJobOpeningsForUser(int userId)
+	public List<JobOpeningJSON> getJobOpeningsForUser(String userId)
 	{
 		String sql = "SELECT city, state, L.zipcode, name, J.id as jobId FROM Location AS L, Uses AS Us, Job AS J, User AS Ur, Technology AS T" + 
-				"	WHERE Ur.id=" + userId + " AND J.u_id=Ur.id AND Us.j_id=J.id AND Us.t_id=T.id AND L.zipcode=J.zipcode ORDER BY J.id";
+				"	WHERE Ur.id= ? AND J.u_id=Ur.id AND Us.j_id=J.id AND Us.t_id=T.id AND L.zipcode=J.zipcode ORDER BY J.id";
 		
 		PreparedStatement preparedStatement = getPreparedStatement(sql);
+		
+		String[] values = {userId};
+		setPlaceholderValues(values, preparedStatement);
 		
 		ResultSet resultSet = getResultSet(preparedStatement);
 		

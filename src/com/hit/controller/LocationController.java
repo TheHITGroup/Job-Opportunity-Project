@@ -33,13 +33,16 @@ public class LocationController extends Controller {
 				"    FROM" + 
 				"        Location, Uses, Job, Technology" + 
 				"    WHERE" + 
-				"        state = '" + state + "' AND name = '"+ tech + "'" + 
+				"        state = ? AND name = ?" + 
 				"            AND Uses.j_id = Job.id" + 
 				"            AND Uses.t_id = Technology.id" + 
 				"            AND Job.zipcode = Location.zipcode" + 
 				"    GROUP BY city) A;";
 		
 		PreparedStatement preparedStatement = getPreparedStatement(sql);
+		
+		String[] values = {state, tech};
+		setPlaceholderValues(values, preparedStatement);
 		
 		ResultSet resultSet = getResultSet(preparedStatement);
 		
@@ -78,9 +81,12 @@ public class LocationController extends Controller {
     }
 
     public static List<CityJSON> getListOfCities(String state) {
-        String sql = "SELECT DISTINCT city FROM Location WHERE state= '"+state+"' ORDER BY city";
+        String sql = "SELECT DISTINCT city FROM Location WHERE state= ? ORDER BY city";
 
         PreparedStatement preparedStatement = getPreparedStatement(sql);
+		
+		String[] values = {state};
+		setPlaceholderValues(values, preparedStatement);
 
         ResultSet resultSet = getResultSet(preparedStatement);
 

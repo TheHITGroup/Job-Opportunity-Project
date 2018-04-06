@@ -29,6 +29,9 @@ public class ComplexQueryController extends Controller
 		
 		PreparedStatement preparedStatement = getPreparedStatement(sql);
 		
+		String[] values = {city, state, techOne, techTwo, city, state, city, state, techOne, techTwo, city, state};
+		setPlaceholderValues(values, preparedStatement);
+		
 		ResultSet resultSet = getResultSet(preparedStatement);
 	
 		StringMaker sm = new StringMaker();
@@ -57,6 +60,9 @@ public class ComplexQueryController extends Controller
 		String sql = SQL.getSqlForMostPopularOfTwoTechnologiesByZip(techOne, techTwo, zip);
 		
 		PreparedStatement preparedStatement = getPreparedStatement(sql);
+		
+		String[] values = {zip, techOne, techTwo, zip, zip, techOne, techTwo, zip};
+		setPlaceholderValues(values, preparedStatement);
 		
 		ResultSet resultSet = getResultSet(preparedStatement);
 		
@@ -89,6 +95,10 @@ public class ComplexQueryController extends Controller
 		
 		PreparedStatement preparedStatement = getPreparedStatement(sql);
 		
+		String[] values = {tech, cityOne, stateOne, tech, cityTwo, 
+				stateTwo, tech, cityOne, stateOne, tech, cityTwo, stateTwo};
+		setPlaceholderValues(values, preparedStatement);
+		
 		ResultSet resultSet = getResultSet(preparedStatement);
 		
 		StringMaker sm = new StringMaker();
@@ -117,6 +127,9 @@ public class ComplexQueryController extends Controller
 		
 		PreparedStatement preparedStatement = getPreparedStatement(sql);
 		
+		String[] values = {city, state, language, city, state, city, state, language, city, state, city, state};
+		setPlaceholderValues(values, preparedStatement);
+		
 		ResultSet resultSet = getResultSet(preparedStatement);
 		
 		StringMaker sm = new StringMaker();
@@ -144,6 +157,9 @@ public class ComplexQueryController extends Controller
 		String sql = SQL.getSQLForCityInStateWithAtLeastNJobsForTechnology(state, tech, numJobsRequest);
 		
 		PreparedStatement preparedStatement = getPreparedStatement(sql);
+		
+		String[] values = {tech, state, numJobsRequest};
+		setPlaceholderValues(values, preparedStatement);
 		
 		ResultSet resultSet = getResultSet(preparedStatement);
 		
