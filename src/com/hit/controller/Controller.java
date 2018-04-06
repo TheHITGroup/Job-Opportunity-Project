@@ -18,7 +18,7 @@ public class Controller
 	 * @param sql
 	 * @return
 	 */
-	public static PreparedStatement getPreparedStatement(String sql)
+	protected static PreparedStatement getPreparedStatement(String sql)
 	{
 		DbController Dbc = new DbController();
 		PreparedStatement preparedStatement = Dbc.getPreparedStatement(sql);
@@ -34,7 +34,7 @@ public class Controller
 	 * 
 	 * @return PreparedStatement object
 	 */
-	public static PreparedStatement getPreparedStatementWithLastInsertId(String sql)
+	protected static PreparedStatement getPreparedStatementWithLastInsertId(String sql)
 	{
 		DbController Dbc = new DbController();
 		PreparedStatement preparedStatement = Dbc.getPreparedStatementWithLastInsertId(sql);
@@ -42,7 +42,13 @@ public class Controller
 		return preparedStatement;
 	}
 	
-	public static void setPlaceholderValues(String[] values, PreparedStatement preparedStatement)
+	/**
+	 * Sets the placeholders in the SQL to the desired value. Done to prevent SQL injection.
+	 * 
+	 * @param values String array of the values, in order, used to replace placeholders
+	 * @param preparedStatement
+	 */
+	protected static void setPlaceholderValues(String[] values, PreparedStatement preparedStatement)
 	{
 		int valuesLength = values.length;
 		
@@ -62,7 +68,7 @@ public class Controller
 	 * @param preparedStatement
 	 * @return ResultSet
 	 */
-	public static ResultSet getResultSet(PreparedStatement preparedStatement)
+	protected static ResultSet getResultSet(PreparedStatement preparedStatement)
 	{
 		ResultSet resultSet = null;
 		
@@ -82,7 +88,7 @@ public class Controller
 	 * 
 	 * @return true if successful; false if failed
 	 */
-	public static boolean executeInsertQuery(PreparedStatement preparedStatement)
+	protected static boolean executeInsertQuery(PreparedStatement preparedStatement)
 	{ 
 		try {
 			preparedStatement.executeUpdate();
@@ -100,7 +106,7 @@ public class Controller
 	 * @param resultSet
 	 * @return boolean
 	 */
-	public boolean resultHasMoreThanOneRow(ResultSet resultSet) 
+	protected boolean resultHasMoreThanOneRow(ResultSet resultSet) 
 	{
 		int i = 0;
 		try {
@@ -123,7 +129,7 @@ public class Controller
 	 * @param resultSet
 	 * @return result
 	 */
-	public String getStringResultByColNameAndReset(String columnName, ResultSet resultSet)
+	protected String getStringResultByColNameAndReset(String columnName, ResultSet resultSet)
 	{	
 		String result = "";
 		try {
@@ -148,7 +154,7 @@ public class Controller
 	 * @param resultSet
 	 * @return result
 	 */
-	public int getIntResultByColNameAndReset(String columnName, ResultSet resultSet)
+	protected int getIntResultByColNameAndReset(String columnName, ResultSet resultSet)
 	{	
 		int result = -1;
 		try {
@@ -175,7 +181,7 @@ public class Controller
 	 * @param resultSet
 	 * @return result
 	 */
-	public int getIntResultByColNameNoReset(String columnName, ResultSet resultSet)
+	protected int getIntResultByColNameNoReset(String columnName, ResultSet resultSet)
 	{	
 		int result = -1;
 		try {
@@ -198,7 +204,7 @@ public class Controller
 	 * @param resultSet
 	 * @return result
 	 */
-	public static String getStringResultByColNameNoReset(String columnName, ResultSet resultSet)
+	protected static String getStringResultByColNameNoReset(String columnName, ResultSet resultSet)
 	{	
 		String result = "";
 		try {
@@ -219,7 +225,7 @@ public class Controller
 	 * @param resultSet
 	 * @return size of ResultSet
 	 */
-	public static int getSizeOfResultSet(ResultSet resultSet)
+	protected static int getSizeOfResultSet(ResultSet resultSet)
 	{
 		int size = 0;
 		
@@ -242,7 +248,7 @@ public class Controller
 	 * @param resultSet
 	 * @param rowNum row at which to point the pointer
 	 */
-	public static void setRow(ResultSet resultSet, int rowNum)
+	protected static void setRow(ResultSet resultSet, int rowNum)
 	{
 		try {
 			//ResultSet.absolute cannot absolute position to row 0, so we do it ourself
@@ -264,7 +270,7 @@ public class Controller
 	 * @param preparedStatement
 	 * @return
 	 */
-	public int getIdForLastInsert(PreparedStatement preparedStatement)
+	protected int getIdForLastInsert(PreparedStatement preparedStatement)
 	{
 		ResultSet resultSet = null;
 		int id = -1;
@@ -279,6 +285,16 @@ public class Controller
 		}
 		
 		return id;
+	}
+	
+	/**
+	 * Returns a string to tell the user their query did not produce any results. 
+	 * 
+	 * @return String
+	 */
+	protected String getNoResultString() 
+	{
+		return "Sorry, your search did not produce any results.";
 	}
 
 }

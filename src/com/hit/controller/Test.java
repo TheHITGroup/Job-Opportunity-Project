@@ -39,7 +39,7 @@ public class Test {
 		 
 		 OtherRequirementsController orc = new OtherRequirementsController();
 		 String[] techs = {"Java", "Spring"};
-		 int jobId = orc.addJobOpening( 8876, techs, 1);
+		 String jobId = orc.addJobOpening( "08876", techs, "1");
 		 //System.out.println(jobId);
 		 
 //		 List<JobOpeningJSON> UJJs = orc.getJobOpeningsForUser(1);
@@ -58,8 +58,15 @@ public class Test {
 		 TextJSON tj1 = tc.getPopOfTwoTechsByCityState("C++", "Java", "Somerville", "NJ");
 		 TextJSON tj5 = tc.getPopOfTwoTechsByZip("C++", "Java", "08876");
 		 TextJSON tj2 = tc.getPopOfTwoCityStatesForTech("Java", "New York", "NY", "Newark", "NJ");
-		 TextJSON tj3 = tc.getPopFWForLangInCityState("Java", "Newark", "NJ");
+		 TextJSON tj3 = tc.getPopFWForLangInCityState("Java", "Somerville", "NJ");
 		 TextJSON tj4 = tc.getCityInStateAtLeastNJobsForTech("NY", "Java", "10");
+		 
+		 PatternQueryController pc = new PatternQueryController();
+		 
+		 TextJSON pq1 = pc.getPopLangInZip("08876");
+		 TextJSON pq2 = pc.getPopFWInZip("08876");
+		 TextJSON pq3 = pc.getPopCityForTechInState("NJ", "Java");
+		 TextJSON pq4 = pc.getPopStateForTech("Java");
 //		 System.out.println(result);
 //		 System.out.println(result2);
 //		 System.out.println(result3);
@@ -67,8 +74,14 @@ public class Test {
 //		 System.out.println(result5);
 		 LocationController lc = new LocationController();
 		 int result6 = lc.getMaxJobsForLangInCityByStateTech("NJ", "Java");
+		 System.out.println(tj1.getResult());
 		 System.out.println(tj4.getResult());
+		 System.out.println(tj3.getResult());
 		 System.out.println(tj5.getResult());
+		 System.out.println(pq1.getResult());
+		 System.out.println(pq2.getResult());
+		 System.out.println(pq3.getResult());
+		 System.out.println(pq4.getResult());
 	}
 
 }

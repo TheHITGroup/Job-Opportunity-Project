@@ -8,7 +8,7 @@ import com.hit.controller.Controller;
  * @author tom
  *
  */
-public class StringMaker extends Controller
+public class ComplexStringMaker extends Controller
 {
 
 	/**
@@ -174,17 +174,6 @@ public class StringMaker extends Controller
 		cityAndNumJobsInCityArray[1] = getStringResultByColNameNoReset("count", resultSet);
 		
 		return cityAndNumJobsInCityArray;
-	}
-	
-	/**
-	 * Returns a string to tell the user their query did not produce any results. Called
-	 * by all public methods in the class.
-	 * 
-	 * @return String
-	 */
-	private String getNoResultString() 
-	{
-		return "Sorry, your search did not produce any results.";
 	}
 
 }

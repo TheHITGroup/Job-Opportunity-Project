@@ -25,7 +25,7 @@ public class ComplexQueryController extends Controller
         public static TextJSON getPopOfTwoTechsByCityState(String techOne, String techTwo, String city, String state)
 	{
 		ComplexQueries SQL = new ComplexQueries();
-		String sql = SQL.getSqlForMostPopularOfTwoTechnologies(techOne, techTwo, city, state);
+		String sql = SQL.getSqlForMostPopularOfTwoTechnologies();
 		
 		PreparedStatement preparedStatement = getPreparedStatement(sql);
 		
@@ -34,7 +34,7 @@ public class ComplexQueryController extends Controller
 		
 		ResultSet resultSet = getResultSet(preparedStatement);
 	
-		StringMaker sm = new StringMaker();
+		ComplexStringMaker sm = new ComplexStringMaker();
 		String resultString = sm.getStringPopOfTwoTechsByZip(resultSet);
 		
         TextJSON textJSON = new TextJSON();
@@ -57,7 +57,7 @@ public class ComplexQueryController extends Controller
 	public static TextJSON getPopOfTwoTechsByZip(String techOne, String techTwo, String zip)
 	{
 		ComplexQueries SQL = new ComplexQueries();
-		String sql = SQL.getSqlForMostPopularOfTwoTechnologiesByZip(techOne, techTwo, zip);
+		String sql = SQL.getSqlForMostPopularOfTwoTechnologiesByZip();
 		
 		PreparedStatement preparedStatement = getPreparedStatement(sql);
 		
@@ -66,7 +66,7 @@ public class ComplexQueryController extends Controller
 		
 		ResultSet resultSet = getResultSet(preparedStatement);
 		
-		StringMaker sm = new StringMaker();
+		ComplexStringMaker sm = new ComplexStringMaker();
 		String resultString = sm.getStringPopOfTwoTechsByZip(resultSet);
 		
         TextJSON textJSON = new TextJSON();
@@ -91,7 +91,7 @@ public class ComplexQueryController extends Controller
 			String cityOne, String stateOne, String cityTwo, String stateTwo)
 	{
 		ComplexQueries SQL = new ComplexQueries();
-		String sql = SQL.getSQLForPopOfTwoCityStatesForTech(tech, cityOne, stateOne, cityTwo, stateTwo);
+		String sql = SQL.getSQLForPopOfTwoCityStatesForTech();
 		
 		PreparedStatement preparedStatement = getPreparedStatement(sql);
 		
@@ -101,7 +101,7 @@ public class ComplexQueryController extends Controller
 		
 		ResultSet resultSet = getResultSet(preparedStatement);
 		
-		StringMaker sm = new StringMaker();
+		ComplexStringMaker sm = new ComplexStringMaker();
 		String resultString = sm.getStringPopOfTwoCityStatesForTech(resultSet);
 		
         TextJSON textJSON = new TextJSON();
@@ -123,7 +123,7 @@ public class ComplexQueryController extends Controller
 	public static TextJSON getPopFWForLangInCityState(String language, String city, String state)
 	{
 		ComplexQueries SQL = new ComplexQueries();
-		String sql = SQL.getSQLForMostPopularFrameworkForLanguageInCityState(language, city, state);
+		String sql = SQL.getSQLForMostPopularFrameworkForLanguageInCityState();
 		
 		PreparedStatement preparedStatement = getPreparedStatement(sql);
 		
@@ -132,7 +132,7 @@ public class ComplexQueryController extends Controller
 		
 		ResultSet resultSet = getResultSet(preparedStatement);
 		
-		StringMaker sm = new StringMaker();
+		ComplexStringMaker sm = new ComplexStringMaker();
 		String resultString = sm.getStringPopFWForLangInCityState(resultSet);
 		
         TextJSON textJSON = new TextJSON();
@@ -154,7 +154,7 @@ public class ComplexQueryController extends Controller
 	public static TextJSON getCityInStateAtLeastNJobsForTech(String state, String tech, String numJobsRequest)
 	{
 		ComplexQueries SQL = new ComplexQueries();
-		String sql = SQL.getSQLForCityInStateWithAtLeastNJobsForTechnology(state, tech, numJobsRequest);
+		String sql = SQL.getSQLForCityInStateWithAtLeastNJobsForTechnology();
 		
 		PreparedStatement preparedStatement = getPreparedStatement(sql);
 		
@@ -163,7 +163,7 @@ public class ComplexQueryController extends Controller
 		
 		ResultSet resultSet = getResultSet(preparedStatement);
 		
-		StringMaker sm = new StringMaker();
+		ComplexStringMaker sm = new ComplexStringMaker();
 		String resultString = sm.getStringCityInStateAtLeastNJobsForTech(resultSet, numJobsRequest);
 		
         TextJSON textJSON = new TextJSON();
