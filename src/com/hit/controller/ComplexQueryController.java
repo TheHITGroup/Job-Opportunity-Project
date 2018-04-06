@@ -22,21 +22,6 @@ public class ComplexQueryController extends Controller
 	 * 
 	 * @return JSON object with result String
 	 */
-	/*public static String getPopOfTwoTechsByCityState(String techOne, String techTwo, String city, String state)
-	{
-		ComplexQueries SQL = new ComplexQueries();
-		String sql = SQL.getSqlForMostPopularOfTwoTechnologies(techOne, techTwo, city, state);
-		
-		PreparedStatement preparedStatement = getPreparedStatement(sql);
-		
-		ResultSet resultSet = getResultSet(preparedStatement);
-	
-		StringMaker sm = new StringMaker();
-		String resultString = sm.getStringPopOfTwoTechsByZip(resultSet);
-		
-		return resultString;
-                
-	}*/
         public static TextJSON getPopOfTwoTechsByCityState(String techOne, String techTwo, String city, String state)
 	{
 		ComplexQueries SQL = new ComplexQueries();
