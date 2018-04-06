@@ -5,7 +5,6 @@ import com.hit.controller.Controller;
 
 /**
  * This class creates result strings for the ComplexQueries class. Inherits from Controller.
- * @author tom
  *
  */
 public class ComplexStringMaker extends Controller
@@ -163,6 +162,14 @@ public class ComplexStringMaker extends Controller
 		return resultString;
 	}
 	
+	/**
+	 * Creates an array of a city and its respective number of jobs to be used in the cityStringBuilder method.
+	 * The city is at index 0 and the number of jobs is at index 1
+	 * 
+	 * @param resultSet
+	 * @param rowNum
+	 * @return
+	 */
 	private String[] getCityAndNumJobsArray(ResultSet resultSet, int rowNum)
 	{
 		String[] cityAndNumJobsInCityArray = new String[2];

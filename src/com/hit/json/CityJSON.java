@@ -7,7 +7,7 @@ package com.hit.json;
 
 /**
  *
- * @author ivan
+ * This is the JSON representation of the city attribute
  */
 public class CityJSON {
     String city;

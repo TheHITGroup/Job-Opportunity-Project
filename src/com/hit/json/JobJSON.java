@@ -3,7 +3,7 @@ package com.hit.json;
 import java.sql.Timestamp;
 
 /*
- * This is the JSON representation of the Job relations
+ * This is the JSON representation of the Job relation
  */
 public class JobJSON
 {

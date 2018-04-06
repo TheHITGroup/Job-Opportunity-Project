@@ -10,6 +10,11 @@ import com.hit.controller.PatternQueryController;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+/**
+ * 
+ * Service for the PatternQueries controller
+ *
+ */
 @Path("/patternQueries")
 public class PatternQueriesService
 {      

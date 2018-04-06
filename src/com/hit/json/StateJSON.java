@@ -7,7 +7,7 @@ package com.hit.json;
 
 /**
  *
- * @author ivan
+ * This is the JSON representation of the state attribute
  */
 public class StateJSON {
     String state;

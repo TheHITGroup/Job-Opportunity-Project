@@ -9,7 +9,8 @@ import javax.ws.rs.core.Response;
 
 /**
  *
- * @author ivan
+ * Service for the Technology Controller
+ * 
  */
 @Path("/tech")
 public class TechnologyService {

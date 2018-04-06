@@ -68,33 +68,6 @@ public class LocationController extends Controller {
         return locations;
     }
 
-    public static List<StateJSON> getListOfStates() {
-        String sql = "SELECT DISTINCT state FROM Location ORDER BY state";
-
-        PreparedStatement preparedStatement = getPreparedStatement(sql);
-
-        ResultSet resultSet = getResultSet(preparedStatement);
-
-        List<StateJSON> states = stateListBuilder(resultSet);
-
-        return states;
-    }
-
-    public static List<CityJSON> getListOfCities(String state) {
-        String sql = "SELECT DISTINCT city FROM Location WHERE state= ? ORDER BY city";
-
-        PreparedStatement preparedStatement = getPreparedStatement(sql);
-		
-		String[] values = {state};
-		setPlaceholderValues(values, preparedStatement);
-
-        ResultSet resultSet = getResultSet(preparedStatement);
-
-        List<CityJSON> cities = cityListBuilder(resultSet);
-
-        return cities;
-    }
-
     /**
      * Builds the list for the getListOfLocations method
      *
@@ -126,6 +99,28 @@ public class LocationController extends Controller {
         return locations;
     }
 
+    /**
+     * Returns a list of all states in the database
+     * 
+     */
+    public static List<StateJSON> getListOfStates() {
+        String sql = "SELECT DISTINCT state FROM Location ORDER BY state";
+
+        PreparedStatement preparedStatement = getPreparedStatement(sql);
+
+        ResultSet resultSet = getResultSet(preparedStatement);
+
+        List<StateJSON> states = stateListBuilder(resultSet);
+
+        return states;
+    }
+
+    /**
+     * Builds the list of states for the getListOfStatesMethod
+     * 
+     * @param resultSet
+     * @return
+     */
     private static List<StateJSON> stateListBuilder(ResultSet resultSet) {
         List<StateJSON> states = new ArrayList<StateJSON>();
 
@@ -136,26 +131,53 @@ public class LocationController extends Controller {
             setRow(resultSet, i);
             String stateName = getStringResultByColNameNoReset("state", resultSet);
             state.setState(stateName);
-            System.out.println(stateName);
+            
             states.add(state);
         }
         return states;
     }
-    
-     private static List<CityJSON> cityListBuilder(ResultSet resultSet) {
-        List<CityJSON> cities = new ArrayList<CityJSON>();
 
-        int sizeOfResultSet = getSizeOfResultSet(resultSet);
-        for (int i = 0; i < sizeOfResultSet; i++) {
-            CityJSON city = new CityJSON();
+    /**
+     * returns a list of all cities in a given state
+     * 
+     * @param state
+     * @return
+     */
+    public static List<CityJSON> getListOfCities(String state) {
+        String sql = "SELECT DISTINCT city FROM Location WHERE state= ? ORDER BY city";
 
-            setRow(resultSet, i);
-            String cityName = getStringResultByColNameNoReset("city", resultSet);
-            city.setCity(cityName);
-            cities.add(city);
-        }
+        PreparedStatement preparedStatement = getPreparedStatement(sql);
+		
+		String[] values = {state};
+		setPlaceholderValues(values, preparedStatement);
+
+        ResultSet resultSet = getResultSet(preparedStatement);
+
+        List<CityJSON> cities = cityListBuilder(resultSet);
+
         return cities;
     }
+    
+    /**
+     * Builds the list of cities for the getListOfCities method
+     * 
+     * @param resultSet
+     * @return
+     */
+	private static List<CityJSON> cityListBuilder(ResultSet resultSet) {
+	    List<CityJSON> cities = new ArrayList<CityJSON>();
+	
+	    int sizeOfResultSet = getSizeOfResultSet(resultSet);
+	    for (int i = 0; i < sizeOfResultSet; i++) {
+	        CityJSON city = new CityJSON();
+	
+	        setRow(resultSet, i);
+	        String cityName = getStringResultByColNameNoReset("city", resultSet);
+	        city.setCity(cityName);
+	        cities.add(city);
+	    }
+	    return cities;
+	}
      
 
 }

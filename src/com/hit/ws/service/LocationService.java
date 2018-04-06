@@ -17,7 +17,8 @@ import javax.ws.rs.core.Response;
 
 /**
  *
- * @author ivan
+ * Service for the Location Controller
+ * 
  */
 @Path("/location")
 public class LocationService {

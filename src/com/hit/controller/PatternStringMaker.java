@@ -2,9 +2,22 @@ package com.hit.controller;
 
 import java.sql.ResultSet;
 
+/**
+ * 
+ * This class creates result strings for the ComplexQueries class. Inherits from Controller.
+ *
+ */
 public class PatternStringMaker extends Controller
 {
 
+	/**
+	 * Creates result string for getPopTechInZip and getPopOfTwoTechsByZip method in PatternQueries class. 
+	 * 
+	 * @param resultSet
+	 * @param type
+	 * 
+	 * @return
+	 */
 	public String getStringPopTechInZip(ResultSet resultSet, String type)
 	{	
 		if(getSizeOfResultSet(resultSet) == 0)
@@ -26,6 +39,13 @@ public class PatternStringMaker extends Controller
 		return resultString;
 	}
 	
+	/**
+	 * Builds a String representation of technologies for getStringPopTechInZip method
+	 * 
+	 * @param resultSet
+	 * 
+	 * @return resultString
+	 */
 	private String techListBuilder(ResultSet resultSet)
 	{
 		String resultString = "";
@@ -44,6 +64,14 @@ public class PatternStringMaker extends Controller
 		return resultString;
 	}
 
+	/**
+	 * Creates result string for getPopLocationForTech method in PatternQueries class.
+	 * 
+	 * @param resultSet
+	 * @param location
+	 * 
+	 * @return result string
+	 */
 	public String getStringPopLocationForTech(ResultSet resultSet, String location)
 	{	
 		if(getSizeOfResultSet(resultSet) == 0)
@@ -67,6 +95,14 @@ public class PatternStringMaker extends Controller
 		return resultString;
 	}
 
+	/**
+	 * Builds a string representation of locations for getStringPopLocationForTech method
+	 * 
+	 * @param resultSet
+	 * @param location
+	 * 
+	 * @return result String
+	 */
 	private String locationListBuilder(ResultSet resultSet, String location)
 	{
 		String resultString = "";

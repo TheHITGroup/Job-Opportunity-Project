@@ -7,8 +7,21 @@ import com.hit.json.TextJSON;
 
 import Queries.PatternQueries;
 
+/**
+ * 
+ * Class containing the queries used to fulfill requirement number 5 in the grading rubric. Inherits from Controller
+ * All the SQL for this class is stored in Queries/PatternQueries.java
+ */
 public class PatternQueryController extends Controller
 {
+	/**
+	 * Given a zipcode, this method returns the most poopular programming language
+	 * in that zipcode
+	 * 
+	 * @param zip
+	 * 
+	 * @return JSON object with result String
+	 */
 	public static TextJSON getPopLangInZip(String zip)
 	{
 		PatternQueries SQL = new PatternQueries();
@@ -30,6 +43,14 @@ public class PatternQueryController extends Controller
         return textJSON;
 	}
 	
+	/**
+	 * Given a zipcode, this method returns the most popular framework
+	 * in that zipcode
+	 * 
+	 * @param zip
+	 * 
+	 * @return JSON object with result String
+	 */
 	public static TextJSON getPopFWInZip(String zip)
 	{
 		PatternQueries SQL = new PatternQueries();
@@ -51,6 +72,15 @@ public class PatternQueryController extends Controller
         return textJSON;
 	}
 	
+	/**
+	 * Given a state and a technology, this method returns the city with the most jobs
+	 * in that state for the given language.
+	 * 
+	 * @param state
+	 * @param tech
+	 * 
+	 * @return JSON object with result String
+	 */
 	public static TextJSON getPopCityForTechInState(String state, String tech)
 	{
 		PatternQueries SQL = new PatternQueries();
@@ -72,6 +102,14 @@ public class PatternQueryController extends Controller
         return textJSON;
 	}
 	
+	/**
+	 * Given a technology, this method returns the state with the most job
+	 * for the given technology
+	 * 
+	 * @param tech
+	 * 
+	 * @return JSON object with result String
+	 */
 	public static TextJSON getPopStateForTech(String tech)
 	{
 		PatternQueries SQL = new PatternQueries();

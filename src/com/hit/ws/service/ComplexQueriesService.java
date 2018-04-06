@@ -10,6 +10,11 @@ import com.hit.controller.ComplexQueryController;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+/**
+ * 
+ * Service for the ComplexQueries controller
+ *
+ */
 @Path("/complexQueries")
 public class ComplexQueriesService
 {      

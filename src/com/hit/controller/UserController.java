@@ -7,9 +7,20 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
 
-
+/**
+ * 
+ * Controller for the User entity
+ *
+ */
 public class UserController {
 
+	/**
+	 * Checks login of the User
+	 * 
+	 * @param userJSON
+	 * 
+	 * @return
+	 */
 	public static int checkLogin(UserJSON userJSON) {
 	    int id=0;
 	    
@@ -70,7 +81,13 @@ public class UserController {
 		return id;
 	}
 	
-	
+	/**
+	 * Checks if user exists
+	 * 
+	 * @param userJSON
+	 * 
+	 * @return
+	 */
 	public static int isUser(UserJSON userJSON) {
 	    int id=0;
 	    
@@ -130,7 +147,15 @@ public class UserController {
 		return id;
 	}
 	
-	
+	/**
+	 * Adds User tuple to database
+	 * 
+	 * @param userJSON
+	 * 
+	 * @return
+	 * 
+	 * @throws SQLException
+	 */
 	public static int addUser(UserJSON userJSON) throws SQLException {
 	    int status=0;
 	     Connection conn = null;

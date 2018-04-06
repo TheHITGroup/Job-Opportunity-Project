@@ -12,6 +12,11 @@ import javax.ws.rs.core.Response;
 import com.hit.controller.OtherRequirementsController;
 import com.hit.json.JobOpeningJSON;
 
+/**
+ * 
+ * Service for the OtherRequirements controller
+ *
+ */
 @Path("/otherRequirements")
 public class OtherRequirementsService 
 {

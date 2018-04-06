@@ -3,6 +3,14 @@ package com.hit.json;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This is the JSON representation of a Job Opening
+ * A Job Opening is created by the user, and contains the
+ * UserId, city and state of the job, and any technologies used
+ * 
+ * @author tom
+ *
+ */
 public class JobOpeningJSON
 {
 	private String city;

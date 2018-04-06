@@ -4,6 +4,12 @@
  * and open the template in the editor.
  */
 package com.hit.json;
+
+/**
+ * This is the JSON representation of the resulting Strings from a query
+ *
+ */
+
 public class TextJSON {
     String result;
 

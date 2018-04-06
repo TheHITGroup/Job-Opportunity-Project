@@ -87,7 +87,7 @@ public class TechnologyController extends Controller
 	}
 
 	/**
-	 * Returns of list of all Technology tuples
+	 * Returns a list of all Technology tuples
 	 * 
 	 * @return List of Technology Json objects
 	 */

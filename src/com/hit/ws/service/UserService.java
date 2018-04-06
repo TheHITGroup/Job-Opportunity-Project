@@ -13,6 +13,11 @@ import javax.ws.rs.core.Response;
 import com.hit.controller.UserController;
 import com.hit.json.UserJSON;
 
+/**
+ * 
+ * Service for the UserController
+ *
+ */
 @Path("/user")
 public class UserService {
 	
