@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 /**
  * 
- * Constructor superclass.
+ * Controller superclass.
  *
  */
 public class Controller
@@ -181,7 +181,7 @@ public class Controller
 	 * @param resultSet
 	 * @return result
 	 */
-	protected int getIntResultByColNameNoReset(String columnName, ResultSet resultSet)
+	protected static int getIntResultByColNameNoReset(String columnName, ResultSet resultSet)
 	{	
 		int result = -1;
 		try {

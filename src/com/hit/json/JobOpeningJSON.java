@@ -9,7 +9,9 @@ public class JobOpeningJSON
 	
 	private String state;
 	
-	private int zipcode;
+	private String zipcode;
+	
+	private String userId;
 	
 	private List<String> techs = new ArrayList<String>();
 
@@ -33,12 +35,12 @@ public class JobOpeningJSON
 		this.state = state;
 	}
 
-	public int getZipcode()
+	public String getZipcode()
 	{
 		return zipcode;
 	}
 
-	public void setZipcode(int zipcode)
+	public void setZipcode(String zipcode)
 	{
 		this.zipcode = zipcode;
 	}
@@ -51,5 +53,15 @@ public class JobOpeningJSON
 	public void setTechs(List<String> techs)
 	{
 		this.techs = techs;
+	}
+
+	public String getUserId()
+	{
+		return userId;
+	}
+
+	public void setUserId(String userId)
+	{
+		this.userId = userId;
 	}
 }
