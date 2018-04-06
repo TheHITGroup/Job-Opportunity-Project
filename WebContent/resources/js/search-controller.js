@@ -100,8 +100,47 @@
         }]);  
     
     
+     angular.module('hitModule').factory('searchFourthFactory',
+        ['$resource', function ($resource) {
+        return function (tech,city,state) {
+        var restUrl = "ws/complexQueries/fwForLangInCityState";
+                return $resource(restUrl, {}, {
+                get: {
+                method: 'GET',
+                        params: {'language': tech,
+                                'city' : city,
+                                'state' : state
+                                },
+                             
+                         isArray: false
+                }
 
-    angular.module('hitModule').controller('searchController', function ($scope, $location, $http, techListFactory, stateListFactory,cityListFactory,searchOneFactory,searchTwoFactory, searchThreeFactory) {
+                });
+                }
+        }]);  
+    
+    angular.module('hitModule').factory('searchFifthFactory',
+        ['$resource', function ($resource) {
+        return function (state,tech,numJobs) {
+        var restUrl = "ws/complexQueries/cityStateNJobsForTech";
+                return $resource(restUrl, {}, {
+                get: {
+                method: 'GET',
+                        params: {'state': state,
+                                'tech' : tech,
+                                'numJobs' : numJobs
+                                },
+                             
+                         isArray: false
+                }
+
+                });
+                }
+        }]);
+    
+    
+
+    angular.module('hitModule').controller('searchController', function ($scope, $location, $http, techListFactory, stateListFactory,cityListFactory,searchOneFactory,searchTwoFactory, searchThreeFactory,searchFourthFactory,searchFifthFactory) {
 
 
       //  $scope.tech1="";
@@ -160,6 +199,24 @@
         $scope.searchThree= function() {
              $scope.resultThree = searchThreeFactory($scope.techThird, $scope.cityOne, $scope.stateOne, $scope.cityTwo, $scope.stateTwo).get();
         }
+        
+        
+        $scope.getCitiesFourth = function() {
+            $scope.citiesFourth = cityListFactory($scope.stateFourth).get();
+        }
+        
+        $scope.resultFourth = "";
+        $scope.searchFourth= function() {
+             $scope.resultFourth = searchFourthFactory($scope.techFouth, $scope.cityFourth, $scope.stateFourth).get();
+        }
+        
+        
+        
+       $scope.resultFifth = "";
+       $scope.searchFifth = function() {
+           $scope.resultFifth = searchFifthFactory($scope.stateFifth, $scope.techFifth, $scope.numJobs).get();
+        }
+        
  
     });
 })();
