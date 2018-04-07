@@ -8,7 +8,7 @@ import java.util.List;
 import com.hit.json.JobOpeningJSON;
 
 /**
- *  Class containing the queries used to fulfill requirements 1 and 2 in the grading rubric
+ *  Class containing the queries used to fulfill requirements 2 and 3 in the grading rubric
  *
  */
 public class OtherRequirementsController extends Controller
@@ -19,9 +19,8 @@ public class OtherRequirementsController extends Controller
 	 * If the new job opening is for a programming language or framework not already in the technology
 	 * table, it adds the new technology to the table.
 	 * 
-	 * @param zipcode
-	 * @param techs
-	 * @param userId
+	 * @param jobOpeningJSON
+	 * 
 	 * @return
 	 */
 	public static String addJobOpening(JobOpeningJSON jobOpeningJSON) 

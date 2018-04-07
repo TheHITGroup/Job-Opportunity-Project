@@ -25,7 +25,7 @@ public class JobController extends Controller
 		String[] values = {userId, zipcode};
 		setPlaceholderValues(values, preparedStatement);
 		
-		executeInsertQuery(preparedStatement);
+		executeUpdate(preparedStatement);
 		
 		int jobIdInt = getIdForLastInsert(preparedStatement);
 		

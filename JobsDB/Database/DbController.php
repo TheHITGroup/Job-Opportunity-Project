@@ -46,8 +46,8 @@ class DbController
     function createJobTable($pdo)
     {
         $sql = "CREATE TABLE Job (id INT AUTO_INCREMENT, created_on DATETIME DEFAULT CURRENT_TIMESTAMP, u_id INT(11),zipcode INT(5), 
-                FOREIGN KEY(u_id) REFERENCES User(id), 
-                FOREIGN KEY(zipcode) REFERENCES Location (zipcode) ON DELETE CASCADE, 
+                FOREIGN KEY(u_id) REFERENCES User(id)  ON DELETE CASCADE, 
+                FOREIGN KEY(zipcode) REFERENCES Location (zipcode), 
                 PRIMARY KEY(id))";
         try {
             $pdo->exec($sql);
@@ -67,9 +67,10 @@ class DbController
     
     function createUsesTable($pdo)
     {
-        $sql = "CREATE TABLE Uses (j_id INT, t_id INT, 
+        $sql = "CREATE TABLE Uses (j_id INT, t_id INT,
+                PRIMARY KEY(j_id, t_id), 
                 FOREIGN KEY(j_id) REFERENCES Job(id) ON DELETE CASCADE, 
-                FOREIGN KEY(t_id) REFERENCES Technology(id) ON DELETE CASCADE)";
+                FOREIGN KEY(t_id) REFERENCES Technology(id))";
         try {
             $pdo->exec($sql);
         } catch (Exception $e) {

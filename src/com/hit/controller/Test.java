@@ -39,7 +39,7 @@ public class Test {
 		 
 		 OtherRequirementsController orc = new OtherRequirementsController();
 		 String[] techs = {"Java", "Spring"};
-		 String jobId = orc.addJobOpening( "08876", techs, "1");
+		 //String jobId = orc.addJobOpening( "08876", techs, "1");
 		 //System.out.println(jobId);
 		 
 //		 List<JobOpeningJSON> UJJs = orc.getJobOpeningsForUser(1);
@@ -57,7 +57,7 @@ public class Test {
 //		 String result = tc.getPopOfTwoTechsByZip("Java", "C++", "08876");
 		 TextJSON tj1 = tc.getPopOfTwoTechsByCityState("C++", "Java", "Somerville", "NJ");
 		 TextJSON tj5 = tc.getPopOfTwoTechsByZip("C++", "Java", "08876");
-		 TextJSON tj2 = tc.getPopOfTwoCityStatesForTech("Java", "New York", "NY", "Newark", "NJ");
+		 TextJSON tj2 = ComplexQueryController.getPopOfTwoCityStatesForTech("Java", "New York", "NY", "Newark", "NJ");
 		 TextJSON tj3 = tc.getPopFWForLangInCityState("Java", "Somerville", "NJ");
 		 TextJSON tj4 = tc.getCityInStateAtLeastNJobsForTech("NY", "Java", "10");
 		 
@@ -82,6 +82,14 @@ public class Test {
 		 System.out.println(pq2.getResult());
 		 System.out.println(pq3.getResult());
 		 System.out.println(pq4.getResult());
+		 
+		 UserJSON tom = new UserJSON();
+		 tom.setId(1);
+		 UserController uc = new UserController();
+		 List<JobOpeningJSON> JOs = uc.deleteUser(tom);
+		 for(JobOpeningJSON JO : JOs) {
+			 System.out.println(JO.getCity() + ", " + JO.getState() + ", " + JO.getZipcode() + ", " + JO.getTechs().get(0));
+		 }
 	}
 
 }

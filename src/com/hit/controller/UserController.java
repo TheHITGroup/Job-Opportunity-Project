@@ -1,10 +1,12 @@
 package com.hit.controller;
+import com.hit.json.JobOpeningJSON;
 import com.hit.json.UserJSON;
 
 import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 import java.sql.ResultSet;
 
 /**
@@ -12,7 +14,7 @@ import java.sql.ResultSet;
  * Controller for the User entity
  *
  */
-public class UserController {
+public class UserController extends Controller {
 
 	/**
 	 * Checks login of the User
@@ -196,6 +198,26 @@ public class UserController {
 			}
 	        
 		return status;
+	}
+	
+	public static List<JobOpeningJSON> deleteUser(UserJSON user)
+	{
+		String sql = "DELETE FROM User WHERE id=?";
+		
+		int intId = user.getId();
+		String userId = Integer.toString(intId);
+		
+		OtherRequirementsController ORC = new OtherRequirementsController();
+		List<JobOpeningJSON> userJobOpenings = ORC.getUJOList(userId);
+		
+		PreparedStatement preparedStatement = getPreparedStatement(sql);
+		
+		String[] values = {userId};
+		setPlaceholderValues(values, preparedStatement);
+		
+		executeUpdate(preparedStatement);
+		
+		return userJobOpenings;
 	}
 	
 	

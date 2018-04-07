@@ -25,6 +25,6 @@ public class UsesController extends Controller
 		String[] values = {techId, jobId};
 		setPlaceholderValues(values, preparedStatement);
 		
-		return executeInsertQuery(preparedStatement);
+		return executeUpdate(preparedStatement);
 	}
 }

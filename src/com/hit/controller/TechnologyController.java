@@ -77,7 +77,7 @@ public class TechnologyController extends Controller
 		String[] values = {tech};
 		setPlaceholderValues(values, preparedStatement);
 		
-		executeInsertQuery(preparedStatement);
+		executeUpdate(preparedStatement);
 		
 		int techIdInt = getIdForLastInsert(preparedStatement);
 		

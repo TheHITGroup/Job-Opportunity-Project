@@ -88,7 +88,7 @@ public class Controller
 	 * 
 	 * @return true if successful; false if failed
 	 */
-	protected static boolean executeInsertQuery(PreparedStatement preparedStatement)
+	protected static boolean executeUpdate(PreparedStatement preparedStatement)
 	{ 
 		try {
 			preparedStatement.executeUpdate();

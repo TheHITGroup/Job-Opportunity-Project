@@ -55,6 +55,17 @@ public class UserService {
 		return response;
 	}
 	
+	@POST
+	@Path("/deleteUser")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response deleteUser(UserJSON userJSON) throws SQLException {
+		Response response = null;
+		response = Response.ok(UserController.deleteUser(userJSON)).header("Access-Control-Allow-Origin", "*")
+				.header("Allow-Control-Allow-Credentials", "true")
+				.header("Access-Control-Allow-Methods", "POST").build();
+		return response;
+	}
+	
 	
 
 }

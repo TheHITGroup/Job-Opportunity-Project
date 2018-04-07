@@ -16,7 +16,7 @@ public class PatternQueryController extends Controller
 {
 	/**
 	 * Given a zipcode, this method returns the most poopular programming language
-	 * in that zipcode
+	 * in that zipcode and the number of jobs for that language.
 	 * 
 	 * @param zip
 	 * 
@@ -45,7 +45,7 @@ public class PatternQueryController extends Controller
 	
 	/**
 	 * Given a zipcode, this method returns the most popular framework
-	 * in that zipcode
+	 * in that zipcode and the number of jobs for that framework
 	 * 
 	 * @param zip
 	 * 
@@ -74,7 +74,7 @@ public class PatternQueryController extends Controller
 	
 	/**
 	 * Given a state and a technology, this method returns the city with the most jobs
-	 * in that state for the given language.
+	 * in that state for the given language and the number of jobs.
 	 * 
 	 * @param state
 	 * @param tech
@@ -103,8 +103,8 @@ public class PatternQueryController extends Controller
 	}
 	
 	/**
-	 * Given a technology, this method returns the state with the most job
-	 * for the given technology
+	 * Given a technology, this method returns the state with the most jobs
+	 * for the given technology and the number of jobs
 	 * 
 	 * @param tech
 	 * 

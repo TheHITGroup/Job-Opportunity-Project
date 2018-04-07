@@ -7,7 +7,7 @@ package Queries;
  */
 public class ComplexQueries
 {
-	public String getSqlForMostPopularOfTwoTechnologies()
+	public String getSqlPopOfTwoTechsByCityState()
 	{
 		
 		String sql = "SELECT " + 
@@ -56,7 +56,7 @@ public class ComplexQueries
 		return sql;
 	}
 
-	public String getSqlForMostPopularOfTwoTechnologiesByZip()
+	public String getSqlPopOfTwoTechsByZip()
 	{
 		
 		String sql = "SELECT " + 
@@ -102,7 +102,7 @@ public class ComplexQueries
 		return sql;
 	}
 	
-	public String getSQLForPopOfTwoCityStatesForTech()
+	public String getSQLPopOfTwoCityStatesForTech()
 	{
 		String sql = "SELECT " + 
 				"    COUNT(L.city), max_city_count as count, L.city, L.state" + 
@@ -149,7 +149,7 @@ public class ComplexQueries
 		return sql;
 	}
 	
-	public String getSQLForMostPopularFrameworkForLanguageInCityState()
+	public String getSQLPopFWForLangInCityState()
 	{
 		String sql = "SELECT " + 
 				"    COUNT(T.name) as count, max_name_count, T.name, city, state" + 
@@ -219,7 +219,7 @@ public class ComplexQueries
 		return sql;
 	}
 	
-	public String getSQLForCityInStateWithAtLeastNJobsForTechnology()
+	public String getSQLCityInStateAtLeastNJobsForTech()
 	{
 		String sql = "SELECT " + 
 				"    city, COUNT(city) as count" + 

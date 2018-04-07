@@ -25,7 +25,7 @@ public class ComplexQueryController extends Controller
         public static TextJSON getPopOfTwoTechsByCityState(String techOne, String techTwo, String city, String state)
 	{
 		ComplexQueries SQL = new ComplexQueries();
-		String sql = SQL.getSqlForMostPopularOfTwoTechnologies();
+		String sql = SQL.getSqlPopOfTwoTechsByCityState();
 		
 		PreparedStatement preparedStatement = getPreparedStatement(sql);
 		
@@ -45,7 +45,7 @@ public class ComplexQueryController extends Controller
         
 	
 	/**
-	 * Given two technologies and a zipcode this method returns which of the two technologies has
+	 * Given two technologies and a zipcode, this method returns which of the two technologies has
 	 * the most jobs in the specified zipcode as well as the number of jobs available for that technology.
 	 * 
 	 * @param techOne
@@ -57,7 +57,7 @@ public class ComplexQueryController extends Controller
 	public static TextJSON getPopOfTwoTechsByZip(String techOne, String techTwo, String zip)
 	{
 		ComplexQueries SQL = new ComplexQueries();
-		String sql = SQL.getSqlForMostPopularOfTwoTechnologiesByZip();
+		String sql = SQL.getSqlPopOfTwoTechsByZip();
 		
 		PreparedStatement preparedStatement = getPreparedStatement(sql);
 		
@@ -91,7 +91,7 @@ public class ComplexQueryController extends Controller
 			String cityOne, String stateOne, String cityTwo, String stateTwo)
 	{
 		ComplexQueries SQL = new ComplexQueries();
-		String sql = SQL.getSQLForPopOfTwoCityStatesForTech();
+		String sql = SQL.getSQLPopOfTwoCityStatesForTech();
 		
 		PreparedStatement preparedStatement = getPreparedStatement(sql);
 		
@@ -112,7 +112,7 @@ public class ComplexQueryController extends Controller
 	
 	/**
 	 * Given a programming language, city, and state, this method returns the framework with the most job openings
-	 * associated with the given language in the specified city, state combo.
+	 * associated with the given language in the specified city, state combo and the number of jobs.
 	 * 
 	 * @param language
 	 * @param city
@@ -123,7 +123,7 @@ public class ComplexQueryController extends Controller
 	public static TextJSON getPopFWForLangInCityState(String language, String city, String state)
 	{
 		ComplexQueries SQL = new ComplexQueries();
-		String sql = SQL.getSQLForMostPopularFrameworkForLanguageInCityState();
+		String sql = SQL.getSQLPopFWForLangInCityState();
 		
 		PreparedStatement preparedStatement = getPreparedStatement(sql);
 		
@@ -143,7 +143,7 @@ public class ComplexQueryController extends Controller
 	
 	/**
 	 * Given a state, technology, and number of jobs, this method returns all cities in the specified state
-	 * with at least the specified number of jobs for the given technology
+	 * with at least the specified number of jobs for the given technology and the number of jobs
 	 * 
 	 * @param state
 	 * @param tech
@@ -154,7 +154,7 @@ public class ComplexQueryController extends Controller
 	public static TextJSON getCityInStateAtLeastNJobsForTech(String state, String tech, String numJobsRequest)
 	{
 		ComplexQueries SQL = new ComplexQueries();
-		String sql = SQL.getSQLForCityInStateWithAtLeastNJobsForTechnology();
+		String sql = SQL.getSQLCityInStateAtLeastNJobsForTech();
 		
 		PreparedStatement preparedStatement = getPreparedStatement(sql);
 		
