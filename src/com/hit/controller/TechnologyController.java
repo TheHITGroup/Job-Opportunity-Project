@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.hit.json.TechnologyJSON;
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.InterningXmlVisitor;
 
 /**
  * This is the controller for Technology entity
@@ -72,7 +71,7 @@ public class TechnologyController extends Controller
 	{
 		String sql = "INSERT INTO Technology (name) VALUES(?)";
 		
-		PreparedStatement preparedStatement = getPreparedStatementWithLastInsertId(sql);
+		PreparedStatement preparedStatement = getPreparedStatementPersistentId(sql);
 		
 		String[] values = {tech};
 		setPlaceholderValues(values, preparedStatement);

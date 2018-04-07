@@ -20,7 +20,7 @@ public class JobController extends Controller
 	{
 		String sql = "INSERT INTO Job (u_id, zipcode) VALUES(?, ?)";
 		
-		PreparedStatement preparedStatement = getPreparedStatementWithLastInsertId(sql);
+		PreparedStatement preparedStatement = getPreparedStatementPersistentId(sql);
 		
 		String[] values = {userId, zipcode};
 		setPlaceholderValues(values, preparedStatement);

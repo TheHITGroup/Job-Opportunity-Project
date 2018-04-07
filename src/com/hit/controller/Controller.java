@@ -27,22 +27,6 @@ public class Controller
 	}
 	
 	/**
-	 * Gets a prepared statement which maintains the auto incremented id of the tuple to be inserted,
-	 * which can be requested later by calling getGeneratedKeys on the PreparedStatement object
-	 * 
-	 * @param sql
-	 * 
-	 * @return PreparedStatement object
-	 */
-	protected static PreparedStatement getPreparedStatementWithLastInsertId(String sql)
-	{
-		DbController Dbc = new DbController();
-		PreparedStatement preparedStatement = Dbc.getPreparedStatementWithLastInsertId(sql);
-		
-		return preparedStatement;
-	}
-	
-	/**
 	 * Sets the placeholders in the SQL to the desired value. Done to prevent SQL injection.
 	 * 
 	 * @param values String array of the values, in order, used to replace placeholders
@@ -261,11 +245,27 @@ public class Controller
 			System.out.println(e.getMessage());
 		}
 	}
+	
+	/**
+	 * Gets a prepared statement which maintains the auto incremented id of the tuple to be inserted,
+	 * which can be requested later by calling getGeneratedKeys on the PreparedStatement object
+	 * 
+	 * @param sql
+	 * 
+	 * @return PreparedStatement object
+	 */
+	protected static PreparedStatement getPreparedStatementPersistentId(String sql)
+	{
+		DbController Dbc = new DbController();
+		PreparedStatement preparedStatement = Dbc.getPreparedStatementWithLastInsertId(sql);
+		
+		return preparedStatement;
+	}
 
 	/**
 	 * Gets the auto incremented id result of the last value inserted tuple, given
-	 * that the insert was prepared with the getPreparedStatementWithLastInsertId
-	 * method at the top of this class
+	 * that the insert was prepared with the getPreparedStatementPersistentId
+	 * method above
 	 * 
 	 * @param preparedStatement
 	 * @return
