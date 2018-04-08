@@ -60,10 +60,11 @@
 
             <div class="row">
                 <div class="form-group col-md-3 col-xs-4">
-                    <label for="tech">Technology (Multiselect)</label><br>
+                    <label for="tech">Technology</label><br>
                     <select multiple="multiple" name="tech" ng-model="tech">
                         <option ng-repeat="tech in techs" value="{{tech.name}}">{{tech.name}}</option>
                     </select>
+                    <p>Hold Ctrl key to multi-select</p>
                 </div>
             </div>
             <button ng-click="addJob()" type="button" class="btn btn-primary">Add Job</button>
