@@ -118,6 +118,7 @@ public class OtherRequirementsController extends Controller
 			setRow(resultSet, i);
 			
 			String zipcode = getStringResultByColNameNoReset("zipcode", resultSet);
+			if (zipcode.length() == 4) zipcode = "0" + zipcode;
 			UJO.setZipcode(zipcode);
 			setRow(resultSet, i);
 			
