@@ -26,6 +26,7 @@ public class OtherRequirementsController extends Controller
 	public static String addJobOpening(JobOpeningJSON jobOpeningJSON) 
 	{	
 		String userId = jobOpeningJSON.getUserId();
+		System.out.println(userId);
 		String zipcode = jobOpeningJSON.getZipcode();
 		List<String> techs = jobOpeningJSON.getTechs();
 		
@@ -75,7 +76,7 @@ public class OtherRequirementsController extends Controller
 	 */
 	public static List<JobOpeningJSON> getUJOList(String userId)
 	{
-		String sql = "SELECT city, state, L.zipcode, name, J.id as jobId FROM Location AS L, Uses AS Us, Job AS J, User AS Ur, Technology AS T" + 
+		String sql = "SELECT city, state, L.zipcode, name, J.id as jobId, Ur.id as Userid FROM Location AS L, Uses AS Us, Job AS J, User AS Ur, Technology AS T" + 
 				"	WHERE Ur.id= ? AND J.u_id=Ur.id AND Us.j_id=J.id AND Us.t_id=T.id AND L.zipcode=J.zipcode ORDER BY J.id";
 		
 		PreparedStatement preparedStatement = getPreparedStatement(sql);
@@ -123,6 +124,10 @@ public class OtherRequirementsController extends Controller
 			String tech = getStringResultByColNameNoReset("name", resultSet);
 			List<String> techs = new ArrayList<>();
 			techs.add(tech);
+			setRow(resultSet, i);
+			
+			String id = getStringResultByColNameNoReset("userId", resultSet);
+			UJO.setUserId(id);
 			setRow(resultSet, i);
 			
 			i = multipleTechsForOneJobHandler(UJO, techs, resultSet, i);

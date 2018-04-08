@@ -1,4 +1,5 @@
 package com.hit.controller;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.hit.controller.ComplexQueryController;
@@ -38,8 +39,14 @@ public class Test {
 //		 }
 		 
 		 OtherRequirementsController orc = new OtherRequirementsController();
-		 String[] techs = {"Java", "Spring"};
-		 //String jobId = orc.addJobOpening( "08876", techs, "1");
+		 JobOpeningJSON JOJ = new JobOpeningJSON();
+		 List<String> techs = new ArrayList<>();
+		 techs.add("Java");
+		 techs.add("Spring");
+		 JOJ.setTechs(techs);
+		 JOJ.setUserId("2");
+		 JOJ.setZipcode("08876");
+		 String jobId = orc.addJobOpening(JOJ);
 		 //System.out.println(jobId);
 		 
 //		 List<JobOpeningJSON> UJJs = orc.getJobOpeningsForUser(1);

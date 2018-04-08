@@ -7,6 +7,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import java.sql.ResultSet;
 
 /**
