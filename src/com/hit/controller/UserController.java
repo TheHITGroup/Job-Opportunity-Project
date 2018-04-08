@@ -38,7 +38,7 @@ public class UserController extends Controller {
 		    ResultSet rs = null;
 		    try {
 		        stmt = conn.createStatement();
-		        String query="select id from user where username= '"+userJSON.getUserName() + "' and password='"+userJSON.getPassword()+"'";
+		        String query="select id from User where username= '"+userJSON.getUserName() + "' and password='"+userJSON.getPassword()+"'";
 		        System.out.println(query);
 		        rs = stmt.executeQuery(query);
 		        while (rs.next()) {
@@ -105,7 +105,7 @@ public class UserController extends Controller {
 		    ResultSet rs = null;
 		    try {
 		        stmt = conn.createStatement();
-		        String query="select id from user where username= '"+userJSON.getUserName() + "'";
+		        String query="select id from User where username= '"+userJSON.getUserName() + "'";
 		        System.out.println(query);
 		        rs = stmt.executeQuery(query);
 		        while (rs.next()) {
@@ -168,7 +168,7 @@ public class UserController extends Controller {
 
 	     PreparedStatement preparedStatement = null;
 
-		String insertTableSQL = "insert into user (username,password) values (?,?)";
+		String insertTableSQL = "insert into User (username,password) values (?,?)";
 		try {
 		    	DbController Dbc = new DbController();
 		        conn = Dbc.getDBConnection();
