@@ -1,4 +1,4 @@
 (function () {
-    angular.module('hitModule').controller('introController', function ($scope, $location, $http) {
+    angular.module('hitModule').controller('introController', function ($scope, $rootScope,$location, $http) {
     });
 })();

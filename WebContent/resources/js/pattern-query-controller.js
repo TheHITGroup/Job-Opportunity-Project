@@ -70,7 +70,7 @@
     
     
 
-    angular.module('hitModule').controller('patternQueriesController', function ($scope, $location, $http, techListFactory, stateListFactory, searchPatternOneFactory, searchPatternTwoFactory, searchPatternThreeFactory,searchPatternFourFactory) {
+    angular.module('hitModule').controller('patternQueriesController', function ($scope, $rootScope,$location, $http, techListFactory, stateListFactory, searchPatternOneFactory, searchPatternTwoFactory, searchPatternThreeFactory,searchPatternFourFactory) {
         /*list of techs*/
         $scope.techs = techListFactory.get(
                 function (data) {

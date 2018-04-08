@@ -43,6 +43,10 @@
                     templateUrl: './pages/patternqueries.html',
                     controller: 'patternQueriesController'
 
+                }).when('/logout', {
+                    templateUrl: './pages/logout.html',
+                    controller: 'logoutController'
+
                 })
 
         //.otherwise({

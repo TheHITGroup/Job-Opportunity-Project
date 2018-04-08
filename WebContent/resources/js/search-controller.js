@@ -95,7 +95,7 @@
                 });
                 }
         }]);
-    angular.module('hitModule').controller('searchController', function ($scope, $location, $http, techListFactory, stateListFactory,cityListFactory,searchOneFactory,searchTwoFactory, searchThreeFactory,searchFourthFactory,searchFifthFactory) {
+    angular.module('hitModule').controller('searchController', function ($scope, $rootScope,$location, $http, techListFactory, stateListFactory,cityListFactory,searchOneFactory,searchTwoFactory, searchThreeFactory,searchFourthFactory,searchFifthFactory) {
 
 
       //  $scope.tech1="";

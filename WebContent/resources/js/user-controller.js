@@ -1,6 +1,6 @@
 (function () {
 
-    angular.module('hitModule').controller('userController', function ($scope, $location, $http) {
+    angular.module('hitModule').controller('userController', function ($scope, $rootScope,$location, $http) {
         $scope.userName = "";
         $scope.password = "";
 
