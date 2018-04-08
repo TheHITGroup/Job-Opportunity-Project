@@ -38,15 +38,15 @@ public class Test {
 //			 System.out.println(Loc.getZipcode());
 //		 }
 		 
-		 OtherRequirementsController orc = new OtherRequirementsController();
-		 JobOpeningJSON JOJ = new JobOpeningJSON();
-		 List<String> techs = new ArrayList<>();
-		 techs.add("Java");
-		 techs.add("Spring");
-		 JOJ.setTechs(techs);
-		 JOJ.setUserId("2");
-		 JOJ.setZipcode("08876");
-		 String jobId = orc.addJobOpening(JOJ);
+//		 OtherRequirementsController orc = new OtherRequirementsController();
+//		 JobOpeningJSON JOJ = new JobOpeningJSON();
+//		 List<String> techs = new ArrayList<>();
+//		 techs.add("Go");
+//		 techs.add("Beego");
+//		 JOJ.setTechs(techs);
+//		 JOJ.setUserId("2");
+//		 JOJ.setZipcode("08876");
+//		 String jobId = orc.addJobOpening(JOJ);
 		 //System.out.println(jobId);
 		 
 //		 List<JobOpeningJSON> UJJs = orc.getJobOpeningsForUser(1);
@@ -72,7 +72,7 @@ public class Test {
 		 
 		 TextJSON pq1 = pc.getPopLangInZip("08876");
 		 TextJSON pq2 = pc.getPopFWInZip("08876");
-		 TextJSON pq3 = pc.getPopCityForTechInState("NJ", "Java");
+		 TextJSON pq3 = pc.getPopCityForTechInState("NY", "Python");
 		 TextJSON pq4 = pc.getPopStateForTech("Java");
 //		 System.out.println(result);
 //		 System.out.println(result2);

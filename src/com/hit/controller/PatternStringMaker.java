@@ -51,15 +51,22 @@ public class PatternStringMaker extends Controller
 		String resultString = "";
 		int sizeOfResultSet = getSizeOfResultSet(resultSet);
 		for(int i = 1; i < sizeOfResultSet; i++) {
-			setRow(resultSet, i);
 			resultString += getStringResultByColNameNoReset("name", resultSet);
 			resultString += " with ";
+			
 			setRow(resultSet, i);
 			resultString += getStringResultByColNameNoReset("count2", resultSet);
 			resultString += " jobs";
+			
 			resultString += (sizeOfResultSet != 2) ? ", " : "";
+			
+			setRow(resultSet, i);
 		}
 		resultString += " and " + getStringResultByColNameAndReset("name", resultSet);
+		resultString += " with ";
+		resultString += getStringResultByColNameNoReset("count2", resultSet);
+		resultString += " jobs";
+		
 		
 		return resultString;
 	}
@@ -108,15 +115,18 @@ public class PatternStringMaker extends Controller
 		String resultString = "";
 		int sizeOfResultSet = getSizeOfResultSet(resultSet);
 		for(int i = 1; i < sizeOfResultSet; i++) {
-			setRow(resultSet, i);
 			resultString += getStringResultByColNameNoReset(location, resultSet);
 			resultString += " with ";
 			setRow(resultSet, i);
 			resultString += getStringResultByColNameNoReset("count2", resultSet);
 			resultString += " jobs";
 			resultString += (sizeOfResultSet != 2) ? ", " : "";
+			setRow(resultSet, i);
 		}
-		resultString += " and " + getStringResultByColNameAndReset("name", resultSet);
+		resultString += " and " + getStringResultByColNameAndReset(location, resultSet);
+		resultString += " with ";
+		resultString += getStringResultByColNameNoReset("count2", resultSet);
+		resultString += " jobs";
 		
 		return resultString;
 	}

@@ -28,10 +28,10 @@ public class ComplexStringMaker extends Controller
 		String resultString =  "";
 		
 		if(resultHasMoreThanOneRow(resultSet)) {
-			resultString = "Both languages have the same number of jobs with " + numJobs + " job"
+			resultString = "Both technologies have the same number of jobs with " + numJobs + " job"
 							+ (numJobs.equals("1") ? "" : "s") + ".";
 		} else {
-			resultString = "The most popular of the two languages is " + name + " with " + numJobs + " job"
+			resultString = "The most popular of the two technologies is " + name + " with " + numJobs + " job"
 							+ (numJobs.equals("1") ? "" : "s") + ".";
 		}
 		
