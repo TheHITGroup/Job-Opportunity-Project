@@ -34,6 +34,16 @@
                     controller: 'introController'
 
                 })
+                .when('/userdeleted', {
+                    templateUrl: './pages/userdeleted.html',
+                    controller: 'userDeletedController'
+
+                })
+                .when('/patternqueries', {
+                    templateUrl: './pages/patternqueries.html',
+                    controller: 'patternQueriesController'
+
+                })
 
         //.otherwise({
         //	redirectTo : '/',

@@ -1,0 +1,48 @@
+<div class="pull-right">See also <a ng-href="#/search">Complex Queries</a></div>
+<h2>Pattern Queries</h2>
+
+<!-- query 1 --->
+<div class="panel panel-default">
+    <div class="panel-heading">Most popular programming language by zip code</div>
+    <div class="panel-body">
+        <form>
+
+            <div class="row">
+                <div class="form-group col-xs-6 col-md-3">
+                    <label for="zipCode">Zip Code</label>
+                    <input type="text" ng-model="zipCode"class="form-control" placeholder="Enter Zip Code">
+                </div>
+            </div> 
+            <button ng-click="searchPatternOne()" type="button" class="btn btn-primary">Search</button>
+        </form>
+        <br/>
+        <div class="alert alert-info">
+            Result: {{resultPatternOne.result}}
+        </div>
+
+    </div>
+</div>
+
+
+<!-- query 2 --->
+<div class="panel panel-default">
+    <div class="panel-heading">Most popular framework by Zip Code</div>
+    <div class="panel-body">
+        <form>
+            <div class="row">
+                <div class="form-group col-xs-6 col-md-3">
+                    <label for="zipCode">Zip Code</label>
+                    <input type="text" ng-model="zipCode2" class="form-control" placeholder="Enter Zip Code">
+                </div>
+            </div> 
+            <button ng-click="searchPatternTwo()" type="button" class="btn btn-primary">Search</button>
+        </form>
+        <br/>
+        <div class="alert alert-info">
+            Result: {{resultPatternTwo.result}}
+        </div>
+
+    </div>
+</div>
+
+

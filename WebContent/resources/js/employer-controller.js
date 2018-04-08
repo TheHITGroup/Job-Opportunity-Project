@@ -1,5 +1,5 @@
 (function () {
-
+    console.log("jobList");
     angular.module('hitModule').factory('jobListFactory',
             ['$resource', function ($resource) {
                     return function (userId) {
@@ -16,10 +16,43 @@
                     }
                 }]);
 
+     //techListFactory
+     //stateListFactory
+     //cityListFactory
+     
+     
+    
+        
 
 
-    angular.module('hitModule').controller('employerController', function ($scope, $rootScope, $location, $http, jobListFactory) {
-
+    angular.module('hitModule').controller('employerController', function ($scope, $rootScope, $location, $http, jobListFactory,techListFactory,stateListFactory,cityListFactory) {
+   
+       $scope.techs = techListFactory.get(
+                function (data) {
+                }, function (error) {
+            console.log("Error while getting REST data");
+      });
+      console.log($scope.techs ); 
+        
+        
+        //list of states
+        $scope.states = stateListFactory.get(
+                function (data) {
+                    console.log("success states!");
+                    //$scope.techs = data;
+                }, function (error) {
+            console.log("Error while getting REST data");
+        });
+        console.log($scope.states);
+        
+        //cities
+       $scope.getCities = function() {
+           $scope.cities = cityListFactory($scope.state).get();
+           //console.log($scope.cities);
+       }
+       
+       
+       
 
         $scope.jobList = jobListFactory($rootScope.currentUser.id).get(
                 function (data) {
@@ -27,6 +60,8 @@
                 }, function (error) {
             console.log("Error while getting REST data");
         });
+        
+        console.log($scope.jobList);
         var user = {
                     id: $rootScope.currentUser.id
                 }
@@ -42,7 +77,7 @@
                         .then(
                                 function (response) {
                                     console.log("POST success");
-                                    
+                                    $location.path("/userdeleted");
 
                                 });
 
