@@ -28,7 +28,7 @@
     </tfoot>
 </table>
 <div class="panel panel-default">
-    <div class="panel-heading">New Job</div>
+    <div class="panel-heading">Add a New Job Opportunity</div>
     <div class="panel-body">
         <form>
             <div class="row">
@@ -50,17 +50,23 @@
                     </select>
                 </div>
             </div> 
-
+            <div class="row">
+                <div class="form-group col-xs-6 col-md-3">
+                    <label for="zipCode">Zip Code</label>
+                    <input type="text" ng-model="zipCode"class="form-control" placeholder="Enter Zip Code">
+                </div>
+                
+            </div> 
 
             <div class="row">
                 <div class="form-group col-md-3 col-xs-4">
-                    <label for="tech">Technology</label><br>
-                    <select name="tech" ng-model="tech">
+                    <label for="tech">Technology (Multiselect)</label><br>
+                    <select multiple="multiple" name="tech" ng-model="tech">
                         <option ng-repeat="tech in techs" value="{{tech.name}}">{{tech.name}}</option>
                     </select>
                 </div>
             </div>
-            <button ng-click="addJob()" type="button" class="btn btn-primary">Add</button>
+            <button ng-click="addJob()" type="button" class="btn btn-primary">Add Job</button>
         </form>
 
         
