@@ -36,6 +36,11 @@
                                                                 alert("User was created succesfully!");
                                                                 $scope.userName = "";
                                                                 $scope.password = "";
+                                                            	$rootScope.currentUser = {
+                                                                        id: 0,
+                                                                        username:"",
+                                                                        isConnected:false
+                                                                    }
                                                                 $location.path("/intro");
                                                             } else {
                                                                 alert("Issue when adding user");
