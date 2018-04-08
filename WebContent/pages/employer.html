@@ -2,10 +2,27 @@
 <h4>List of Jobs Opportunities you added</h4>
 
 
-<table>
-  <tr ng-repeat="job in jobs">
-    <td>{{ x.Name }}</td>
-    <td>{{ x.Country }}</td>
-  </tr>
+<table  class="table table-bordered table-hover bg-info table-striped">
+    <thead>
+        <tr>
+            <th>City</th>
+            <th>State</th>
+            <th>Zip Code</th>
+            <th>Technology</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="job in jobList">
+            <td>{{job.city}}</td>
+            <td>{{job.state}}</td>
+            <td>{{job.zipcode}}</td>
+            <td>{{job.techs}}</td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <th>Number of jobs: {{jobListSize}}</th>
+        </tr>
+    </tfoot>
 </table>
 
